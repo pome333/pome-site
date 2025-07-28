@@ -282,7 +282,7 @@ function App() {
                     <button
                       key={quadrant}
                       className={selectedQuadrant === quadrant ? 'quadrant-button active' : 'quadrant-button'}
-                      onClick={() => setSelectedQuadrant(quadrant)}
+                      onClick={() => handleQuadrantSelect(quadrant)}
                     >
                       <div className="quadrant-title">{quadrantDisplayNames[quadrant]}</div>
                       <div className="quadrant-emotions">
