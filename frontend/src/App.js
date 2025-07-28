@@ -198,11 +198,8 @@ function App() {
     };
 
     const handleEmotionSelect = (emotion) => {
-      console.log('Selecting emotion:', emotion); // Debug log
       setSelectedEmotion(emotion);
     };
-
-    console.log('Current selectedEmotion:', selectedEmotion); // Debug log
 
     const logEmotion = async () => {
       if (!selectedQuadrant || !selectedEmotion) return;
