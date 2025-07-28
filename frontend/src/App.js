@@ -83,8 +83,23 @@ function App() {
         <h2>Help Us Improve</h2>
         <p>Your feedback is valuable! Let us know what features would help you most.</p>
         <div className="feedback-form">
+          <div style={{
+            border: '2px dashed #d2691e',
+            padding: '3rem',
+            borderRadius: '15px',
+            textAlign: 'center',
+            backgroundColor: '#f5e6d3',
+            color: '#8b4513'
+          }}>
+            <h3 style={{marginBottom: '1rem'}}>📝 Google Form Integration</h3>
+            <p>Replace this placeholder with your actual Google Form embed code.</p>
+            <p style={{fontSize: '0.9rem', marginTop: '1rem'}}>
+              To integrate: Create your Google Form → Send → Embed → Copy HTML → Replace the iframe below
+            </p>
+          </div>
+          {/* 
           <iframe 
-            src="https://docs.google.com/forms/d/e/1FAIpQLSf7XYZ123_example/viewform?embedded=true" 
+            src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true" 
             width="100%" 
             height="600" 
             frameBorder="0" 
@@ -94,6 +109,7 @@ function App() {
           >
             Loading feedback form...
           </iframe>
+          */}
         </div>
       </section>
 
