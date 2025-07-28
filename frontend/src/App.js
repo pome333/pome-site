@@ -302,7 +302,7 @@ function App() {
                       <button
                         key={emotion}
                         className={selectedEmotion === emotion ? 'emotion-button active' : 'emotion-button'}
-                        onClick={() => setSelectedEmotion(emotion)}
+                        onClick={() => handleEmotionSelect(emotion)}
                       >
                         {emotion}
                       </button>
