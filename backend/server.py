@@ -1,75 +1,216 @@
-from fastapi import FastAPI, APIRouter
-from dotenv import load_dotenv
-from starlette.middleware.cors import CORSMiddleware
-from motor.motor_asyncio import AsyncIOMotorClient
+from fastapi import FastAPI, HTTPException, Depends
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from typing import List, Optional
 import os
-import logging
-from pathlib import Path
-from pydantic import BaseModel, Field
-from typing import List
+from datetime import datetime, timedelta
 import uuid
-from datetime import datetime
+from pymongo import MongoClient
 
-
-ROOT_DIR = Path(__file__).parent
-load_dotenv(ROOT_DIR / '.env')
-
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
-
-# Create the main app without a prefix
 app = FastAPI()
 
-# Create a router with the /api prefix
-api_router = APIRouter(prefix="/api")
-
-
-# Define Models
-class StatusCheck(BaseModel):
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    client_name: str
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
-
-class StatusCheckCreate(BaseModel):
-    client_name: str
-
-# Add your routes to the router instead of directly to app
-@api_router.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-@api_router.post("/status", response_model=StatusCheck)
-async def create_status_check(input: StatusCheckCreate):
-    status_dict = input.dict()
-    status_obj = StatusCheck(**status_dict)
-    _ = await db.status_checks.insert_one(status_obj.dict())
-    return status_obj
-
-@api_router.get("/status", response_model=List[StatusCheck])
-async def get_status_checks():
-    status_checks = await db.status_checks.find().to_list(1000)
-    return [StatusCheck(**status_check) for status_check in status_checks]
-
-# Include the router in the main app
-app.include_router(api_router)
-
+# CORS configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_credentials=True,
     allow_origins=["*"],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger(__name__)
+# MongoDB setup
+MONGO_URL = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
+client = MongoClient(MONGO_URL)
+db = client.pome_db
 
-@app.on_event("shutdown")
-async def shutdown_db_client():
-    client.close()
+# Collections
+users = db.users
+emotions = db.emotions
+activities = db.activities
+user_activities = db.user_activities
+
+# Models
+class User(BaseModel):
+    id: Optional[str] = None
+    email: str
+    name: str
+    created_at: Optional[datetime] = None
+
+class EmotionEntry(BaseModel):
+    id: Optional[str] = None
+    user_id: str
+    quadrant: str  # "high_energy_low_pleasant", "high_energy_high_pleasant", etc.
+    specific_emotion: str
+    intensity: int  # 1-10 scale
+    context: Optional[dict] = None  # location, social_setting, activities_doing
+    created_at: Optional[datetime] = None
+
+class Activity(BaseModel):
+    id: Optional[str] = None
+    name: str
+    energy_categories: List[str]  # physical, emotional, social, natural, spiritual
+    description: Optional[str] = None
+
+class UserActivity(BaseModel):
+    id: Optional[str] = None
+    user_id: str
+    activity_id: str
+    completed: bool = False
+    effectiveness_rating: Optional[int] = None  # 1-10 how much it helped
+    completed_at: Optional[datetime] = None
+    created_at: Optional[datetime] = None
+
+# Predefined emotion quadrants
+EMOTION_QUADRANTS = {
+    "high_energy_low_pleasant": ["Anger", "Frustration", "Anxiety", "Irritation", "Stress"],
+    "high_energy_high_pleasant": ["Excitement", "Joy", "Curiosity", "Enthusiasm", "Elation"],
+    "low_energy_high_pleasant": ["Calm", "Contentment", "Security", "Peace", "Satisfaction"],
+    "low_energy_low_pleasant": ["Sadness", "Fatigue", "Loneliness", "Disappointment", "Melancholy"]
+}
+
+# Predefined activities with energy categories
+DEFAULT_ACTIVITIES = [
+    {"name": "Gym workout", "energy_categories": ["physical"]},
+    {"name": "Yoga", "energy_categories": ["physical", "spiritual"]},
+    {"name": "Beach walk", "energy_categories": ["physical", "natural"]},
+    {"name": "Meditation", "energy_categories": ["spiritual"]},
+    {"name": "Call friends", "energy_categories": ["social", "emotional"]},
+    {"name": "Gratitude journaling", "energy_categories": ["emotional", "spiritual"]},
+    {"name": "Dancing", "energy_categories": ["physical", "emotional"]},
+    {"name": "Nature hike", "energy_categories": ["physical", "natural"]},
+    {"name": "Therapy session", "energy_categories": ["emotional"]},
+    {"name": "Art creation", "energy_categories": ["emotional", "spiritual"]},
+]
+
+@app.get("/api/health")
+async def health_check():
+    return {"status": "healthy"}
+
+@app.post("/api/users")
+async def create_user(user: User):
+    user_dict = user.dict()
+    user_dict["id"] = str(uuid.uuid4())
+    user_dict["created_at"] = datetime.utcnow()
+    
+    # Check if user already exists
+    existing = users.find_one({"email": user.email})
+    if existing:
+        return {"id": existing["id"], "email": existing["email"], "name": existing["name"]}
+    
+    users.insert_one(user_dict)
+    return {"id": user_dict["id"], "email": user_dict["email"], "name": user_dict["name"]}
+
+@app.get("/api/users/{user_id}")
+async def get_user(user_id: str):
+    user = users.find_one({"id": user_id})
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return {"id": user["id"], "email": user["email"], "name": user["name"]}
+
+@app.get("/api/emotion-quadrants")
+async def get_emotion_quadrants():
+    return EMOTION_QUADRANTS
+
+@app.post("/api/emotions")
+async def log_emotion(emotion: EmotionEntry):
+    emotion_dict = emotion.dict()
+    emotion_dict["id"] = str(uuid.uuid4())
+    emotion_dict["created_at"] = datetime.utcnow()
+    emotions.insert_one(emotion_dict)
+    return {"id": emotion_dict["id"], "message": "Emotion logged successfully"}
+
+@app.get("/api/emotions/user/{user_id}")
+async def get_user_emotions(user_id: str, days: int = 7):
+    since_date = datetime.utcnow() - timedelta(days=days)
+    user_emotions = list(emotions.find(
+        {"user_id": user_id, "created_at": {"$gte": since_date}},
+        {"_id": 0}
+    ).sort("created_at", -1))
+    return user_emotions
+
+@app.get("/api/activities")
+async def get_activities():
+    activity_list = list(activities.find({}, {"_id": 0}))
+    if not activity_list:
+        # Initialize with default activities
+        for activity_data in DEFAULT_ACTIVITIES:
+            activity_dict = activity_data.copy()
+            activity_dict["id"] = str(uuid.uuid4())
+            activities.insert_one(activity_dict)
+        activity_list = list(activities.find({}, {"_id": 0}))
+    return activity_list
+
+@app.post("/api/user-activities")
+async def create_user_activity(user_activity: UserActivity):
+    activity_dict = user_activity.dict()
+    activity_dict["id"] = str(uuid.uuid4())
+    activity_dict["created_at"] = datetime.utcnow()
+    user_activities.insert_one(activity_dict)
+    return {"id": activity_dict["id"], "message": "Activity added successfully"}
+
+@app.put("/api/user-activities/{activity_id}/complete")
+async def complete_activity(activity_id: str, effectiveness_rating: int):
+    result = user_activities.update_one(
+        {"id": activity_id},
+        {
+            "$set": {
+                "completed": True,
+                "effectiveness_rating": effectiveness_rating,
+                "completed_at": datetime.utcnow()
+            }
+        }
+    )
+    if result.matched_count == 0:
+        raise HTTPException(status_code=404, detail="Activity not found")
+    return {"message": "Activity marked as completed"}
+
+@app.get("/api/user-activities/{user_id}")
+async def get_user_activities(user_id: str):
+    user_activity_list = list(user_activities.find(
+        {"user_id": user_id},
+        {"_id": 0}
+    ).sort("created_at", -1))
+    return user_activity_list
+
+@app.get("/api/analytics/patterns/{user_id}")
+async def get_emotion_patterns(user_id: str, days: int = 30):
+    since_date = datetime.utcnow() - timedelta(days=days)
+    
+    # Get emotions for the period
+    user_emotions = list(emotions.find(
+        {"user_id": user_id, "created_at": {"$gte": since_date}},
+        {"_id": 0}
+    ))
+    
+    # Analyze patterns
+    quadrant_counts = {}
+    emotion_counts = {}
+    triggers = {}
+    
+    for emotion in user_emotions:
+        # Count quadrants
+        quadrant = emotion.get("quadrant", "unknown")
+        quadrant_counts[quadrant] = quadrant_counts.get(quadrant, 0) + 1
+        
+        # Count specific emotions
+        specific = emotion.get("specific_emotion", "unknown")
+        emotion_counts[specific] = emotion_counts.get(specific, 0) + 1
+        
+        # Analyze triggers from context
+        if emotion.get("context"):
+            context = emotion["context"]
+            for key, value in context.items():
+                if key not in triggers:
+                    triggers[key] = {}
+                triggers[key][value] = triggers[key].get(value, 0) + 1
+    
+    return {
+        "quadrant_distribution": quadrant_counts,
+        "emotion_frequency": emotion_counts,
+        "trigger_analysis": triggers,
+        "total_entries": len(user_emotions)
+    }
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8001)
