@@ -263,11 +263,11 @@ function App() {
               </div>
 
               {/* Specific Emotion */}
-              {selectedQuadrant && (
+              {selectedQuadrant && emotionQuadrants[selectedQuadrant] && (
                 <div className="emotion-selection">
                   <h3>Which specific emotion?</h3>
                   <div className="emotion-buttons">
-                    {emotionQuadrants[selectedQuadrant]?.map(emotion => (
+                    {emotionQuadrants[selectedQuadrant].map(emotion => (
                       <button
                         key={emotion}
                         className={selectedEmotion === emotion ? 'emotion-button active' : 'emotion-button'}
