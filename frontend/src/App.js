@@ -186,6 +186,21 @@ function App() {
       current_activity: ''
     });
 
+    // Reset emotion selection when quadrant changes
+    useEffect(() => {
+      setSelectedEmotion('');
+      setEmotionIntensity(5);
+      setEmotionContext({ location: '', social_setting: '', current_activity: '' });
+    }, [selectedQuadrant]);
+
+    const handleQuadrantSelect = (quadrant) => {
+      setSelectedQuadrant(quadrant);
+    };
+
+    const handleEmotionSelect = (emotion) => {
+      setSelectedEmotion(emotion);
+    };
+
     const logEmotion = async () => {
       if (!selectedQuadrant || !selectedEmotion) return;
 
