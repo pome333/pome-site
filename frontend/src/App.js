@@ -562,7 +562,6 @@ function App() {
 
       loadUserEmotions();
       loadAnalytics();
-      loadUserActivities();
     } catch (error) {
       console.error('Error loading user data:', error);
     }
@@ -576,17 +575,6 @@ function App() {
       setUserEmotions(emotions);
     } catch (error) {
       console.error('Error loading emotions:', error);
-    }
-  };
-
-  const loadUserActivities = async () => {
-    if (!user) return;
-    try {
-      const response = await fetch(`${BACKEND_URL}/api/user-activities/${user.id}`);
-      const userActData = await response.json();
-      setUserActivities(userActData);
-    } catch (error) {
-      console.error('Error loading user activities:', error);
     }
   };
 
