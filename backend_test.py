@@ -180,11 +180,10 @@ class PomeAPITester:
             "user_id": self.test_user_id,
             "quadrant": "high_energy_high_pleasant",
             "specific_emotion": "Joy",
-            "intensity": 8,
             "context": {
-                "location": "home",
-                "social_setting": "family",
-                "current_activity": "testing"
+                "location": "Home",
+                "social_setting": "Family", 
+                "current_activity": "Working"
             }
         }
         
