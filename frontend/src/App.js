@@ -227,6 +227,23 @@ function App() {
       setEmotionContext({ location: '', social_setting: '', current_activity: '' });
     }, [selectedQuadrant]);
 
+    // Load user activities function inside MainApp component
+    const loadUserActivities = async () => {
+      if (!user) return;
+      try {
+        const response = await fetch(`${BACKEND_URL}/api/user-activities/${user.id}`);
+        const userActData = await response.json();
+        setUserActivities(userActData);
+      } catch (error) {
+        console.error('Error loading user activities:', error);
+      }
+    };
+
+    // Load user activities on component mount
+    useEffect(() => {
+      loadUserActivities();
+    }, [user]);
+
     const handleQuadrantSelect = (quadrant) => {
       setSelectedQuadrant(quadrant);
     };
