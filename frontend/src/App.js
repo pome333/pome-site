@@ -491,7 +491,7 @@ function App() {
             <div className="analytics-section">
               <h2>Your Emotional Patterns</h2>
               
-              {!analytics || analytics.total_entries === 0 ? (
+              {!analytics || analytics.total_entries < 5 ? (
                 <div className="empty-analytics">
                   <h3>📊 Analytics Coming Soon</h3>
                   <p>Check in with your emotions more often to see patterns emerge.</p>
