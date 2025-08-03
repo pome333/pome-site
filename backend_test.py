@@ -133,24 +133,42 @@ class PomeAPITester:
             validate_response=validate_user_get
         )
 
-    def test_get_emotion_quadrants(self):
-        """Test emotion quadrants endpoint"""
-        def validate_quadrants(data):
-            expected_quadrants = [
-                "high_energy_low_pleasant",
-                "high_energy_high_pleasant", 
-                "low_energy_high_pleasant",
-                "low_energy_low_pleasant"
-            ]
-            return all(quadrant in data for quadrant in expected_quadrants)
+    def test_log_emotion_enhanced(self):
+        """Test enhanced emotion logging with new context structure"""
+        if not self.test_user_id:
+            print("❌ Skipping - No test user ID available")
+            return False, {}
         
-        return self.run_test(
-            "Get Emotion Quadrants",
-            "GET",
-            "api/emotion-quadrants",
+        emotion_data = {
+            "user_id": self.test_user_id,
+            "quadrant": "high_energy_high_pleasant",
+            "specific_emotion": "Joy",
+            "context": {
+                "location": "Home",
+                "social_setting": "Family",
+                "current_activity": "Working"
+            }
+        }
+        
+        def validate_emotion(data):
+            has_id = 'id' in data and data['id']
+            has_message = 'message' in data
+            return has_id and has_message
+        
+        success, response = self.run_test(
+            "Log Enhanced Emotion",
+            "POST",
+            "api/emotions",
             200,
-            validate_response=validate_quadrants
+            data=emotion_data,
+            validate_response=validate_emotion
         )
+        
+        if success:
+            self.test_emotion_id = response.get('id')
+            print(f"   Created emotion ID: {self.test_emotion_id}")
+        
+        return success, response
 
     def test_log_emotion(self):
         """Test emotion logging"""
