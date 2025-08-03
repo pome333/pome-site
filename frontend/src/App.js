@@ -11,6 +11,57 @@ function App() {
   const [userEmotions, setUserEmotions] = useState([]);
   const [analytics, setAnalytics] = useState(null);
 
+  // Enhanced emotion data with descriptions
+  const EMOTION_DATA = {
+    "high_energy_low_pleasant": {
+      "Anger": "Feeling strong displeasure or hostility",
+      "Frustration": "Being upset due to inability to change or achieve something", 
+      "Anxiety": "Feeling worried, nervous, or uneasy about something",
+      "Irritation": "Being annoyed or made impatient by someone or something",
+      "Stress": "Feeling pressured or overwhelmed by demands",
+      "Overwhelm": "Being completely overcome by responsibilities or emotions",
+      "Rage": "Intense, uncontrolled anger",
+      "Panic": "Sudden uncontrollable fear or anxiety"
+    },
+    "high_energy_high_pleasant": {
+      "Excitement": "Feeling eager enthusiasm and anticipation",
+      "Joy": "A feeling of great pleasure and happiness",
+      "Curiosity": "Eager to know or learn something new", 
+      "Enthusiasm": "Intense and eager enjoyment or interest",
+      "Elation": "Great happiness and exhilaration",
+      "Ecstasy": "An overwhelming feeling of great happiness",
+      "Euphoria": "A feeling of intense excitement and happiness",
+      "Bliss": "Perfect happiness and contentment"
+    },
+    "low_energy_high_pleasant": {
+      "Calm": "Peaceful, relaxed, and untroubled",
+      "Contentment": "A state of happiness and satisfaction",
+      "Security": "Feeling safe, stable, and protected",
+      "Peace": "Freedom from disturbance; tranquility",
+      "Satisfaction": "Fulfillment of desires, expectations, or needs",
+      "Serenity": "The state of being calm and peaceful",
+      "Gratitude": "Being thankful and appreciative",
+      "Relief": "Reassurance and relaxation after anxiety"
+    },
+    "low_energy_low_pleasant": {
+      "Sadness": "Feeling sorrow or unhappiness",
+      "Fatigue": "Extreme tiredness and lack of energy",
+      "Loneliness": "Feeling sad due to lack of companionship",
+      "Disappointment": "Sadness from unfulfilled hopes or expectations",
+      "Melancholy": "A pensive sadness or thoughtful sorrow",
+      "Despair": "Complete loss of hope",
+      "Grief": "Deep sorrow over loss",
+      "Emptiness": "Feeling hollow or devoid of meaning"
+    }
+  };
+
+  // Context options
+  const CONTEXT_OPTIONS = {
+    location: ["Home", "Work", "Outside", "Hanging out", "Traveling", "Gym", "Restaurant", "Shopping", "Transport"],
+    social_setting: ["By myself", "Family", "Friends", "Co-workers", "Pets", "Significant other", "Strangers", "Large group"],
+    current_activity: ["Working", "Relaxing", "Exercising", "Eating", "Socializing", "Learning", "Creating", "Commuting", "Sleeping"]
+  };
+
   // Landing page component
   const LandingPage = () => (
     <div className="landing-container">
@@ -18,7 +69,7 @@ function App() {
       <section className="hero-section">
         <div className="hero-content">
           <div className="hero-text">
-            <img src="https://customer-assets.emergentagent.com/job_0a105801-b55a-4071-b353-d7cbf88316c3/artifacts/web1oksp_logo%201.png" alt="Pome" className="logo" />
+            <img src="https://customer-assets.emergentagent.com/job_eq-empowerment/artifacts/0s5x9cly_logo%201%20-%20transparent%20background.png" alt="Pome" className="logo" />
             <h1>Build Your Emotional Intelligence</h1>
             <p className="hero-subtitle">
               Empower yourself with tools to track emotional states, identify triggers, 
@@ -46,24 +97,24 @@ function App() {
         <h2>How Pome Helps You Grow</h2>
         <div className="features-grid">
           <div className="feature-card">
-            <div className="feature-icon">🎯</div>
+            <div className="feature-icon">✨</div>
             <h3>Track Your Emotions</h3>
-            <p>Log your emotional states using our science-based quadrant system to understand your patterns</p>
+            <p>Log your emotional states using our science-based quadrant system to understand your patterns and triggers</p>
           </div>
           <div className="feature-card">
-            <div className="feature-icon">🔍</div>
+            <div className="feature-icon">🎯</div>
             <h3>Identify Triggers</h3>
-            <p>Discover what situations, people, or activities consistently affect your emotional state</p>
+            <p>Discover what situations, people, or activities consistently affect your emotional state and well-being</p>
           </div>
           <div className="feature-card">
-            <div className="feature-icon">⚡</div>
+            <div className="feature-icon">💪</div>
             <h3>Build Resourceful Activities</h3>
             <p>Create a personalized toolkit of activities across five energy categories that help you thrive</p>
           </div>
           <div className="feature-card">
-            <div className="feature-icon">📊</div>
+            <div className="feature-icon">📈</div>
             <h3>See Your Progress</h3>
-            <p>Get insights into your emotional patterns and see which activities work best for you</p>
+            <p>Get insights into your emotional patterns and see which activities work best for building resilience</p>
           </div>
         </div>
       </section>
@@ -81,35 +132,19 @@ function App() {
       {/* Feedback Form Section */}
       <section className="feedback-section">
         <h2>Help Us Improve</h2>
-        <p>Your feedback is valuable! Let us know what features would help you most.</p>
+        <p>Your feedback is valuable! Let us know what features would help you most on your emotional intelligence journey.</p>
         <div className="feedback-form">
-          <div style={{
-            border: '2px dashed #d2691e',
-            padding: '3rem',
-            borderRadius: '15px',
-            textAlign: 'center',
-            backgroundColor: '#f5e6d3',
-            color: '#8b4513'
-          }}>
-            <h3 style={{marginBottom: '1rem'}}>📝 Google Form Integration</h3>
-            <p>Replace this placeholder with your actual Google Form embed code.</p>
-            <p style={{fontSize: '0.9rem', marginTop: '1rem'}}>
-              To integrate: Create your Google Form → Send → Embed → Copy HTML → Replace the iframe below
-            </p>
-          </div>
-          {/* 
           <iframe 
-            src="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform?embedded=true" 
+            src="https://docs.google.com/forms/d/e/1FAIpQLSfimMroes1U1ho1k3nNmVuJHPxDXp_CcYWl4GTgyFkmqxHotQ/viewform?embedded=true" 
             width="100%" 
-            height="600" 
+            height="2001" 
             frameBorder="0" 
             marginHeight="0" 
             marginWidth="0"
             title="Feedback Form"
           >
-            Loading feedback form...
+            Loading…
           </iframe>
-          */}
         </div>
       </section>
 
@@ -144,7 +179,7 @@ function App() {
     return (
       <div className="auth-container">
         <div className="auth-card">
-          <img src="https://customer-assets.emergentagent.com/job_0a105801-b55a-4071-b353-d7cbf88316c3/artifacts/web1oksp_logo%201.png" alt="Pome" className="auth-logo" />
+          <img src="https://customer-assets.emergentagent.com/job_eq-empowerment/artifacts/0s5x9cly_logo%201%20-%20transparent%20background.png" alt="Pome" className="auth-logo" />
           <h2>Welcome to Your Journey</h2>
           <form onSubmit={handleSubmit} className="auth-form">
             <input
@@ -179,17 +214,16 @@ function App() {
     const [currentSection, setCurrentSection] = useState('emotions');
     const [selectedQuadrant, setSelectedQuadrant] = useState('');
     const [selectedEmotion, setSelectedEmotion] = useState('');
-    const [emotionIntensity, setEmotionIntensity] = useState(5);
     const [emotionContext, setEmotionContext] = useState({
       location: '',
       social_setting: '',
       current_activity: ''
     });
+    const [userActivities, setUserActivities] = useState([]);
 
     // Reset emotion selection when quadrant changes
     useEffect(() => {
       setSelectedEmotion('');
-      setEmotionIntensity(5);
       setEmotionContext({ location: '', social_setting: '', current_activity: '' });
     }, [selectedQuadrant]);
 
@@ -199,6 +233,34 @@ function App() {
 
     const handleEmotionSelect = (emotion) => {
       setSelectedEmotion(emotion);
+    };
+
+    const handleContextSelect = (type, value) => {
+      setEmotionContext(prev => ({
+        ...prev,
+        [type]: prev[type] === value ? '' : value
+      }));
+    };
+
+    const handleAddActivity = async (activity) => {
+      try {
+        const response = await fetch(`${BACKEND_URL}/api/user-activities`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            user_id: user.id,
+            activity_id: activity.id,
+            completed: false
+          })
+        });
+        
+        if (response.ok) {
+          setUserActivities(prev => [...prev, { activity_id: activity.id, activity_name: activity.name }]);
+          loadUserActivities();
+        }
+      } catch (error) {
+        console.error('Error adding activity:', error);
+      }
     };
 
     const logEmotion = async () => {
@@ -212,7 +274,6 @@ function App() {
             user_id: user.id,
             quadrant: selectedQuadrant,
             specific_emotion: selectedEmotion,
-            intensity: emotionIntensity,
             context: emotionContext
           })
         });
@@ -220,11 +281,11 @@ function App() {
         // Reset form
         setSelectedQuadrant('');
         setSelectedEmotion('');
-        setEmotionIntensity(5);
         setEmotionContext({ location: '', social_setting: '', current_activity: '' });
         
-        // Reload user emotions
+        // Reload user emotions and analytics
         loadUserEmotions();
+        loadAnalytics();
         alert('Emotion logged successfully!');
       } catch (error) {
         console.error('Error logging emotion:', error);
@@ -242,7 +303,7 @@ function App() {
       <div className="app-container">
         {/* Header */}
         <header className="app-header">
-          <img src="https://customer-assets.emergentagent.com/job_0a105801-b55a-4071-b353-d7cbf88316c3/artifacts/web1oksp_logo%201.png" alt="Pome" className="app-logo" />
+          <img src="https://customer-assets.emergentagent.com/job_eq-empowerment/artifacts/0s5x9cly_logo%201%20-%20transparent%20background.png" alt="Pome" className="app-logo" />
           <div className="user-info">Hello, {user.name}!</div>
         </header>
 
@@ -278,7 +339,7 @@ function App() {
               <div className="quadrant-selection">
                 <h3>Select Your Energy Quadrant:</h3>
                 <div className="quadrant-grid">
-                  {Object.keys(emotionQuadrants).map(quadrant => (
+                  {Object.keys(EMOTION_DATA).map(quadrant => (
                     <button
                       key={quadrant}
                       className={selectedQuadrant === quadrant ? 'quadrant-button active' : 'quadrant-button'}
@@ -286,7 +347,7 @@ function App() {
                     >
                       <div className="quadrant-title">{quadrantDisplayNames[quadrant]}</div>
                       <div className="quadrant-emotions">
-                        {emotionQuadrants[quadrant]?.slice(0, 3).join(', ')}...
+                        {Object.keys(EMOTION_DATA[quadrant]).slice(0, 3).join(', ')}...
                       </div>
                     </button>
                   ))}
@@ -294,36 +355,21 @@ function App() {
               </div>
 
               {/* Specific Emotion */}
-              {selectedQuadrant && emotionQuadrants[selectedQuadrant] && (
+              {selectedQuadrant && EMOTION_DATA[selectedQuadrant] && (
                 <div className="emotion-selection">
-                  <h3>Which specific emotion?</h3>
+                  <h3>Which specific emotion describes you best?</h3>
                   <div className="emotion-buttons">
-                    {emotionQuadrants[selectedQuadrant].map(emotion => (
+                    {Object.entries(EMOTION_DATA[selectedQuadrant]).map(([emotion, description]) => (
                       <button
                         key={emotion}
                         className={selectedEmotion === emotion ? 'emotion-button active' : 'emotion-button'}
                         onClick={() => handleEmotionSelect(emotion)}
                       >
-                        {emotion}
+                        <div className="emotion-name">{emotion}</div>
+                        <div className="emotion-description">{description}</div>
                       </button>
                     ))}
                   </div>
-                </div>
-              )}
-
-              {/* Intensity */}
-              {selectedEmotion && (
-                <div className="intensity-selection">
-                  <h3>Intensity (1-10):</h3>
-                  <input
-                    type="range"
-                    min="1"
-                    max="10"
-                    value={emotionIntensity}
-                    onChange={(e) => setEmotionIntensity(parseInt(e.target.value))}
-                    className="intensity-slider"
-                  />
-                  <div className="intensity-value">{emotionIntensity}</div>
                 </div>
               )}
 
@@ -331,25 +377,50 @@ function App() {
               {selectedEmotion && (
                 <div className="context-section">
                   <h3>Context (Optional):</h3>
-                  <div className="context-inputs">
-                    <input
-                      type="text"
-                      placeholder="Where are you? (home, work, outside, etc.)"
-                      value={emotionContext.location}
-                      onChange={(e) => setEmotionContext({...emotionContext, location: e.target.value})}
-                    />
-                    <input
-                      type="text"
-                      placeholder="Who are you with? (alone, family, friends, etc.)"
-                      value={emotionContext.social_setting}
-                      onChange={(e) => setEmotionContext({...emotionContext, social_setting: e.target.value})}
-                    />
-                    <input
-                      type="text"
-                      placeholder="What were you doing? (working, relaxing, etc.)"
-                      value={emotionContext.current_activity}
-                      onChange={(e) => setEmotionContext({...emotionContext, current_activity: e.target.value})}
-                    />
+                  
+                  <div className="context-group">
+                    <h4>Where are you?</h4>
+                    <div className="context-options">
+                      {CONTEXT_OPTIONS.location.map(option => (
+                        <button
+                          key={option}
+                          className={emotionContext.location === option ? 'context-option active' : 'context-option'}
+                          onClick={() => handleContextSelect('location', option)}
+                        >
+                          {option}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="context-group">
+                    <h4>Who are you with?</h4>
+                    <div className="context-options">
+                      {CONTEXT_OPTIONS.social_setting.map(option => (
+                        <button
+                          key={option}
+                          className={emotionContext.social_setting === option ? 'context-option active' : 'context-option'}
+                          onClick={() => handleContextSelect('social_setting', option)}
+                        >
+                          {option}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="context-group">
+                    <h4>What were you doing?</h4>
+                    <div className="context-options">
+                      {CONTEXT_OPTIONS.current_activity.map(option => (
+                        <button
+                          key={option}
+                          className={emotionContext.current_activity === option ? 'context-option active' : 'context-option'}
+                          onClick={() => handleContextSelect('current_activity', option)}
+                        >
+                          {option}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
               )}
@@ -368,7 +439,6 @@ function App() {
                   {userEmotions.slice(0, 5).map((emotion, index) => (
                     <div key={index} className="emotion-entry">
                       <span className="emotion-name">{emotion.specific_emotion}</span>
-                      <span className="emotion-intensity">Intensity: {emotion.intensity}</span>
                       <span className="emotion-time">
                         {new Date(emotion.created_at).toLocaleDateString()}
                       </span>
@@ -382,7 +452,7 @@ function App() {
           {currentSection === 'activities' && (
             <div className="activities-section">
               <h2>Resourceful Activities</h2>
-              <p>Choose activities that help you feel more resourceful and resilient:</p>
+              <p className="subtitle">Choose multiple activities for each week to help you become more resourceful and resilient. Build your personal toolkit across five energy categories:</p>
               
               <div className="energy-categories">
                 <div className="category-legend">
@@ -405,8 +475,11 @@ function App() {
                         </span>
                       ))}
                     </div>
-                    <button className="add-activity-button">
-                      Add to My Plan
+                    <button 
+                      className={userActivities.some(ua => ua.activity_id === activity.id) ? 'add-activity-button added' : 'add-activity-button'}
+                      onClick={() => handleAddActivity(activity)}
+                    >
+                      {userActivities.some(ua => ua.activity_id === activity.id) ? 'Added to Plan ✓' : 'Add to My Plan'}
                     </button>
                   </div>
                 ))}
@@ -418,7 +491,13 @@ function App() {
             <div className="analytics-section">
               <h2>Your Emotional Patterns</h2>
               
-              {analytics && (
+              {!analytics || analytics.total_entries === 0 ? (
+                <div className="empty-analytics">
+                  <h3>📊 Analytics Coming Soon</h3>
+                  <p>Check in with your emotions more often to see patterns emerge.</p>
+                  <p>We'll show your insights after you've logged at least 5 emotions!</p>
+                </div>
+              ) : (
                 <div className="analytics-content">
                   <div className="analytics-card">
                     <h3>Quadrant Distribution</h3>
@@ -476,11 +555,6 @@ function App() {
   // Load data functions
   const loadUserData = async (userId) => {
     try {
-      // Load emotion quadrants
-      const quadrantsResponse = await fetch(`${BACKEND_URL}/api/emotion-quadrants`);
-      const quadrantsData = await quadrantsResponse.json();
-      setEmotionQuadrants(quadrantsData);
-
       // Load activities
       const activitiesResponse = await fetch(`${BACKEND_URL}/api/activities`);
       const activitiesData = await activitiesResponse.json();
@@ -488,6 +562,7 @@ function App() {
 
       loadUserEmotions();
       loadAnalytics();
+      loadUserActivities();
     } catch (error) {
       console.error('Error loading user data:', error);
     }
@@ -501,6 +576,17 @@ function App() {
       setUserEmotions(emotions);
     } catch (error) {
       console.error('Error loading emotions:', error);
+    }
+  };
+
+  const loadUserActivities = async () => {
+    if (!user) return;
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/user-activities/${user.id}`);
+      const userActData = await response.json();
+      setUserActivities(userActData);
+    } catch (error) {
+      console.error('Error loading user activities:', error);
     }
   };
 

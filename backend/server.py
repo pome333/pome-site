@@ -41,8 +41,7 @@ class EmotionEntry(BaseModel):
     user_id: str
     quadrant: str  # "high_energy_low_pleasant", "high_energy_high_pleasant", etc.
     specific_emotion: str
-    intensity: int  # 1-10 scale
-    context: Optional[dict] = None  # location, social_setting, activities_doing
+    context: Optional[dict] = None  # location, social_setting, current_activity
     created_at: Optional[datetime] = None
 
 class Activity(BaseModel):
@@ -60,15 +59,7 @@ class UserActivity(BaseModel):
     completed_at: Optional[datetime] = None
     created_at: Optional[datetime] = None
 
-# Predefined emotion quadrants
-EMOTION_QUADRANTS = {
-    "high_energy_low_pleasant": ["Anger", "Frustration", "Anxiety", "Irritation", "Stress"],
-    "high_energy_high_pleasant": ["Excitement", "Joy", "Curiosity", "Enthusiasm", "Elation"],
-    "low_energy_high_pleasant": ["Calm", "Contentment", "Security", "Peace", "Satisfaction"],
-    "low_energy_low_pleasant": ["Sadness", "Fatigue", "Loneliness", "Disappointment", "Melancholy"]
-}
-
-# Predefined activities with energy categories
+# Enhanced default activities
 DEFAULT_ACTIVITIES = [
     {"name": "Gym workout", "energy_categories": ["physical"]},
     {"name": "Yoga", "energy_categories": ["physical", "spiritual"]},
@@ -76,10 +67,35 @@ DEFAULT_ACTIVITIES = [
     {"name": "Meditation", "energy_categories": ["spiritual"]},
     {"name": "Call friends", "energy_categories": ["social", "emotional"]},
     {"name": "Gratitude journaling", "energy_categories": ["emotional", "spiritual"]},
-    {"name": "Dancing", "energy_categories": ["physical", "emotional"]},
+    {"name": "Dancing", "energy_categories": ["physical", "social"]},
     {"name": "Nature hike", "energy_categories": ["physical", "natural"]},
     {"name": "Therapy session", "energy_categories": ["emotional"]},
-    {"name": "Art creation", "energy_categories": ["emotional", "spiritual"]},
+    {"name": "Art creation", "energy_categories": ["emotional"]},
+    {"name": "Meet with friends", "energy_categories": ["social"]},
+    {"name": "Meet with family", "energy_categories": ["social"]},
+    {"name": "Time with pets", "energy_categories": ["emotional"]},
+    {"name": "Art gallery/museum/concert", "energy_categories": ["emotional"]},
+    {"name": "A good movie night", "energy_categories": ["emotional"]},
+    {"name": "Reading", "energy_categories": ["emotional"]},
+    {"name": "Spa day", "energy_categories": ["physical"]},
+    {"name": "Massage", "energy_categories": ["physical"]},
+    {"name": "A date", "energy_categories": ["social"]},
+    {"name": "Work on my mission", "energy_categories": ["spiritual"]},
+    {"name": "A long walk", "energy_categories": ["physical", "natural"]},
+    {"name": "Cooking favorite meal", "energy_categories": ["emotional"]},
+    {"name": "Gardening", "energy_categories": ["natural", "spiritual"]},
+    {"name": "Volunteer work", "energy_categories": ["social", "spiritual"]},
+    {"name": "Listen to music", "energy_categories": ["emotional"]},
+    {"name": "Take a bath", "energy_categories": ["physical"]},
+    {"name": "Photography", "energy_categories": ["emotional"]},
+    {"name": "Write in journal", "energy_categories": ["emotional", "spiritual"]},
+    {"name": "Play with children", "energy_categories": ["social", "emotional"]},
+    {"name": "Attend religious service", "energy_categories": ["spiritual", "social"]},
+    {"name": "Go to the beach", "energy_categories": ["natural", "physical"]},
+    {"name": "Have a picnic", "energy_categories": ["natural", "social"]},
+    {"name": "Practice breathing exercises", "energy_categories": ["spiritual", "physical"]},
+    {"name": "Learn something new", "energy_categories": ["emotional"]},
+    {"name": "Organize/declutter space", "energy_categories": ["physical", "emotional"]},
 ]
 
 @app.get("/api/health")
@@ -106,10 +122,6 @@ async def get_user(user_id: str):
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     return {"id": user["id"], "email": user["email"], "name": user["name"]}
-
-@app.get("/api/emotion-quadrants")
-async def get_emotion_quadrants():
-    return EMOTION_QUADRANTS
 
 @app.post("/api/emotions")
 async def log_emotion(emotion: EmotionEntry):
@@ -200,9 +212,10 @@ async def get_emotion_patterns(user_id: str, days: int = 30):
         if emotion.get("context"):
             context = emotion["context"]
             for key, value in context.items():
-                if key not in triggers:
-                    triggers[key] = {}
-                triggers[key][value] = triggers[key].get(value, 0) + 1
+                if value:  # Only count non-empty values
+                    if key not in triggers:
+                        triggers[key] = {}
+                    triggers[key][value] = triggers[key].get(value, 0) + 1
     
     return {
         "quadrant_distribution": quadrant_counts,
