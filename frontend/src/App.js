@@ -598,6 +598,29 @@ function App() {
                 </div>
               ) : (
                 <div className="analytics-content">
+                  {/* Show message if we have some data but not complete */}
+                  {((!analytics || analytics.total_entries < 5) || (!activityAnalytics || activityAnalytics.total_activities_added === 0)) && (
+                    <div className="analytics-card">
+                      <h3>📊 Building Your Analytics</h3>
+                      <div className="analytics-progress">
+                        <div className="progress-item">
+                          <span className="progress-label">Emotions logged:</span>
+                          <span className="progress-value">
+                            {analytics?.total_entries || 0}/5 
+                            {analytics?.total_entries >= 5 ? " ✅" : ""}
+                          </span>
+                        </div>
+                        <div className="progress-item">
+                          <span className="progress-label">Activities added:</span>
+                          <span className="progress-value">
+                            {activityAnalytics?.total_activities_added || 0}
+                            {activityAnalytics?.total_activities_added > 0 ? " ✅" : ""}
+                          </span>
+                        </div>
+                      </div>
+                      <p>Keep adding data to unlock more detailed insights!</p>
+                    </div>
+                  )}
                   {/* Emotion Analytics */}
                   {analytics && analytics.total_entries >= 5 && (
                     <>
