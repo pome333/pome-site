@@ -9,6 +9,7 @@ function App() {
   const [activities, setActivities] = useState([]);
   const [userEmotions, setUserEmotions] = useState([]);
   const [analytics, setAnalytics] = useState(null);
+  const [activityAnalytics, setActivityAnalytics] = useState(null);
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
 
   // Updated emotion data based on the provided quadrant image
