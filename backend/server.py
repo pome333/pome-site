@@ -95,7 +95,7 @@ DEFAULT_ACTIVITIES = [
     {"name": "Have a picnic", "energy_categories": ["natural", "social"]},
     {"name": "Practice breathing exercises", "energy_categories": ["physical"]},
     {"name": "Learn something new", "energy_categories": ["emotional"]},
-    {"name": "Organize/declutter space", "energy_categories": ["physical", "emotional"]},
+    {"name": "Organize/declutter space", "energy_categories": ["emotional"]},
 ]
 
 @app.get("/api/health")
