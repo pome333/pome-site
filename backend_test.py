@@ -376,9 +376,11 @@ class PomeAPITester:
             self.test_log_emotion_enhanced,
             self.test_get_user_emotions,
             self.test_get_activities,
+            self.test_organize_declutter_activity_tag,
             self.test_create_user_activity,
             self.test_get_user_activities,
-            self.test_analytics_patterns
+            self.test_analytics_patterns,
+            self.test_activity_analytics
         ]
         
         for test_method in test_methods:
