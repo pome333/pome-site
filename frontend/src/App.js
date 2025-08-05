@@ -687,6 +687,17 @@ function App() {
     }
   };
 
+  const loadActivityAnalytics = async () => {
+    if (!user) return;
+    try {
+      const response = await fetch(`${BACKEND_URL}/api/analytics/activities/${user.id}`);
+      const activityAnalyticsData = await response.json();
+      setActivityAnalytics(activityAnalyticsData);
+    } catch (error) {
+      console.error('Error loading activity analytics:', error);
+    }
+  };
+
   // Render appropriate view
   return (
     <div className="App">
