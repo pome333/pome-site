@@ -224,6 +224,99 @@ async def get_emotion_patterns(user_id: str, days: int = 30):
         "total_entries": len(user_emotions)
     }
 
+@app.get("/api/analytics/activities/{user_id}")
+async def get_activity_analytics(user_id: str, days: int = 30):
+    since_date = datetime.utcnow() - timedelta(days=days)
+    
+    # Get user activities for the period
+    user_activity_list = list(user_activities.find(
+        {"user_id": user_id, "created_at": {"$gte": since_date}},
+        {"_id": 0}
+    ))
+    
+    # Get all activities to get category information
+    all_activities = list(activities.find({}, {"_id": 0}))
+    activity_lookup = {act["id"]: act for act in all_activities}
+    
+    # Overall activity analytics
+    total_activities_added = len(user_activity_list)
+    completed_activities = [ua for ua in user_activity_list if ua.get("completed", False)]
+    completion_rate = (len(completed_activities) / total_activities_added * 100) if total_activities_added > 0 else 0
+    
+    # Activity frequency
+    activity_counts = {}
+    category_counts = {"physical": 0, "emotional": 0, "social": 0, "natural": 0, "spiritual": 0}
+    effectiveness_by_activity = {}
+    effectiveness_by_category = {"physical": [], "emotional": [], "social": [], "natural": [], "spiritual": []}
+    
+    for ua in user_activity_list:
+        activity_id = ua.get("activity_id")
+        activity_info = activity_lookup.get(activity_id)
+        
+        if activity_info:
+            activity_name = activity_info["name"]
+            activity_counts[activity_name] = activity_counts.get(activity_name, 0) + 1
+            
+            # Count by categories
+            for category in activity_info["energy_categories"]:
+                category_counts[category] += 1
+                
+                # Track effectiveness by category
+                if ua.get("effectiveness_rating"):
+                    effectiveness_by_category[category].append(ua["effectiveness_rating"])
+            
+            # Track effectiveness by activity
+            if ua.get("effectiveness_rating"):
+                if activity_name not in effectiveness_by_activity:
+                    effectiveness_by_activity[activity_name] = []
+                effectiveness_by_activity[activity_name].append(ua["effectiveness_rating"])
+    
+    # Calculate average effectiveness by category
+    avg_effectiveness_by_category = {}
+    for category, ratings in effectiveness_by_category.items():
+        if ratings:
+            avg_effectiveness_by_category[category] = sum(ratings) / len(ratings)
+    
+    # Calculate average effectiveness by activity
+    avg_effectiveness_by_activity = {}
+    for activity, ratings in effectiveness_by_activity.items():
+        if ratings:
+            avg_effectiveness_by_activity[activity] = sum(ratings) / len(ratings)
+    
+    # Weekly breakdown (last 4 weeks)
+    weekly_data = {}
+    for i in range(4):
+        week_start = datetime.utcnow() - timedelta(days=7*(i+1))
+        week_end = datetime.utcnow() - timedelta(days=7*i)
+        week_label = f"Week {4-i}"
+        
+        week_activities = [ua for ua in user_activity_list 
+                          if week_start <= ua.get("created_at", datetime.min) < week_end]
+        
+        week_category_counts = {"physical": 0, "emotional": 0, "social": 0, "natural": 0, "spiritual": 0}
+        for ua in week_activities:
+            activity_info = activity_lookup.get(ua.get("activity_id"))
+            if activity_info:
+                for category in activity_info["energy_categories"]:
+                    week_category_counts[category] += 1
+        
+        weekly_data[week_label] = {
+            "total_activities": len(week_activities),
+            "category_breakdown": week_category_counts
+        }
+    
+    return {
+        "total_activities_added": total_activities_added,
+        "completion_rate": round(completion_rate, 1),
+        "activity_frequency": activity_counts,
+        "category_distribution": category_counts,
+        "avg_effectiveness_by_category": avg_effectiveness_by_category,
+        "avg_effectiveness_by_activity": avg_effectiveness_by_activity,
+        "weekly_breakdown": weekly_data,
+        "most_effective_activities": sorted(avg_effectiveness_by_activity.items(), 
+                                          key=lambda x: x[1], reverse=True)[:5]
+    }
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8001)
