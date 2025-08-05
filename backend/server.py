@@ -59,14 +59,14 @@ class UserActivity(BaseModel):
     completed_at: Optional[datetime] = None
     created_at: Optional[datetime] = None
 
-# Enhanced default activities
+# Enhanced default activities with corrected tags
 DEFAULT_ACTIVITIES = [
     {"name": "Gym workout", "energy_categories": ["physical"]},
     {"name": "Yoga", "energy_categories": ["physical", "spiritual"]},
     {"name": "Beach walk", "energy_categories": ["physical", "natural"]},
     {"name": "Meditation", "energy_categories": ["spiritual"]},
     {"name": "Call friends", "energy_categories": ["social", "emotional"]},
-    {"name": "Gratitude journaling", "energy_categories": ["emotional", "spiritual"]},
+    {"name": "Gratitude journaling", "energy_categories": ["emotional"]},
     {"name": "Dancing", "energy_categories": ["physical", "social"]},
     {"name": "Nature hike", "energy_categories": ["physical", "natural"]},
     {"name": "Therapy session", "energy_categories": ["emotional"]},
@@ -83,17 +83,17 @@ DEFAULT_ACTIVITIES = [
     {"name": "Work on my mission", "energy_categories": ["spiritual"]},
     {"name": "A long walk", "energy_categories": ["physical", "natural"]},
     {"name": "Cooking favorite meal", "energy_categories": ["emotional"]},
-    {"name": "Gardening", "energy_categories": ["natural", "spiritual"]},
+    {"name": "Gardening", "energy_categories": ["natural"]},
     {"name": "Volunteer work", "energy_categories": ["social", "spiritual"]},
     {"name": "Listen to music", "energy_categories": ["emotional"]},
     {"name": "Take a bath", "energy_categories": ["physical"]},
     {"name": "Photography", "energy_categories": ["emotional"]},
-    {"name": "Write in journal", "energy_categories": ["emotional", "spiritual"]},
-    {"name": "Play with children", "energy_categories": ["social", "emotional"]},
+    {"name": "Write in journal", "energy_categories": ["emotional"]},
+    {"name": "Play with children", "energy_categories": ["social"]},
     {"name": "Attend religious service", "energy_categories": ["spiritual", "social"]},
     {"name": "Go to the beach", "energy_categories": ["natural", "physical"]},
     {"name": "Have a picnic", "energy_categories": ["natural", "social"]},
-    {"name": "Practice breathing exercises", "energy_categories": ["spiritual", "physical"]},
+    {"name": "Practice breathing exercises", "energy_categories": ["physical"]},
     {"name": "Learn something new", "energy_categories": ["emotional"]},
     {"name": "Organize/declutter space", "energy_categories": ["physical", "emotional"]},
 ]

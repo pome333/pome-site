@@ -1,5 +1,5 @@
 /* Import Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Nunito:wght@300;400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap');
 
 /* Reset and base styles */
 * {
@@ -16,7 +16,8 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Quicksand', sans-serif;
+  color: #B85C5C;
 }
 
 /* Landing Page Styles */
@@ -66,7 +67,7 @@ h1, h2, h3, h4, h5, h6 {
 .hero-text h1 {
   font-size: 3.5rem;
   font-weight: 600;
-  color: #312F32;
+  color: #B85C5C;
   margin-bottom: 1.5rem;
   line-height: 1.2;
   letter-spacing: -0.02em;
@@ -144,7 +145,7 @@ h1, h2, h3, h4, h5, h6 {
 .features-section h2 {
   text-align: center;
   font-size: 2.8rem;
-  color: #312F32;
+  color: #B85C5C;
   margin-bottom: 3.5rem;
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -201,7 +202,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .feature-card h3 {
   font-size: 1.6rem;
-  color: #312F32;
+  color: #B85C5C;
   margin-bottom: 1.5rem;
   font-weight: 600;
 }
@@ -265,7 +266,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .feedback-section h2 {
   font-size: 2.5rem;
-  color: #312F32;
+  color: #B85C5C;
   margin-bottom: 1.5rem;
   font-weight: 600;
 }
@@ -279,9 +280,36 @@ h1, h2, h3, h4, h5, h6 {
   margin-right: auto;
 }
 
+.feedback-cta-button {
+  background: linear-gradient(135deg, #F3D9C4 0%, #E8D5C4 100%);
+  color: #312F32;
+  border: none;
+  padding: 1.2rem 2.8rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(240, 217, 196, 0.4);
+  font-family: 'Nunito', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 3rem;
+}
+
+.feedback-cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(240, 217, 196, 0.6);
+}
+
 .feedback-form {
   max-width: 800px;
   margin: 0 auto;
+  display: none;
+}
+
+.feedback-form.show {
+  display: block;
 }
 
 .feedback-form iframe {
@@ -325,7 +353,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .auth-card h2 {
-  color: #312F32;
+  color: #B85C5C;
   margin-bottom: 2.5rem;
   font-size: 1.9rem;
   font-weight: 600;
@@ -457,7 +485,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Emotions Section */
 .emotions-section h2 {
-  color: #312F32;
+  color: #B85C5C;
   margin-bottom: 2rem;
   font-size: 2.2rem;
   font-weight: 600;
@@ -468,6 +496,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 2rem;
   font-size: 1.3rem;
   font-weight: 500;
+  font-family: 'Nunito', sans-serif;
 }
 
 .quadrant-grid {
@@ -523,10 +552,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .quadrant-title {
   font-weight: 600;
-  color: #312F32;
+  color: #B85C5C;
   margin-bottom: 0.8rem;
   font-size: 1.1rem;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .quadrant-emotions {
@@ -544,6 +573,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 2rem;
   font-size: 1.3rem;
   font-weight: 500;
+  font-family: 'Nunito', sans-serif;
 }
 
 .emotion-buttons {
@@ -581,7 +611,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   font-size: 1.1rem;
   margin-bottom: 0.5rem;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .emotion-description {
@@ -599,6 +629,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 2rem;
   font-size: 1.3rem;
   font-weight: 500;
+  font-family: 'Nunito', sans-serif;
 }
 
 .context-group {
@@ -606,7 +637,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .context-group h4 {
-  color: #312F32;
+  color: #B85C5C;
   margin-bottom: 1rem;
   font-size: 1.1rem;
   font-weight: 600;
@@ -669,6 +700,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 2rem;
   font-size: 1.3rem;
   font-weight: 500;
+  font-family: 'Nunito', sans-serif;
 }
 
 .emotion-history {
@@ -696,7 +728,7 @@ h1, h2, h3, h4, h5, h6 {
 .emotion-name {
   font-weight: 600;
   color: #312F32;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .emotion-time {
@@ -706,7 +738,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Activities Section */
 .activities-section h2 {
-  color: #312F32;
+  color: #B85C5C;
   margin-bottom: 1.5rem;
   font-size: 2.2rem;
   font-weight: 600;
@@ -717,6 +749,65 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 3rem;
   font-size: 1.125rem;
   line-height: 1.6;
+}
+
+.selected-activities {
+  margin-bottom: 3rem;
+}
+
+.selected-activities h3 {
+  color: #B85C5C;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.selected-activities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.selected-activity-card {
+  background: linear-gradient(135deg, #F3D9C4 0%, #E8D5C4 100%);
+  padding: 1.5rem;
+  border-radius: 15px;
+  position: relative;
+  color: #312F32;
+  border: 2px solid #E8D5C4;
+}
+
+.selected-activity-card h4 {
+  color: #312F32;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.selected-activity-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.remove-activity-button {
+  background: rgba(255, 255, 255, 0.9);
+  color: #B85C5C;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+}
+
+.remove-activity-button:hover {
+  background: white;
+  transform: translateY(-1px);
 }
 
 .category-legend {
@@ -824,7 +915,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Analytics Section */
 .analytics-section h2 {
-  color: #312F32;
+  color: #B85C5C;
   margin-bottom: 2rem;
   font-size: 2.2rem;
   font-weight: 600;
@@ -840,7 +931,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .empty-analytics h3 {
-  color: #312F32;
+  color: #B85C5C;
   margin-bottom: 1rem;
   font-size: 1.5rem;
 }
@@ -877,7 +968,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .analytics-card h3 {
-  color: #312F32;
+  color: #B85C5C;
   margin-bottom: 2rem;
   font-size: 1.6rem;
   font-weight: 600;
@@ -915,7 +1006,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .trigger-group h4 {
-  color: #312F32;
+  color: #B85C5C;
   margin-bottom: 1rem;
   font-size: 1.2rem;
   font-weight: 600;
@@ -966,6 +1057,10 @@ h1, h2, h3, h4, h5, h6 {
 
   .context-options {
     justify-content: center;
+  }
+
+  .selected-activities-grid {
+    grid-template-columns: 1fr;
   }
 }
 

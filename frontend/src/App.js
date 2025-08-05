@@ -6,52 +6,56 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001'
 function App() {
   const [currentView, setCurrentView] = useState('landing');
   const [user, setUser] = useState(null);
-  const [emotionQuadrants, setEmotionQuadrants] = useState({});
   const [activities, setActivities] = useState([]);
   const [userEmotions, setUserEmotions] = useState([]);
   const [analytics, setAnalytics] = useState(null);
+  const [showFeedbackForm, setShowFeedbackForm] = useState(false);
 
-  // Enhanced emotion data with descriptions
+  // Updated emotion data based on the provided quadrant image
   const EMOTION_DATA = {
     "high_energy_low_pleasant": {
-      "Anger": "Feeling strong displeasure or hostility",
-      "Frustration": "Being upset due to inability to change or achieve something", 
-      "Anxiety": "Feeling worried, nervous, or uneasy about something",
-      "Irritation": "Being annoyed or made impatient by someone or something",
-      "Stress": "Feeling pressured or overwhelmed by demands",
-      "Overwhelm": "Being completely overcome by responsibilities or emotions",
-      "Rage": "Intense, uncontrolled anger",
-      "Panic": "Sudden uncontrollable fear or anxiety"
+      "Annoyed": "Feeling mildly irritated or bothered by something",
+      "Embarrassed": "Feeling self-conscious or ashamed due to a mistake or awkward situation", 
+      "Contempt": "Feeling that someone or something is worthless or beneath consideration",
+      "Frustrated": "Being upset due to inability to change or achieve something",
+      "Angry": "Feeling strong displeasure or hostility",
+      "Enraged": "Extremely angry, filled with rage",
+      "Afraid": "Feeling fear or anxiety about something threatening",
+      "Panicked": "Feeling sudden uncontrollable fear or anxiety",
+      "Anxious": "Feeling worried, nervous, or uneasy about something"
     },
     "high_energy_high_pleasant": {
-      "Excitement": "Feeling eager enthusiasm and anticipation",
-      "Joy": "A feeling of great pleasure and happiness",
-      "Curiosity": "Eager to know or learn something new", 
-      "Enthusiasm": "Intense and eager enjoyment or interest",
-      "Elation": "Great happiness and exhilaration",
-      "Ecstasy": "An overwhelming feeling of great happiness",
-      "Euphoria": "A feeling of intense excitement and happiness",
-      "Bliss": "Perfect happiness and contentment"
-    },
-    "low_energy_high_pleasant": {
-      "Calm": "Peaceful, relaxed, and untroubled",
-      "Contentment": "A state of happiness and satisfaction",
-      "Security": "Feeling safe, stable, and protected",
-      "Peace": "Freedom from disturbance; tranquility",
-      "Satisfaction": "Fulfillment of desires, expectations, or needs",
-      "Serenity": "The state of being calm and peaceful",
-      "Gratitude": "Being thankful and appreciative",
-      "Relief": "Reassurance and relaxation after anxiety"
+      "Amused": "Finding something funny or entertaining",
+      "Interested": "Feeling curious or wanting to learn more about something",
+      "Surprised": "Feeling unexpected wonder or amazement", 
+      "Happy": "Feeling joy, pleasure, or contentment",
+      "Delighted": "Feeling great pleasure and satisfaction",
+      "Joyful": "Feeling great happiness and triumph",
+      "Hopeful": "Feeling optimistic about the future",
+      "Excited": "Feeling eager enthusiasm and anticipation",
+      "Curious": "Eager to know or learn something new"
     },
     "low_energy_low_pleasant": {
-      "Sadness": "Feeling sorrow or unhappiness",
-      "Fatigue": "Extreme tiredness and lack of energy",
-      "Loneliness": "Feeling sad due to lack of companionship",
-      "Disappointment": "Sadness from unfulfilled hopes or expectations",
-      "Melancholy": "A pensive sadness or thoughtful sorrow",
-      "Despair": "Complete loss of hope",
-      "Grief": "Deep sorrow over loss",
-      "Emptiness": "Feeling hollow or devoid of meaning"
+      "Sad": "Feeling sorrow or unhappiness",
+      "Guilty": "Feeling responsible for wrongdoing or failure",
+      "Ashamed": "Feeling embarrassed or guilty about something",
+      "Disgusted": "Feeling revulsion or strong disapproval",
+      "Unhappy": "Not pleased or satisfied; feeling sad",
+      "Bored": "Feeling weary and impatient due to lack of interest",
+      "Lonely": "Feeling sad due to lack of companionship",
+      "Fatigued": "Extreme tiredness and lack of energy",
+      "Grief": "Deep sorrow over loss"
+    },
+    "low_energy_high_pleasant": {
+      "Affectionate": "Feeling fond and loving toward someone",
+      "Calm": "Peaceful, relaxed, and untroubled",
+      "Peaceful": "Free from disturbance; tranquil",
+      "Content": "Satisfied and at ease with circumstances",
+      "Grateful": "Being thankful and appreciative",
+      "Loved": "Feeling cared for and cherished",
+      "Relaxed": "Free from tension and anxiety",
+      "Relieved": "Feeling reassured after anxiety or distress",
+      "Secure": "Feeling safe, stable, and protected"
     }
   };
 
@@ -123,9 +127,9 @@ function App() {
       <section className="testimonial-section">
         <div className="testimonial-content">
           <blockquote>
-            "Understanding my emotional patterns has been life-changing. I now know exactly which activities help me feel more resourceful and confident."
+            "Understanding my emotional patterns has been life-changing. I now know exactly which activities help me feel more resourceful and content."
           </blockquote>
-          <cite>— Sarah, Beta User</cite>
+          <cite>— Veranika, Beta User</cite>
         </div>
       </section>
 
@@ -133,7 +137,17 @@ function App() {
       <section className="feedback-section">
         <h2>Help Us Improve</h2>
         <p>Your feedback is valuable! Let us know what features would help you most on your emotional intelligence journey.</p>
-        <div className="feedback-form">
+        
+        {!showFeedbackForm ? (
+          <button 
+            className="feedback-cta-button"
+            onClick={() => setShowFeedbackForm(true)}
+          >
+            Leave Feedback
+          </button>
+        ) : null}
+
+        <div className={`feedback-form ${showFeedbackForm ? 'show' : ''}`}>
           <iframe 
             src="https://docs.google.com/forms/d/e/1FAIpQLSfimMroes1U1ho1k3nNmVuJHPxDXp_CcYWl4GTgyFkmqxHotQ/viewform?embedded=true" 
             width="100%" 
@@ -220,6 +234,7 @@ function App() {
       current_activity: ''
     });
     const [userActivities, setUserActivities] = useState([]);
+    const [selectedActivities, setSelectedActivities] = useState([]);
 
     // Reset emotion selection when quadrant changes
     useEffect(() => {
@@ -234,15 +249,25 @@ function App() {
         const response = await fetch(`${BACKEND_URL}/api/user-activities/${user.id}`);
         const userActData = await response.json();
         setUserActivities(userActData);
+        
+        // Create selected activities array with full activity details
+        const selectedActIds = userActData.map(ua => ua.activity_id);
+        const selectedActDetails = activities.filter(act => selectedActIds.includes(act.id));
+        setSelectedActivities(selectedActDetails.map(act => ({
+          ...act,
+          user_activity_id: userActData.find(ua => ua.activity_id === act.id)?.id
+        })));
       } catch (error) {
         console.error('Error loading user activities:', error);
       }
     };
 
-    // Load user activities on component mount
+    // Load user activities on component mount and when activities change
     useEffect(() => {
-      loadUserActivities();
-    }, [user]);
+      if (activities.length > 0) {
+        loadUserActivities();
+      }
+    }, [user, activities]);
 
     const handleQuadrantSelect = (quadrant) => {
       setSelectedQuadrant(quadrant);
@@ -272,11 +297,33 @@ function App() {
         });
         
         if (response.ok) {
-          setUserActivities(prev => [...prev, { activity_id: activity.id, activity_name: activity.name }]);
+          const result = await response.json();
+          setSelectedActivities(prev => [...prev, {
+            ...activity,
+            user_activity_id: result.id
+          }]);
           loadUserActivities();
         }
       } catch (error) {
         console.error('Error adding activity:', error);
+      }
+    };
+
+    const handleRemoveActivity = async (activity) => {
+      try {
+        // Find the user activity ID
+        const userActivity = userActivities.find(ua => ua.activity_id === activity.id);
+        if (!userActivity) return;
+
+        // Remove from selected activities immediately (optimistic update)
+        setSelectedActivities(prev => prev.filter(act => act.id !== activity.id));
+
+        // Note: We would need a DELETE endpoint to properly remove from database
+        // For now, we'll just remove from the UI
+        
+        loadUserActivities();
+      } catch (error) {
+        console.error('Error removing activity:', error);
       }
     };
 
@@ -469,7 +516,37 @@ function App() {
           {currentSection === 'activities' && (
             <div className="activities-section">
               <h2>Resourceful Activities</h2>
-              <p className="subtitle">Choose multiple activities for each week to help you become more resourceful and resilient. Build your personal toolkit across five energy categories:</p>
+              <p className="subtitle">
+                Select resourceful activities that give you an energy boost. Everyone responds differently to activities, so experiment to find what works best for you. 
+                Aim to incorporate these activities weekly to maintain your emotional well-being and energy levels. These aren't all your activities - just the ones that make you feel more resourceful and resilient.
+              </p>
+
+              {/* Selected Activities */}
+              {selectedActivities.length > 0 && (
+                <div className="selected-activities">
+                  <h3>Your Weekly Resourceful Activities ({selectedActivities.length})</h3>
+                  <div className="selected-activities-grid">
+                    {selectedActivities.map(activity => (
+                      <div key={activity.id} className="selected-activity-card">
+                        <h4>{activity.name}</h4>
+                        <div className="selected-activity-categories">
+                          {activity.energy_categories.map(category => (
+                            <span key={category} className={`category-tag ${category}`}>
+                              {category}
+                            </span>
+                          ))}
+                        </div>
+                        <button 
+                          className="remove-activity-button"
+                          onClick={() => handleRemoveActivity(activity)}
+                        >
+                          Remove
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
               
               <div className="energy-categories">
                 <div className="category-legend">
@@ -493,10 +570,11 @@ function App() {
                       ))}
                     </div>
                     <button 
-                      className={userActivities.some(ua => ua.activity_id === activity.id) ? 'add-activity-button added' : 'add-activity-button'}
+                      className={selectedActivities.some(sa => sa.id === activity.id) ? 'add-activity-button added' : 'add-activity-button'}
                       onClick={() => handleAddActivity(activity)}
+                      disabled={selectedActivities.some(sa => sa.id === activity.id)}
                     >
-                      {userActivities.some(ua => ua.activity_id === activity.id) ? 'Added to Plan ✓' : 'Add to My Plan'}
+                      {selectedActivities.some(sa => sa.id === activity.id) ? 'Added to Plan ✓' : 'Add to My Plan'}
                     </button>
                   </div>
                 ))}
@@ -513,6 +591,7 @@ function App() {
                   <h3>📊 Analytics Coming Soon</h3>
                   <p>Check in with your emotions more often to see patterns emerge.</p>
                   <p>We'll show your insights after you've logged at least 5 emotions!</p>
+                  <p>Keep tracking to unlock powerful insights about your emotional well-being and activity effectiveness.</p>
                 </div>
               ) : (
                 <div className="analytics-content">
