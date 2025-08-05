@@ -304,6 +304,7 @@ function App() {
             user_activity_id: result.id
           }]);
           loadUserActivities();
+          loadActivityAnalytics(); // Load analytics after adding activity
         }
       } catch (error) {
         console.error('Error adding activity:', error);
