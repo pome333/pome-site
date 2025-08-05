@@ -587,61 +587,159 @@ function App() {
 
           {currentSection === 'analytics' && (
             <div className="analytics-section">
-              <h2>Your Emotional Patterns</h2>
+              <h2>Your Emotional & Activity Patterns</h2>
               
-              {!analytics || analytics.total_entries < 5 ? (
+              {(!analytics || analytics.total_entries < 5) && (!activityAnalytics || activityAnalytics.total_activities_added === 0) ? (
                 <div className="empty-analytics">
                   <h3>📊 Analytics Coming Soon</h3>
-                  <p>Check in with your emotions more often to see patterns emerge.</p>
-                  <p>We'll show your insights after you've logged at least 5 emotions!</p>
+                  <p>Check in with your emotions and add activities to see patterns emerge.</p>
+                  <p>We'll show your insights after you've logged at least 5 emotions and added some activities!</p>
                   <p>Keep tracking to unlock powerful insights about your emotional well-being and activity effectiveness.</p>
                 </div>
               ) : (
                 <div className="analytics-content">
-                  <div className="analytics-card">
-                    <h3>Quadrant Distribution</h3>
-                    <div className="quadrant-stats">
-                      {Object.entries(analytics.quadrant_distribution).map(([quadrant, count]) => (
-                        <div key={quadrant} className="stat-item">
-                          <span className="stat-label">{quadrantDisplayNames[quadrant]}:</span>
-                          <span className="stat-value">{count}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="analytics-card">
-                    <h3>Most Common Emotions</h3>
-                    <div className="emotion-stats">
-                      {Object.entries(analytics.emotion_frequency)
-                        .sort(([,a], [,b]) => b - a)
-                        .slice(0, 5)
-                        .map(([emotion, count]) => (
-                          <div key={emotion} className="stat-item">
-                            <span className="stat-label">{emotion}:</span>
-                            <span className="stat-value">{count}</span>
-                          </div>
-                        ))}
-                    </div>
-                  </div>
-
-                  <div className="analytics-card">
-                    <h3>Trigger Analysis</h3>
-                    {Object.entries(analytics.trigger_analysis).map(([trigger_type, triggers]) => (
-                      <div key={trigger_type} className="trigger-group">
-                        <h4>{trigger_type.replace('_', ' ').toUpperCase()}:</h4>
-                        {Object.entries(triggers)
-                          .sort(([,a], [,b]) => b - a)
-                          .slice(0, 3)
-                          .map(([trigger, count]) => (
-                            <div key={trigger} className="stat-item">
-                              <span className="stat-label">{trigger}:</span>
+                  {/* Emotion Analytics */}
+                  {analytics && analytics.total_entries >= 5 && (
+                    <>
+                      <div className="analytics-card">
+                        <h3>Emotional Quadrant Distribution</h3>
+                        <div className="quadrant-stats">
+                          {Object.entries(analytics.quadrant_distribution).map(([quadrant, count]) => (
+                            <div key={quadrant} className="stat-item">
+                              <span className="stat-label">{quadrantDisplayNames[quadrant]}:</span>
                               <span className="stat-value">{count}</span>
                             </div>
                           ))}
+                        </div>
                       </div>
-                    ))}
-                  </div>
+
+                      <div className="analytics-card">
+                        <h3>Most Common Emotions</h3>
+                        <div className="emotion-stats">
+                          {Object.entries(analytics.emotion_frequency)
+                            .sort(([,a], [,b]) => b - a)
+                            .slice(0, 5)
+                            .map(([emotion, count]) => (
+                              <div key={emotion} className="stat-item">
+                                <span className="stat-label">{emotion}:</span>
+                                <span className="stat-value">{count}</span>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+
+                      <div className="analytics-card">
+                        <h3>Emotional Triggers</h3>
+                        {Object.entries(analytics.trigger_analysis).map(([trigger_type, triggers]) => (
+                          <div key={trigger_type} className="trigger-group">
+                            <h4>{trigger_type.replace('_', ' ').toUpperCase()}:</h4>
+                            {Object.entries(triggers)
+                              .sort(([,a], [,b]) => b - a)
+                              .slice(0, 3)
+                              .map(([trigger, count]) => (
+                                <div key={trigger} className="stat-item">
+                                  <span className="stat-label">{trigger}:</span>
+                                  <span className="stat-value">{count}</span>
+                                </div>
+                              ))}
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  )}
+
+                  {/* Activity Analytics */}
+                  {activityAnalytics && activityAnalytics.total_activities_added > 0 && (
+                    <>
+                      <div className="analytics-card">
+                        <h3>Activity Overview</h3>
+                        <div className="activity-overview">
+                          <div className="stat-item">
+                            <span className="stat-label">Total Activities Added:</span>
+                            <span className="stat-value">{activityAnalytics.total_activities_added}</span>
+                          </div>
+                          <div className="stat-item">
+                            <span className="stat-label">Completion Rate:</span>
+                            <span className="stat-value">{activityAnalytics.completion_rate}%</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="analytics-card">
+                        <h3>Activity Distribution by Category</h3>
+                        <div className="category-stats">
+                          {Object.entries(activityAnalytics.category_distribution)
+                            .sort(([,a], [,b]) => b - a)
+                            .map(([category, count]) => (
+                              <div key={category} className="stat-item">
+                                <span className="stat-label">
+                                  <span className={`category-indicator ${category}`}></span>
+                                  {category.charAt(0).toUpperCase() + category.slice(1)}:
+                                </span>
+                                <span className="stat-value">{count}</span>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+
+                      {Object.keys(activityAnalytics.avg_effectiveness_by_category).length > 0 && (
+                        <div className="analytics-card">
+                          <h3>Category Effectiveness</h3>
+                          <div className="effectiveness-stats">
+                            {Object.entries(activityAnalytics.avg_effectiveness_by_category)
+                              .sort(([,a], [,b]) => b - a)
+                              .map(([category, rating]) => (
+                                <div key={category} className="stat-item">
+                                  <span className="stat-label">
+                                    <span className={`category-indicator ${category}`}></span>
+                                    {category.charAt(0).toUpperCase() + category.slice(1)}:
+                                  </span>
+                                  <span className="stat-value">{rating.toFixed(1)}/10</span>
+                                </div>
+                              ))}
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="analytics-card">
+                        <h3>Weekly Activity Breakdown</h3>
+                        <div className="weekly-stats">
+                          {Object.entries(activityAnalytics.weekly_breakdown)
+                            .reverse()
+                            .map(([week, data]) => (
+                              <div key={week} className="week-breakdown">
+                                <h4>{week}: {data.total_activities} activities</h4>
+                                <div className="week-categories">
+                                  {Object.entries(data.category_breakdown)
+                                    .filter(([,count]) => count > 0)
+                                    .map(([category, count]) => (
+                                      <span key={category} className={`category-tag ${category}`}>
+                                        {category}: {count}
+                                      </span>
+                                    ))}
+                                </div>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+
+                      {activityAnalytics.most_effective_activities.length > 0 && (
+                        <div className="analytics-card">
+                          <h3>Most Effective Activities</h3>
+                          <div className="effectiveness-ranking">
+                            {activityAnalytics.most_effective_activities.map(([activity, rating], index) => (
+                              <div key={activity} className="stat-item">
+                                <span className="stat-label">
+                                  {index + 1}. {activity}:
+                                </span>
+                                <span className="stat-value">{rating.toFixed(1)}/10</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </>
+                  )}
                 </div>
               )}
             </div>
