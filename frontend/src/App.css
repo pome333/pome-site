@@ -1012,6 +1012,58 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 }
 
+.activity-overview, .category-stats, .effectiveness-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.category-indicator {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+.category-indicator.physical { background: #FFB3BA; }
+.category-indicator.emotional { background: #BAFFB3; }
+.category-indicator.social { background: #B3D9FF; }
+.category-indicator.natural { background: #C8E6C9; }
+.category-indicator.spiritual { background: #FFF9B3; }
+
+.weekly-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.week-breakdown {
+  padding: 1rem;
+  background: #FFF9F5;
+  border-radius: 12px;
+  border: 1px solid rgba(232, 213, 196, 0.3);
+}
+
+.week-breakdown h4 {
+  color: #B85C5C;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.week-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.effectiveness-ranking {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .hero-content {
