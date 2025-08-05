@@ -352,6 +352,7 @@ function App() {
         loadUserEmotions();
         loadAnalytics();
         loadActivityAnalytics();
+        loadActivityAnalytics();
         alert('Emotion logged successfully!');
       } catch (error) {
         console.error('Error logging emotion:', error);
