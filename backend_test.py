@@ -311,6 +311,58 @@ class PomeAPITester:
             validate_response=validate_analytics
         )
 
+    def test_activity_analytics(self):
+        """Test activity analytics endpoint"""
+        if not self.test_user_id:
+            print("❌ Skipping - No test user ID available")
+            return False, {}
+        
+        def validate_activity_analytics(data):
+            required_keys = [
+                'total_activities_added', 'completion_rate', 'activity_frequency',
+                'category_distribution', 'avg_effectiveness_by_category',
+                'avg_effectiveness_by_activity', 'weekly_breakdown', 'most_effective_activities'
+            ]
+            return all(key in data for key in required_keys)
+        
+        return self.run_test(
+            "Get Activity Analytics",
+            "GET",
+            f"api/analytics/activities/{self.test_user_id}",
+            200,
+            validate_response=validate_activity_analytics
+        )
+
+    def test_organize_declutter_activity_tag(self):
+        """Test that 'Organize/declutter space' activity has only 'emotional' tag"""
+        success, activities = self.test_get_activities()
+        if not success:
+            return False, {}
+        
+        # Find the "Organize/declutter space" activity
+        organize_activity = None
+        for activity in activities:
+            if activity.get('name') == 'Organize/declutter space':
+                organize_activity = activity
+                break
+        
+        if not organize_activity:
+            print("❌ Failed - 'Organize/declutter space' activity not found")
+            return False, {}
+        
+        expected_categories = ['emotional']
+        actual_categories = organize_activity.get('energy_categories', [])
+        
+        if actual_categories == expected_categories:
+            print("✅ Passed - 'Organize/declutter space' has correct tags: ['emotional']")
+            self.tests_passed += 1
+            return True, organize_activity
+        else:
+            print(f"❌ Failed - Expected ['emotional'], got {actual_categories}")
+            return False, {}
+        
+        self.tests_run += 1
+
     def run_all_tests(self):
         """Run all API tests in sequence"""
         print("🚀 Starting Pome API Tests")
