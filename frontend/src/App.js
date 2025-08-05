@@ -270,6 +270,25 @@ function App() {
       }
     }, [user, activities]);
 
+    // Load activity analytics function inside MainApp component
+    const loadActivityAnalytics = async () => {
+      if (!user) return;
+      try {
+        const response = await fetch(`${BACKEND_URL}/api/analytics/activities/${user.id}`);
+        const activityAnalyticsData = await response.json();
+        setActivityAnalytics(activityAnalyticsData);
+      } catch (error) {
+        console.error('Error loading activity analytics:', error);
+      }
+    };
+
+    // Load activity analytics on component mount
+    useEffect(() => {
+      if (user) {
+        loadActivityAnalytics();
+      }
+    }, [user]);
+
     const handleQuadrantSelect = (quadrant) => {
       setSelectedQuadrant(quadrant);
     };
