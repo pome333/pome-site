@@ -138,7 +138,7 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateX(-50%);
   width: 100px;
   height: 4px;
-  background: linear-gradient(90deg, #EE3364A 0%, #D4A574 100%);
+  background: linear-gradient(90deg, #EE3364 0%, #D4A574 100%);
   border-radius: 2px;
 }
 
@@ -177,7 +177,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #EE3364A 0%, #D4A574 100%);
+  background: linear-gradient(90deg, #EE3364 0%, #D4A574 100%);
 }
 
 .feature-card:hover {
@@ -190,7 +190,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 2rem;
   display: inline-block;
   padding: 1rem;
-  background: linear-gradient(135deg, #EE3364A 0%, #D4A574 100%);
+  background: linear-gradient(135deg, #EE3364 0%, #D4A574 100%);
   border-radius: 50%;
   width: 80px;
   height: 80px;
@@ -428,13 +428,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .auth-form input:focus {
   outline: none;
-  border-color: #EE3364A;
+  border-color: #EE3364;
   background: white;
   box-shadow: 0 0 15px rgba(238, 51, 100, 0.15);
 }
 
 .auth-button {
-  background: linear-gradient(135deg, #EE3364A 0%, #D4A574 100%);
+  background: linear-gradient(135deg, #EE3364 0%, #D4A574 100%);
   color: #FFFFFF;
   border: none;
   padding: 1.2rem;
@@ -522,7 +522,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-button.active {
   color: #B85C5C;
-  border-bottom-color: #EE3364A;
+  border-bottom-color: #EE3364;
   font-weight: 600;
   background: #FDFCFB;
 }
@@ -549,7 +549,7 @@ h1, h2, h3, h4, h5, h6 {
   background: #FDFCFB;
   padding: 2rem;
   border-radius: 15px;
-  border-left: 4px solid #EE3364A;
+  border-left: 4px solid #EE3364;
 }
 
 .quadrant-selection h3 {
@@ -587,7 +587,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #EE3364A 0%, #D4A574 100%);
+  background: linear-gradient(90deg, #EE3364 0%, #D4A574 100%);
   transform: scaleX(0);
   transition: transform 0.3s ease;
 }
@@ -597,13 +597,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .quadrant-button:hover {
-  border-color: #EE3364A;
+  border-color: #EE3364;
   transform: translateY(-3px);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .quadrant-button.active {
-  border-color: #EE3364A;
+  border-color: #EE3364;
   background: #FDFCFB;
   box-shadow: 0 8px 25px rgba(238, 51, 100, 0.15);
 }
@@ -658,15 +658,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .emotion-button:hover {
-  border-color: #EE3364A;
+  border-color: #EE3364;
   transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .emotion-button.active {
-  background: linear-gradient(135deg, #EE3364A 0%, #D4A574 100%);
+  background: linear-gradient(135deg, #EE3364 0%, #D4A574 100%);
   color: white;
-  border-color: #EE3364A;
+  border-color: #EE3364;
   box-shadow: 0 8px 20px rgba(238, 51, 100, 0.25);
 }
 
@@ -724,17 +724,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .context-option:hover {
-  border-color: #EE3364A;
+  border-color: #EE3364;
 }
 
 .context-option.active {
-  background: #EE3364A;
+  background: #EE3364;
   color: white;
-  border-color: #EE3364A;
+  border-color: #EE3364;
 }
 
 .log-emotion-button {
-  background: linear-gradient(135deg, #EE3364A 0%, #D4A574 100%);
+  background: linear-gradient(135deg, #EE3364 0%, #D4A574 100%);
   color: white;
   border: none;
   padding: 1.2rem 3rem;
@@ -834,12 +834,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .selected-activity-card {
-  background: linear-gradient(135deg, #EE3364A 0%, #D4A574 100%);
+  background: linear-gradient(135deg, #EE3364 0%, #D4A574 100%);
   padding: 1.5rem;
   border-radius: 15px;
   position: relative;
   color: white;
-  border: 2px solid #EE3364A;
+  border: 2px solid #EE3364;
 }
 
 .selected-activity-card h4 {
@@ -920,7 +920,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #EE3364A 0%, #D4A574 100%);
+  background: linear-gradient(90deg, #EE3364 0%, #D4A574 100%);
 }
 
 .activity-card:hover {
@@ -956,7 +956,7 @@ h1, h2, h3, h4, h5, h6 {
 .category-tag.spiritual { background: #FFF9B3; color: #F57F17; }
 
 .add-activity-button {
-  background: #EE3364A;
+  background: #EE3364;
   color: white;
   border: none;
   padding: 1rem 1.8rem;
@@ -1030,7 +1030,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #EE3364A 0%, #D4A574 100%);
+  background: linear-gradient(90deg, #EE3364 0%, #D4A574 100%);
 }
 
 .analytics-card h3 {
