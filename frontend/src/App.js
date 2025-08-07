@@ -449,7 +449,7 @@ function App() {
 
         {/* Main Content */}
         <main className="app-main">
-          <div style={{display: currentSection === 'emotions' ? 'block' : 'none'}}>
+          {currentSection === 'emotions' && (
             <div className="emotions-section">
               <h2>How are you feeling right now?</h2>
               
