@@ -251,7 +251,7 @@ function App() {
 
   // Main app component
   const MainApp = () => {
-    const [currentSection, setCurrentSection] = useState('analytics'); // TEMP: Test analytics by default
+    const [currentSection, setCurrentSection] = useState('emotions');
     const [selectedQuadrant, setSelectedQuadrant] = useState('');
     const [selectedEmotion, setSelectedEmotion] = useState('');
     const [emotionContext, setEmotionContext] = useState({
