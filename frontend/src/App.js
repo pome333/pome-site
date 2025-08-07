@@ -480,7 +480,7 @@ function App() {
               window.debugClickCount++;
               console.log('🔥 Activities clicked #' + window.debugClickCount);
               
-              setCurrentSection('activities');
+              dispatchSection({ type: 'SET_SECTION', section: 'activities' });
               
               // Force re-render with a different state update
               setSelectedQuadrant('');
