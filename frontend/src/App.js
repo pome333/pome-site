@@ -252,6 +252,14 @@ function App() {
   // Main app component
   const MainApp = () => {
     const [currentSection, setCurrentSection] = useState('emotions');
+    const currentSectionRef = useRef(currentSection);
+    
+    // Update ref whenever state changes
+    useEffect(() => {
+      currentSectionRef.current = currentSection;
+      console.log('🔍 useEffect: currentSection changed to:', currentSection);
+    }, [currentSection]);
+
     const [selectedQuadrant, setSelectedQuadrant] = useState('');
     const [selectedEmotion, setSelectedEmotion] = useState('');
     const [emotionContext, setEmotionContext] = useState({
@@ -262,7 +270,20 @@ function App() {
     const [userActivities, setUserActivities] = useState([]);
     const [selectedActivities, setSelectedActivities] = useState([]);
 
-    console.log('🔧 MainApp component render - currentSection:', currentSection); // Debug log
+    console.log('🔧 MainApp component render - currentSection:', currentSection);
+
+    // Force state update function  
+    const forceSetCurrentSection = (newSection) => {
+      console.log('🚀 forceSetCurrentSection called with:', newSection);
+      console.log('🔍 Current state before update:', currentSectionRef.current);
+      
+      setCurrentSection(newSection);
+      
+      // Use timeout to verify state change
+      setTimeout(() => {
+        console.log('🔍 State after setTimeout:', currentSectionRef.current);
+      }, 0);
+    }; // Debug log
     
     // Add debug handler to track section changes
     const debugSetCurrentSection = (section) => {
