@@ -254,7 +254,13 @@ function App() {
 
   // Main app component
   const MainApp = () => {
-    const [currentSection, setCurrentSection] = useState('emotions');
+    // Use useReducer instead of useState for currentSection
+    const sectionReducer = (state, action) => {
+      console.log('🔥 sectionReducer called:', { currentState: state, action: action });
+      return action.type === 'SET_SECTION' ? action.section : state;
+    };
+    
+    const [currentSection, dispatchSection] = useReducer(sectionReducer, 'emotions');
     const currentSectionRef = useRef(currentSection);
     
     // Update ref whenever state changes
