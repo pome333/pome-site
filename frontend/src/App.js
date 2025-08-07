@@ -3,6 +3,9 @@ import './App.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
 
+// Global debug variable
+window.debugClickCount = 0;
+
 function App() {
   const [currentView, setCurrentView] = useState('landing');
   const [user, setUser] = useState(null);
