@@ -497,7 +497,7 @@ function App() {
               window.debugClickCount++;
               console.log('🔥 Analytics clicked #' + window.debugClickCount);
               
-              setCurrentSection('analytics');
+              dispatchSection({ type: 'SET_SECTION', section: 'analytics' });
               
               // Force re-render with a different state update
               setSelectedQuadrant('');
