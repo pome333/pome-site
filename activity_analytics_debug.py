@@ -10,7 +10,7 @@ import json
 from datetime import datetime
 
 class ActivityAnalyticsDebugger:
-    def __init__(self, base_url="https://4a319ab0-f977-4a59-9bf8-e2c71ca6322c.preview.emergentagent.com"):
+    def __init__(self, base_url="https://6b1ed6fe-0b44-4fcc-a55e-42cfe3cd5dc0.preview.emergentagent.com"):
         self.base_url = base_url
         self.user_id = None
         self.selected_activities = []
