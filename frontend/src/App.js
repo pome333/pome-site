@@ -439,8 +439,12 @@ function App() {
           <button 
             className={currentSection === 'activities' ? 'nav-button active' : 'nav-button'}
             onClick={() => {
-              console.log('Activities button clicked');
-              debugSetCurrentSection('activities');
+              console.log('Activities button clicked - current state:', currentSection);
+              alert(`Current section before: ${currentSection}`);
+              setCurrentSection('activities');
+              setTimeout(() => {
+                alert(`Current section after: activities (should be activities)`);
+              }, 100);
             }}
           >
             Activities
