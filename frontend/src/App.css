@@ -341,7 +341,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .social-link {
-  background: linear-gradient(135deg, #EE3364A 0%, #D4A574 100%);
+  background: linear-gradient(135deg, #EE3364 0%, #D4A574 100%);
   color: white;
   text-decoration: none;
   padding: 1.5rem 2rem;
