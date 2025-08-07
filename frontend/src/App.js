@@ -297,8 +297,8 @@ function App() {
     // Add debug handler to track section changes
     const debugSetCurrentSection = (section) => {
       console.log('🚀 About to change section from', currentSection, 'to:', section);
-      setCurrentSection(section);
-      console.log('✅ setCurrentSection called with:', section);
+      dispatchSection({ type: 'SET_SECTION', section: section });
+      console.log('✅ dispatchSection called with:', section);
     };
 
     // Use useEffect to monitor currentSection changes
