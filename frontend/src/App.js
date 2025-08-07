@@ -262,6 +262,8 @@ function App() {
     const [userActivities, setUserActivities] = useState([]);
     const [selectedActivities, setSelectedActivities] = useState([]);
 
+    console.log('MainApp render - currentSection:', currentSection); // Debug log
+
     // Reset emotion selection when quadrant changes
     useEffect(() => {
       setSelectedEmotion('');
