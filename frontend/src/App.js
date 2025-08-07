@@ -466,7 +466,7 @@ function App() {
             className={currentSection === 'activities' ? 'nav-button active' : 'nav-button'}
             onClick={() => {
               console.log('🔥 Activities button clicked - current state:', currentSection);
-              debugSetCurrentSection('activities');
+              forceSetCurrentSection('activities');
             }}
           >
             Activities
@@ -475,7 +475,7 @@ function App() {
             className={currentSection === 'analytics' ? 'nav-button active' : 'nav-button'}
             onClick={() => {
               console.log('🔥 Analytics button clicked - current state:', currentSection);
-              debugSetCurrentSection('analytics');
+              forceSetCurrentSection('analytics');
             }}
           >
             Analytics
