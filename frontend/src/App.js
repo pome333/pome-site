@@ -453,7 +453,7 @@ function App() {
           <button 
             className={currentSection === 'analytics' ? 'nav-button active' : 'nav-button'}
             onClick={() => {
-              console.log('Analytics button clicked');
+              console.log('🔥 Analytics button clicked - current state:', currentSection);
               debugSetCurrentSection('analytics');
             }}
           >
