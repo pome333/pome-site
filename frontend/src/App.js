@@ -266,10 +266,15 @@ function App() {
     
     // Add debug handler to track section changes
     const debugSetCurrentSection = (section) => {
-      console.log('About to change section to:', section);
+      console.log('🚀 About to change section from', currentSection, 'to:', section);
       setCurrentSection(section);
-      console.log('Section changed to:', section);
+      console.log('✅ setCurrentSection called with:', section);
     };
+
+    // Use useEffect to monitor currentSection changes
+    useEffect(() => {
+      console.log('🔍 useEffect: currentSection changed to:', currentSection);
+    }, [currentSection]);
 
     // Reset emotion selection when quadrant changes
     useEffect(() => {
