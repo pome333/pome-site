@@ -262,7 +262,7 @@ function App() {
     const [userActivities, setUserActivities] = useState([]);
     const [selectedActivities, setSelectedActivities] = useState([]);
 
-    console.log('MainApp render - currentSection:', currentSection); // Debug log
+    console.log('🔧 MainApp component render - currentSection:', currentSection); // Debug log
     
     // Add debug handler to track section changes
     const debugSetCurrentSection = (section) => {
