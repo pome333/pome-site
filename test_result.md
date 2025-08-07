@@ -190,7 +190,6 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Backend API endpoints for emotions, activities, and analytics"
     - "Navigation tabs (Activities/Analytics) section switching"
   stuck_tasks:
     - "Navigation tabs (Activities/Analytics) section switching"
