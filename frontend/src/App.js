@@ -281,12 +281,12 @@ function App() {
 
     console.log('🔧 MainApp component render - currentSection:', currentSection);
 
-    // Force state update function  
+    // Force state update function using useReducer
     const forceSetCurrentSection = (newSection) => {
       console.log('🚀 forceSetCurrentSection called with:', newSection);
       console.log('🔍 Current state before update:', currentSectionRef.current);
       
-      setCurrentSection(newSection);
+      dispatchSection({ type: 'SET_SECTION', section: newSection });
       
       // Use timeout to verify state change
       setTimeout(() => {
