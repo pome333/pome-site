@@ -429,13 +429,19 @@ function App() {
           </button>
           <button 
             className={currentSection === 'activities' ? 'nav-button active' : 'nav-button'}
-            onClick={() => setCurrentSection('activities')}
+            onClick={() => {
+              console.log('Activities button clicked');
+              setCurrentSection('activities');
+            }}
           >
             Activities
           </button>
           <button 
             className={currentSection === 'analytics' ? 'nav-button active' : 'nav-button'}
-            onClick={() => setCurrentSection('analytics')}
+            onClick={() => {
+              console.log('Analytics button clicked');
+              setCurrentSection('analytics');
+            }}
           >
             Analytics
           </button>
