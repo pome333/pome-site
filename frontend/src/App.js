@@ -469,21 +469,35 @@ function App() {
             className={currentSection === 'activities' ? 'nav-button active' : 'nav-button'}
             onClick={(e) => {
               e.preventDefault();
-              console.log('🔥 Direct Activities click');
+              e.stopPropagation();
+              
+              window.debugClickCount++;
+              console.log('🔥 Activities clicked #' + window.debugClickCount);
+              
               setCurrentSection('activities');
+              
+              // Force re-render with a different state update
+              setSelectedQuadrant('');
             }}
           >
-            Activities
+            Activities (Clicks: {typeof window !== 'undefined' && window.debugClickCount})
           </button>
           <button 
             className={currentSection === 'analytics' ? 'nav-button active' : 'nav-button'}
             onClick={(e) => {
               e.preventDefault();
-              console.log('🔥 Direct Analytics click'); 
+              e.stopPropagation();
+              
+              window.debugClickCount++;
+              console.log('🔥 Analytics clicked #' + window.debugClickCount);
+              
               setCurrentSection('analytics');
+              
+              // Force re-render with a different state update
+              setSelectedQuadrant('');
             }}
           >
-            Analytics
+            Analytics (Clicks: {typeof window !== 'undefined' && window.debugClickCount})
           </button>
         </nav>
 
