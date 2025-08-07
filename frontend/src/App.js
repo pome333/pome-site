@@ -432,7 +432,7 @@ function App() {
         <nav className="app-nav">
           <button 
             className={currentSection === 'emotions' ? 'nav-button active' : 'nav-button'}
-            onClick={() => setCurrentSection('emotions')}
+            onClick={() => debugSetCurrentSection('emotions')}
           >
             Track Emotions
           </button>
@@ -440,7 +440,7 @@ function App() {
             className={currentSection === 'activities' ? 'nav-button active' : 'nav-button'}
             onClick={() => {
               console.log('Activities button clicked');
-              setCurrentSection('activities');
+              debugSetCurrentSection('activities');
             }}
           >
             Activities
@@ -449,7 +449,7 @@ function App() {
             className={currentSection === 'analytics' ? 'nav-button active' : 'nav-button'}
             onClick={() => {
               console.log('Analytics button clicked');
-              setCurrentSection('analytics');
+              debugSetCurrentSection('analytics');
             }}
           >
             Analytics
