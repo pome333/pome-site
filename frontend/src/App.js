@@ -263,6 +263,13 @@ function App() {
     const [selectedActivities, setSelectedActivities] = useState([]);
 
     console.log('MainApp render - currentSection:', currentSection); // Debug log
+    
+    // Add debug handler to track section changes
+    const debugSetCurrentSection = (section) => {
+      console.log('About to change section to:', section);
+      setCurrentSection(section);
+      console.log('Section changed to:', section);
+    };
 
     // Reset emotion selection when quadrant changes
     useEffect(() => {
