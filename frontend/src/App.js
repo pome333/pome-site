@@ -12,7 +12,7 @@ function App() {
   const [activityAnalytics, setActivityAnalytics] = useState(null);
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
 
-  // Updated emotion data based on the provided quadrant image
+  // Updated emotion data based on the provided quadrant image - showing ALL emotions
   const EMOTION_DATA = {
     "high_energy_low_pleasant": {
       "Annoyed": "Feeling mildly irritated or bothered by something",
@@ -160,6 +160,31 @@ function App() {
           >
             Loading…
           </iframe>
+        </div>
+      </section>
+
+      {/* Social Links Section */}
+      <section className="social-section">
+        <h2>Connect with Pome</h2>
+        <div className="social-links">
+          <a 
+            href="https://www.instagram.com/pome_app/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="social-link"
+          >
+            <span className="social-icon">📸</span>
+            Follow us on Instagram for daily emotional wellness tips and inspiration
+          </a>
+          <a 
+            href="https://t.me/+q1qz-pSOEiNjZGFh" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="social-link"
+          >
+            <span className="social-icon">💬</span>
+            Join the Pome App group on Telegram to stay connected and learn about new features and be part of the early Pome app adopters!
+          </a>
         </div>
       </section>
 
@@ -343,6 +368,7 @@ function App() {
         // For now, we'll just remove from the UI
         
         loadUserActivities();
+        loadActivityAnalytics(); // Reload analytics after removing activity
       } catch (error) {
         console.error('Error removing activity:', error);
       }
@@ -371,7 +397,6 @@ function App() {
         // Reload user emotions and analytics
         loadUserEmotions();
         loadAnalytics();
-        loadActivityAnalytics();
         loadActivityAnalytics();
         alert('Emotion logged successfully!');
       } catch (error) {
@@ -422,6 +447,19 @@ function App() {
             <div className="emotions-section">
               <h2>How are you feeling right now?</h2>
               
+              <div className="intro-text">
+                <p>
+                  Stop your busy life for a moment, take a deep breath, and ask yourself how you are feeling right now. 
+                  Pick the right quadrant and the emotion. Reflect on it and try to understand what triggered it. 
+                  Answer the questions what you were doing when you felt it, whom you were with and where – this will help you in reflection.
+                </p>
+                <p>
+                  We recommend doing it multiple times because we feel different emotions throughout a day. 
+                  Do this exercise every day for at least 2 weeks. Self-reflection will help you understand yourself better, 
+                  your moods, and triggers.
+                </p>
+              </div>
+              
               {/* Quadrant Selection */}
               <div className="quadrant-selection">
                 <h3>Select Your Energy Quadrant:</h3>
@@ -434,7 +472,7 @@ function App() {
                     >
                       <div className="quadrant-title">{quadrantDisplayNames[quadrant]}</div>
                       <div className="quadrant-emotions">
-                        {Object.keys(EMOTION_DATA[quadrant]).slice(0, 3).join(', ')}...
+                        {Object.keys(EMOTION_DATA[quadrant]).join(', ')}
                       </div>
                     </button>
                   ))}
@@ -641,6 +679,7 @@ function App() {
                       <p>Keep adding data to unlock more detailed insights!</p>
                     </div>
                   )}
+
                   {/* Emotion Analytics */}
                   {analytics && analytics.total_entries >= 5 && (
                     <>
@@ -802,6 +841,7 @@ function App() {
 
       loadUserEmotions();
       loadAnalytics();
+      loadActivityAnalytics();
     } catch (error) {
       console.error('Error loading user data:', error);
     }
