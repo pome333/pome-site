@@ -267,7 +267,6 @@ function App() {
     
     // Update ref whenever state changes
     useEffect(() => {
-      currentSectionRef.current = currentSection;
       console.log('🔍 useEffect: currentSection changed to:', currentSection);
     }, [currentSection]);
 
