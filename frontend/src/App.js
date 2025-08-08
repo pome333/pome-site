@@ -335,7 +335,6 @@ function App() {
 
     const handleQuadrantSelect = (quadrant) => {
       console.log('🎯 Quadrant selected:', quadrant);
-      alert(`Quadrant clicked: ${quadrant}`); // Debug alert
       setSelectedQuadrant(quadrant);
       console.log('🎯 selectedQuadrant state should now be:', quadrant);
     };
