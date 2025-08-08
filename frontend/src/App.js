@@ -494,7 +494,11 @@ function App() {
                     <button
                       key={quadrant}
                       className={selectedQuadrant === quadrant ? 'quadrant-button active' : 'quadrant-button'}
-                      onClick={() => handleQuadrantSelect(quadrant)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        console.log('🔥 DIRECT CLICK on quadrant:', quadrant);
+                        handleQuadrantSelect(quadrant);
+                      }}
                     >
                       <div className="quadrant-title">{quadrantDisplayNames[quadrant]}</div>
                       <div className="quadrant-emotions">
