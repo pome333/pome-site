@@ -172,6 +172,33 @@ frontend:
       - working: false
         agent: "main"
         comment: "ISSUE IDENTIFIED: After moving navigation state to parent, quadrant selection state (selectedQuadrant) is not updating. Click handlers exist but state doesn't change, preventing emotion selection section from appearing. Requires React state management debugging."
+      - working: false
+        agent: "user"  
+        comment: "USER RE-TEST 2: Still unable to select emotional quadrants - no response to clicks, no visual feedback."
+
+  - task: "Activity 'Add to My Plan' functionality"
+    implemented: true
+    working: false
+    file: "/app/frontend/src/App.js"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: false
+        agent: "user"
+        comment: "Unable to add resourceful activities to my plan - click handlers not working on 'Add to My Plan' buttons."
+
+  - task: "Analytics data accuracy"
+    implemented: true
+    working: false
+    file: "/app/backend/server.py"
+    stuck_count: 1
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: false
+        agent: "user"
+        comment: "Analytics overview showing incorrect data - claims user added 18 activities but user hasn't added any activities."
 
   - task: "Navigation tabs (Activities/Analytics) section switching"
     implemented: true
