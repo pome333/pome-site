@@ -444,7 +444,7 @@ function App() {
         <nav className="app-nav">
           <button 
             className={currentSection === 'emotions' ? 'nav-button active' : 'nav-button'}
-            onClick={() => debugSetCurrentSection('emotions')}
+            onClick={() => setCurrentSection('emotions')}
           >
             Track Emotions
           </button>
