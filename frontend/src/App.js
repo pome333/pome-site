@@ -509,11 +509,6 @@ function App() {
 
         {/* Main Content */}
         <main className="app-main">
-          {/* Debug info */}
-          <div style={{position: 'fixed', top: '10px', right: '10px', background: 'yellow', padding: '10px', zIndex: 9999, fontSize: '12px'}}>
-            Current Section: {currentSection}
-          </div>
-          
           {console.log('🔍 Rendering sections - currentSection is:', currentSection)}
           {console.log('🔍 emotions condition:', currentSection === 'emotions')}
           {console.log('🔍 activities condition:', currentSection === 'activities')}
