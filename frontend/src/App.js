@@ -477,16 +477,11 @@ function App() {
               e.preventDefault();
               e.stopPropagation();
               
-              window.debugClickCount++;
-              console.log('🔥 Activities clicked #' + window.debugClickCount);
-              
+              console.log('🔥 Activities clicked');
               dispatchSection({ type: 'SET_SECTION', section: 'activities' });
-              
-              // Force re-render with a different state update
-              setSelectedQuadrant('');
             }}
           >
-            Activities (Clicks: {typeof window !== 'undefined' && window.debugClickCount})
+            Activities
           </button>
           <button 
             className={currentSection === 'analytics' ? 'nav-button active' : 'nav-button'}
@@ -494,16 +489,11 @@ function App() {
               e.preventDefault();
               e.stopPropagation();
               
-              window.debugClickCount++;
-              console.log('🔥 Analytics clicked #' + window.debugClickCount);
-              
+              console.log('🔥 Analytics clicked');
               dispatchSection({ type: 'SET_SECTION', section: 'analytics' });
-              
-              // Force re-render with a different state update
-              setSelectedQuadrant('');
             }}
           >
-            Analytics (Clicks: {typeof window !== 'undefined' && window.debugClickCount})
+            Analytics
           </button>
         </nav>
 
