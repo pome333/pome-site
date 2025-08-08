@@ -217,9 +217,9 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Navigation tabs (Activities/Analytics) section switching"
+    - "Emotional quadrant clickability"
   stuck_tasks:
-    - "Navigation tabs (Activities/Analytics) section switching"
+    - "Emotional quadrant clickability"
   test_all: false
   test_priority: "high_first"
 
