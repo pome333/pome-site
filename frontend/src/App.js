@@ -479,7 +479,7 @@ function App() {
               e.stopPropagation();
               
               console.log('🔥 Activities clicked');
-              dispatchSection({ type: 'SET_SECTION', section: 'activities' });
+              setCurrentSection('activities'); // Use parent state setter
             }}
           >
             Activities
