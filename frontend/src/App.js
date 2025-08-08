@@ -274,13 +274,7 @@ function App() {
     useEffect(() => {
       console.log('🔍 currentSection changed to:', currentSection);
     }, [currentSection]); // Debug log
-    
-    // Add debug handler to track section changes
-    const debugSetCurrentSection = (section) => {
-      console.log('🚀 About to change section from', currentSection, 'to:', section);
-      setCurrentSection(section); // Use parent state setter
-      console.log('✅ setCurrentSection called with:', section);
-    };
+
 
     // Use useEffect to monitor currentSection changes
     useEffect(() => {
