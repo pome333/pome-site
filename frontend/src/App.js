@@ -281,6 +281,8 @@ function App() {
     const [selectedActivities, setSelectedActivities] = useState([]);
 
     console.log('🔧 MainApp component render - currentSection:', currentSection);
+    console.log('🔧 selectedQuadrant state:', selectedQuadrant);
+    console.log('🔧 selectedEmotion state:', selectedEmotion);
 
     // Force state update function using useReducer
     const forceSetCurrentSection = (newSection) => {
