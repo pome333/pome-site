@@ -360,7 +360,9 @@ function App() {
     }, [user]);
 
     const handleQuadrantSelect = (quadrant) => {
+      console.log('🎯 Quadrant selected:', quadrant);
       setSelectedQuadrant(quadrant);
+      console.log('🎯 selectedQuadrant state should now be:', quadrant);
     };
 
     const handleEmotionSelect = (emotion) => {
