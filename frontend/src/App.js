@@ -265,37 +265,14 @@ function App() {
     // const [currentSection, dispatchSection] = useReducer(sectionReducer, 'emotions');
     // const currentSectionRef = useRef(currentSection);
     
-    // Update ref whenever state changes
+    // Clean up console logging
+    console.log('🔧 MainApp render - currentSection:', currentSection);
+    console.log('🔧 selectedQuadrant:', selectedQuadrant);
+    
+    // Use useEffect to monitor currentSection changes
     useEffect(() => {
-      console.log('🔍 useEffect: currentSection changed to:', currentSection);
-    }, [currentSection]);
-
-    const [selectedQuadrant, setSelectedQuadrant] = useState('');
-    const [selectedEmotion, setSelectedEmotion] = useState('');
-    const [emotionContext, setEmotionContext] = useState({
-      location: '',
-      social_setting: '',
-      current_activity: ''
-    });
-    const [userActivities, setUserActivities] = useState([]);
-    const [selectedActivities, setSelectedActivities] = useState([]);
-
-    console.log('🔧 MainApp component render - currentSection:', currentSection);
-    console.log('🔧 selectedQuadrant state:', selectedQuadrant);
-    console.log('🔧 selectedEmotion state:', selectedEmotion);
-
-    // Force state update function using useReducer
-    const forceSetCurrentSection = (newSection) => {
-      console.log('🚀 forceSetCurrentSection called with:', newSection);
-      console.log('🔍 Current state before update:', currentSection);
-      
-      setCurrentSection(newSection); // Use parent state setter
-      
-      // Use timeout to verify state change
-      setTimeout(() => {
-        console.log('🔍 State after setTimeout should be:', newSection);
-      }, 0);
-    }; // Debug log
+      console.log('🔍 currentSection changed to:', currentSection);
+    }, [currentSection]); // Debug log
     
     // Add debug handler to track section changes
     const debugSetCurrentSection = (section) => {
