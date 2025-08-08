@@ -154,11 +154,11 @@ frontend:
 
   - task: "Emotional quadrant clickability"
     implemented: true
-    working: true
+    working: false
     file: "/app/frontend/src/App.js"
-    stuck_count: 0
-    priority: "medium"
-    needs_retesting: false
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: true
     status_history:
       - working: false
         agent: "user"
@@ -166,6 +166,9 @@ frontend:
       - working: true
         agent: "main"
         comment: "WORKING: Quadrant click handlers are functional. Confirmed visual feedback (red line appears) when quadrants are clicked."
+      - working: false
+        agent: "user"
+        comment: "USER RE-TEST: Still not working - can click on emotional quadrants but nothing happens after click. No visual feedback or state change."
 
   - task: "Navigation tabs (Activities/Analytics) section switching"
     implemented: true
