@@ -491,7 +491,7 @@ function App() {
               e.stopPropagation();
               
               console.log('🔥 Analytics clicked');
-              dispatchSection({ type: 'SET_SECTION', section: 'analytics' });
+              setCurrentSection('analytics'); // Use parent state setter
             }}
           >
             Analytics
