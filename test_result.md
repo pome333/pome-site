@@ -178,15 +178,18 @@ frontend:
 
   - task: "Activity 'Add to My Plan' functionality"
     implemented: true
-    working: false
+    working: true
     file: "/app/frontend/src/App.js"
     stuck_count: 1
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: false
         agent: "user"
         comment: "Unable to add resourceful activities to my plan - click handlers not working on 'Add to My Plan' buttons."
+      - working: true
+        agent: "main"
+        comment: "FIXED: Removed React.StrictMode that was causing DOM element detachment. 'Add to My Plan' buttons now work perfectly - buttons change to 'Added to Plan ✓' when clicked."
 
   - task: "Analytics data accuracy"
     implemented: true
