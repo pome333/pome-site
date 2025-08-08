@@ -188,6 +188,18 @@ frontend:
         agent: "user"
         comment: "USER RE-TEST: Navigation still not working - can click on Activities/Analytics tabs but nothing happens after. Content doesn't switch from emotions section."
 
+  - task: "Remove yellow debug overlay"
+    implemented: false
+    working: false
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+      - working: false
+        agent: "user"
+        comment: "Yellow debug box overlapping with 'Hello, user's name!' text - needs to be removed"
+
 metadata:
   created_by: "main_agent"
   version: "1.0"
