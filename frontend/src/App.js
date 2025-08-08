@@ -255,16 +255,17 @@ function App() {
 
   // Main app component
   const MainApp = () => {
-    // Remove currentSection state from here - now using parent state
-    // Use useReducer instead of useState for currentSection
-    const sectionReducer = (state, action) => {
-      console.log('🔥 sectionReducer called:', { currentState: state, action: action });
-      return action.type === 'SET_SECTION' ? action.section : state;
-    };
-    
-    // const [currentSection, dispatchSection] = useReducer(sectionReducer, 'emotions');
-    // const currentSectionRef = useRef(currentSection);
-    
+    // Local state for emotion tracking flow
+    const [selectedQuadrant, setSelectedQuadrant] = useState('');
+    const [selectedEmotion, setSelectedEmotion] = useState('');
+    const [emotionContext, setEmotionContext] = useState({
+      location: '',
+      social_setting: '',
+      current_activity: ''
+    });
+    const [userActivities, setUserActivities] = useState([]);
+    const [selectedActivities, setSelectedActivities] = useState([]);
+
     // Clean up console logging
     console.log('🔧 MainApp render - currentSection:', currentSection);
     console.log('🔧 selectedQuadrant:', selectedQuadrant);
