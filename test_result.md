@@ -175,11 +175,11 @@ frontend:
 
   - task: "Navigation tabs (Activities/Analytics) section switching"
     implemented: true
-    working: true
+    working: false
     file: "/app/frontend/src/App.js"
-    stuck_count: 3
+    stuck_count: 4
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: false
         agent: "user"
@@ -193,6 +193,9 @@ frontend:
       - working: true
         agent: "main"
         comment: "FIXED: Moved currentSection state from MainApp child component to parent App component. Navigation now works perfectly - Activities and Analytics sections display correctly with proper content and tab highlighting."
+      - working: false
+        agent: "user"
+        comment: "USER RE-TEST 2: Navigation still not working. Something is still going on with the navigation item clicks - unable to switch between sections."
 
   - task: "Remove yellow debug overlay"
     implemented: true
