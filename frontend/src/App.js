@@ -450,25 +450,13 @@ function App() {
           </button>
           <button 
             className={currentSection === 'activities' ? 'nav-button active' : 'nav-button'}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              
-              console.log('🔥 Activities clicked');
-              setCurrentSection('activities'); // Use parent state setter
-            }}
+            onClick={() => setCurrentSection('activities')}
           >
             Activities
           </button>
           <button 
             className={currentSection === 'analytics' ? 'nav-button active' : 'nav-button'}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              
-              console.log('🔥 Analytics clicked');
-              setCurrentSection('analytics'); // Use parent state setter
-            }}
+            onClick={() => setCurrentSection('analytics')}
           >
             Analytics
           </button>
