@@ -8,6 +8,7 @@ window.debugClickCount = 0;
 
 function App() {
   const [currentView, setCurrentView] = useState('landing');
+  const [currentSection, setCurrentSection] = useState('emotions'); // Move navigation state to parent
   const [user, setUser] = useState(null);
   const [activities, setActivities] = useState([]);
   const [userEmotions, setUserEmotions] = useState([]);
