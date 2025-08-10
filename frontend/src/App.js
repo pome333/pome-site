@@ -685,7 +685,12 @@ function App() {
                     </div>
                     <button 
                       className={selectedActivities.some(sa => sa.id === activity.id) ? 'add-activity-button added' : 'add-activity-button'}
-                      onClick={() => handleAddActivity(activity)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        console.log('🔥 ADD TO PLAN clicked for:', activity.name);
+                        handleAddActivity(activity);
+                      }}
                       disabled={selectedActivities.some(sa => sa.id === activity.id)}
                     >
                       {selectedActivities.some(sa => sa.id === activity.id) ? 'Added to Plan ✓' : 'Add to My Plan'}
