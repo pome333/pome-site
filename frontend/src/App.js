@@ -444,19 +444,34 @@ function App() {
         <nav className="app-nav">
           <button 
             className={currentSection === 'emotions' ? 'nav-button active' : 'nav-button'}
-            onClick={() => setCurrentSection('emotions')}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log('🔥 Track Emotions clicked');
+              setCurrentSection('emotions');
+            }}
           >
             Track Emotions
           </button>
           <button 
             className={currentSection === 'activities' ? 'nav-button active' : 'nav-button'}
-            onClick={() => setCurrentSection('activities')}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log('🔥 Activities clicked');
+              setCurrentSection('activities');
+            }}
           >
             Activities
           </button>
           <button 
             className={currentSection === 'analytics' ? 'nav-button active' : 'nav-button'}
-            onClick={() => setCurrentSection('analytics')}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              console.log('🔥 Analytics clicked');
+              setCurrentSection('analytics');
+            }}
           >
             Analytics
           </button>
