@@ -337,6 +337,13 @@ function App() {
       console.log('🎯 Quadrant selected:', quadrant);
       setSelectedQuadrant(quadrant);
       console.log('🎯 selectedQuadrant state should now be:', quadrant);
+      // Reset other states when new quadrant selected
+      setSelectedEmotion('');
+      setEmotionContext({
+        location: '',
+        social_setting: '',
+        current_activity: ''
+      });
     };
 
     const handleEmotionSelect = (emotion) => {
