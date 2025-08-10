@@ -156,7 +156,7 @@ frontend:
     implemented: true
     working: false
     file: "/app/frontend/src/App.js"
-    stuck_count: 2
+    stuck_count: 3
     priority: "high"
     needs_retesting: true
     status_history:
@@ -173,8 +173,11 @@ frontend:
         agent: "main"
         comment: "ISSUE IDENTIFIED: After moving navigation state to parent, quadrant selection state (selectedQuadrant) is not updating. Click handlers exist but state doesn't change, preventing emotion selection section from appearing. Requires React state management debugging."
       - working: false
-        agent: "user"  
+        agent: "user"
         comment: "USER RE-TEST 2: Still unable to select emotional quadrants - no response to clicks, no visual feedback."
+      - working: false
+        agent: "user"
+        comment: "USER RE-TEST 3: Quadrants sometimes not clickable. When clicked, should show emotion selection, then context questions - full flow not working."
 
   - task: "Activity 'Add to My Plan' functionality"
     implemented: true
