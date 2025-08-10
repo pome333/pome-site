@@ -350,10 +350,38 @@ function App() {
       }));
     };
 
+    // Helper function for API calls with retry logic
+    const fetchWithRetry = async (url, options = {}, maxRetries = 3) => {
+      for (let attempt = 1; attempt <= maxRetries; attempt++) {
+        try {
+          const response = await fetch(url, {
+            ...options,
+            timeout: 10000 // 10 second timeout
+          });
+          
+          if (response.ok || response.status < 500) {
+            return response; // Return successful response or client errors (don't retry)
+          }
+          
+          throw new Error(`HTTP ${response.status}`);
+        } catch (error) {
+          console.log(`API call attempt ${attempt}/${maxRetries} failed:`, error.message);
+          
+          if (attempt === maxRetries) {
+            throw error; // Final attempt failed
+          }
+          
+          // Exponential backoff: wait 1s, 2s, 4s between retries
+          const delay = Math.pow(2, attempt - 1) * 1000;
+          await new Promise(resolve => setTimeout(resolve, delay));
+        }
+      }
+    };
+
     const handleAddActivity = async (activity) => {
       console.log('🔥 Adding activity:', activity.name);
       try {
-        const response = await fetch(`${BACKEND_URL}/api/user-activities`, {
+        const response = await fetchWithRetry(`${BACKEND_URL}/api/user-activities`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -377,6 +405,7 @@ function App() {
         }
       } catch (error) {
         console.error('❌ Error adding activity:', error);
+        alert('Failed to add activity. Please try again.');
       }
     };
 
