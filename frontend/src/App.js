@@ -301,12 +301,12 @@ function App() {
       }
     };
 
-    // Load user activities on component mount and when activities change
+    // Load user activities on component mount and when user changes
     useEffect(() => {
-      if (activities.length > 0) {
+      if (user && activities.length > 0) {
         loadUserActivities();
       }
-    }, [user, activities]);
+    }, [user]); // Only depend on user, not activities to prevent infinite loops
 
     // Load activity analytics function inside MainApp component
     const loadActivityAnalytics = async () => {
