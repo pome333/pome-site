@@ -383,6 +383,9 @@ function App() {
 
     const handleAddActivity = async (activity) => {
       console.log('🔥 Adding activity:', activity.name);
+      console.log('🔍 Using backend URL:', BACKEND_URL);
+      console.log('🔍 Full URL will be:', `${BACKEND_URL}/api/user-activities`);
+      
       try {
         const response = await fetch(`${BACKEND_URL}/api/user-activities`, {
           method: 'POST',
@@ -412,7 +415,8 @@ function App() {
         }
       } catch (error) {
         console.error('❌ Error adding activity:', error);
-        alert('Failed to add activity. Please try again.');
+        console.error('❌ Error details:', error.message);
+        alert('Network error: Failed to add activity. Please try again.');
       }
     };
 
