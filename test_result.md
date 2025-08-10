@@ -181,11 +181,11 @@ frontend:
 
   - task: "Activity 'Add to My Plan' functionality"
     implemented: true
-    working: true
+    working: false
     file: "/app/frontend/src/App.js"
-    stuck_count: 1
+    stuck_count: 2
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: false
         agent: "user"
@@ -193,6 +193,9 @@ frontend:
       - working: true
         agent: "main"
         comment: "FIXED: Removed React.StrictMode that was causing DOM element detachment. 'Add to My Plan' buttons now work perfectly - buttons change to 'Added to Plan ✓' when clicked."
+      - working: false
+        agent: "user"
+        comment: "USER RE-TEST 3: Can't add activity to plan. When pressing 'Add to My Plan' CTA, nothing happens - button doesn't change to 'Added to My Plan' like before."
 
   - task: "Analytics data accuracy"
     implemented: true
