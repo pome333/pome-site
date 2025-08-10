@@ -432,7 +432,7 @@ function App() {
       if (!selectedQuadrant || !selectedEmotion) return;
 
       try {
-        await fetch(`${BACKEND_URL}/api/emotions`, {
+        await fetchWithRetry(`${BACKEND_URL}/api/emotions`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -455,6 +455,7 @@ function App() {
         alert('Emotion logged successfully!');
       } catch (error) {
         console.error('Error logging emotion:', error);
+        alert('Failed to log emotion. Please try again.');
       }
     };
 
