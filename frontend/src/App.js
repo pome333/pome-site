@@ -524,7 +524,14 @@ function App() {
                         e.preventDefault();
                         e.stopPropagation();
                         console.log('🔥 QUADRANT CLICKED:', quadrant);
+                        console.log('🔥 Before setState - selectedQuadrant:', selectedQuadrant);
                         handleQuadrantSelect(quadrant);
+                        console.log('🔥 After setState - should be:', quadrant);
+                      }}
+                      style={{
+                        pointerEvents: 'auto',
+                        cursor: 'pointer',
+                        zIndex: 1
                       }}
                     >
                       <div className="quadrant-title">{quadrantDisplayNames[quadrant]}</div>
