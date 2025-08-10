@@ -10,15 +10,30 @@ from collections import defaultdict
 
 app = FastAPI()
 
-# Manual CORS handling - no middleware
+# Manual CORS handling - Browser-compatible headers
 @app.middleware("http")
 async def cors_handler(request, call_next):
+    # Handle preflight requests first
+    if request.method == "OPTIONS":
+        return Response(
+            content="",
+            status_code=200,
+            headers={
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
+                "Access-Control-Allow-Headers": "Content-Type,Authorization,Accept,Origin,X-Requested-With",
+                "Access-Control-Max-Age": "86400",
+                "Content-Length": "0"
+            }
+        )
+    
+    # Process the request
     response = await call_next(request)
     
-    # Add CORS headers to every response
+    # Add CORS headers to actual responses
     response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
-    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, Accept, Origin, X-Requested-With"
+    response.headers["Access-Control-Allow-Methods"] = "GET,POST,PUT,DELETE,OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type,Authorization,Accept,Origin,X-Requested-With"
     response.headers["Access-Control-Max-Age"] = "86400"
     
     return response
