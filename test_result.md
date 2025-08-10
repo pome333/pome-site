@@ -205,11 +205,11 @@ frontend:
 
   - task: "Navigation tabs (Activities/Analytics) section switching"
     implemented: true
-    working: true
+    working: false
     file: "/app/frontend/src/App.js"
-    stuck_count: 4
+    stuck_count: 5
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: false
         agent: "user"
@@ -229,6 +229,9 @@ frontend:
       - working: true
         agent: "main"
         comment: "FINAL FIX: Removed React.StrictMode causing excessive re-rendering and DOM element detachment. Navigation now works perfectly - all sections accessible, Activities shows resourceful activities with working 'Add to My Plan' buttons."
+      - working: false
+        agent: "user"
+        comment: "USER RE-TEST 3: Navigation tabs (Activities/Analytics) are sometimes not clickable. Issue persists intermittently."
 
   - task: "Remove yellow debug overlay"
     implemented: true
