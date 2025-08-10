@@ -38,18 +38,7 @@ async def cors_handler(request, call_next):
     
     return response
 
-# Handle preflight requests
-@app.options("/{full_path:path}")
-async def handle_preflight(full_path: str):
-    return Response(
-        content="",
-        headers={
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-            "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept, Origin, X-Requested-With",
-            "Access-Control-Max-Age": "86400"
-        }
-    )
+# Remove the separate OPTIONS handler since we handle it in middleware now
 
 # MongoDB connection
 MONGO_URL = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
