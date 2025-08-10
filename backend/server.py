@@ -1,42 +1,24 @@
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
 from pydantic import BaseModel
+from pymongo import MongoClient
 from typing import List, Optional
 import os
-from datetime import datetime, timedelta
 import uuid
-from pymongo import MongoClient
+from datetime import datetime, timedelta
 
 app = FastAPI()
 
-# CORS configuration - More explicit for troubleshooting  
+# Simple, clean CORS configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://6b1ed6fe-0b44-4fcc-a55e-42cfe3cd5dc0.preview.emergentagent.com",
-        "http://localhost:3000",
-        "*"
-    ],
+    allow_origins=["*"],
     allow_credentials=False,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_methods=["*"],
     allow_headers=["*"],
-    expose_headers=["*"]
 )
 
-# Add explicit OPTIONS handler for preflight requests
-@app.options("/{full_path:path}")
-async def options_handler(full_path: str):
-    return JSONResponse(
-        content="OK",
-        headers={
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-            "Access-Control-Allow-Headers": "*",
-        }
-    )
-
-# MongoDB setup
+# MongoDB connection
 MONGO_URL = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
 client = MongoClient(MONGO_URL)
 db = client.pome_db
