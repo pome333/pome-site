@@ -266,9 +266,8 @@ function App() {
     const [userActivities, setUserActivities] = useState([]);
     const [selectedActivities, setSelectedActivities] = useState([]);
 
-    // Clean up console logging
+    // Clean up console logging (reduced verbosity)
     console.log('🔧 MainApp render - currentSection:', currentSection);
-    console.log('🔧 selectedQuadrant:', selectedQuadrant);
     
     // Use useEffect to monitor currentSection changes
     useEffect(() => {
