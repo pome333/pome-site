@@ -273,12 +273,6 @@ function App() {
     // Use useEffect to monitor currentSection changes
     useEffect(() => {
       console.log('🔍 currentSection changed to:', currentSection);
-    }, [currentSection]); // Debug log
-
-
-    // Use useEffect to monitor currentSection changes
-    useEffect(() => {
-      console.log('🔍 useEffect: currentSection changed to:', currentSection);
     }, [currentSection]);
 
     // Reset emotion selection when quadrant changes
