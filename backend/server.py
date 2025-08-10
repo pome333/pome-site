@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI, HTTPException, Depends, Response
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from pymongo import MongoClient
@@ -6,17 +6,35 @@ from typing import List, Optional
 import os
 import uuid
 from datetime import datetime, timedelta
+from collections import defaultdict
 
 app = FastAPI()
 
-# Simple, clean CORS configuration
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# Manual CORS handling - no middleware
+@app.middleware("http")
+async def cors_handler(request, call_next):
+    response = await call_next(request)
+    
+    # Add CORS headers to every response
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, Accept, Origin, X-Requested-With"
+    response.headers["Access-Control-Max-Age"] = "86400"
+    
+    return response
+
+# Handle preflight requests
+@app.options("/{full_path:path}")
+async def handle_preflight(full_path: str):
+    return Response(
+        content="",
+        headers={
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization, Accept, Origin, X-Requested-With",
+            "Access-Control-Max-Age": "86400"
+        }
+    )
 
 # MongoDB connection
 MONGO_URL = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
