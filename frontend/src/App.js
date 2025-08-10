@@ -436,12 +436,10 @@ function App() {
       if (!selectedQuadrant || !selectedEmotion) return;
 
       try {
-        await fetch(`${BACKEND_URL}/api/emotions`, {
+        const response = await fetch(`${BACKEND_URL}/api/emotions`, {
           method: 'POST',
-          mode: 'cors',
           headers: { 
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            'Content-Type': 'application/json'
           },
           body: JSON.stringify({
             user_id: user.id,
@@ -451,48 +449,24 @@ function App() {
           })
         });
         
-        // Reset form
-        setSelectedQuadrant('');
-        setSelectedEmotion('');
-        setEmotionContext({ location: '', social_setting: '', current_activity: '' });
-        
-        // Reload user emotions and analytics
-        loadUserEmotions();
-        loadAnalytics();
-        loadActivityAnalytics();
-        alert('Emotion logged successfully!');
-      } catch (error) {
-        console.error('Error logging emotion:', error);
-        
-        // Fallback: Try without CORS restrictions
-        try {
-          await fetch(`${BACKEND_URL}/api/emotions`, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              user_id: user.id,
-              quadrant: selectedQuadrant,
-              specific_emotion: selectedEmotion,
-              context: emotionContext
-            })
-          });
-          
-          // Reset form and reload data
+        if (response.ok) {
+          // Reset form
           setSelectedQuadrant('');
           setSelectedEmotion('');
           setEmotionContext({ location: '', social_setting: '', current_activity: '' });
           
+          // Reload user emotions and analytics
           loadUserEmotions();
           loadAnalytics();
+          loadActivityAnalytics();
           alert('Emotion logged successfully!');
-          
-        } catch (fallbackError) {
-          console.error('Both methods failed:', fallbackError);
+        } else {
+          console.error('❌ Failed to log emotion:', response.status);
           alert('Failed to log emotion. Please try again.');
         }
+      } catch (error) {
+        console.error('❌ Error logging emotion:', error);
+        alert('Failed to log emotion. Please try again.');
       }
     };
 
