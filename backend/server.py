@@ -10,11 +10,15 @@ from pymongo import MongoClient
 
 app = FastAPI()
 
-# CORS configuration - Enhanced for preflight requests
+# CORS configuration - More explicit for troubleshooting  
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,  # Changed from True to False to avoid preflight issues
+    allow_origins=[
+        "https://6b1ed6fe-0b44-4fcc-a55e-42cfe3cd5dc0.preview.emergentagent.com",
+        "http://localhost:3000",
+        "*"
+    ],
+    allow_credentials=False,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
     expose_headers=["*"]
