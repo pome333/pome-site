@@ -518,7 +518,8 @@ function App() {
                       className={selectedQuadrant === quadrant ? 'quadrant-button active' : 'quadrant-button'}
                       onClick={(e) => {
                         e.preventDefault();
-                        console.log('🔥 DIRECT CLICK on quadrant:', quadrant);
+                        e.stopPropagation();
+                        console.log('🔥 QUADRANT CLICKED:', quadrant);
                         handleQuadrantSelect(quadrant);
                       }}
                     >
