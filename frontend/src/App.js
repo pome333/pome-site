@@ -468,9 +468,13 @@ function App() {
       if (!selectedQuadrant || !selectedEmotion) return;
 
       try {
-        await fetchWithRetry(`${BACKEND_URL}/api/emotions`, {
+        await fetch(`${BACKEND_URL}/api/emotions`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          mode: 'cors',
+          headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
           body: JSON.stringify({
             user_id: user.id,
             quadrant: selectedQuadrant,
@@ -491,7 +495,36 @@ function App() {
         alert('Emotion logged successfully!');
       } catch (error) {
         console.error('Error logging emotion:', error);
-        alert('Failed to log emotion. Please try again.');
+        
+        // Fallback: Try without CORS restrictions
+        try {
+          await fetch(`${BACKEND_URL}/api/emotions`, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              user_id: user.id,
+              quadrant: selectedQuadrant,
+              specific_emotion: selectedEmotion,
+              context: emotionContext
+            })
+          });
+          
+          // Reset form and reload data
+          setSelectedQuadrant('');
+          setSelectedEmotion('');
+          setEmotionContext({ location: '', social_setting: '', current_activity: '' });
+          
+          loadUserEmotions();
+          loadAnalytics();
+          alert('Emotion logged successfully!');
+          
+        } catch (fallbackError) {
+          console.error('Both methods failed:', fallbackError);
+          alert('Failed to log emotion. Please try again.');
+        }
       }
     };
 
