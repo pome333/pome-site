@@ -358,6 +358,7 @@ function App() {
     };
 
     const handleAddActivity = async (activity) => {
+      console.log('🔥 handleAddActivity called for:', activity.name);
       try {
         const response = await fetch(`${BACKEND_URL}/api/user-activities`, {
           method: 'POST',
@@ -371,15 +372,18 @@ function App() {
         
         if (response.ok) {
           const result = await response.json();
+          console.log('✅ Activity added successfully:', result);
           setSelectedActivities(prev => [...prev, {
             ...activity,
             user_activity_id: result.id
           }]);
           loadUserActivities();
           loadActivityAnalytics(); // Load analytics after adding activity
+        } else {
+          console.error('❌ Failed to add activity:', response.status);
         }
       } catch (error) {
-        console.error('Error adding activity:', error);
+        console.error('❌ Error adding activity:', error);
       }
     };
 
