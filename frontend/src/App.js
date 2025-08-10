@@ -3,6 +3,9 @@ import './App.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
 
+// Debug: Log the backend URL being used
+console.log('🔍 BACKEND_URL:', BACKEND_URL);
+
 // Global debug variable
 window.debugClickCount = 0;
 
