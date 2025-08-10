@@ -284,7 +284,7 @@ function App() {
     const loadUserActivities = async () => {
       if (!user) return;
       try {
-        const response = await fetch(`${BACKEND_URL}/api/user-activities/${user.id}`);
+        const response = await fetchWithRetry(`${BACKEND_URL}/api/user-activities/${user.id}`);
         const userActData = await response.json();
         setUserActivities(userActData);
         
