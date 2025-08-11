@@ -385,13 +385,10 @@ function App() {
 
   // Render signup page
   const renderSignupPage = () => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-
     const handleSubmit = (e) => {
       e.preventDefault();
-      if (name.trim() && email.trim()) {
-        handleSignup(name.trim(), email.trim());
+      if (signupName.trim() && signupEmail.trim()) {
+        handleSignup(signupName.trim(), signupEmail.trim());
       }
     };
 
@@ -409,8 +406,8 @@ function App() {
               <input
                 type="text"
                 id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={signupName}
+                onChange={(e) => setSignupName(e.target.value)}
                 placeholder="Enter your name"
                 required
               />
@@ -421,8 +418,8 @@ function App() {
               <input
                 type="email"
                 id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={signupEmail}
+                onChange={(e) => setSignupEmail(e.target.value)}
                 placeholder="Enter your email"
                 required
               />
