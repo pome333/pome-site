@@ -118,6 +118,10 @@ function App() {
   const [user, setUser] = useState(null);
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
 
+  // Signup form state
+  const [signupName, setSignupName] = useState('');
+  const [signupEmail, setSignupEmail] = useState('');
+
   // Emotion tracking state
   const [selectedQuadrant, setSelectedQuadrant] = useState('');
   const [selectedEmotion, setSelectedEmotion] = useState('');
