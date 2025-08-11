@@ -164,6 +164,10 @@ function App() {
     
     setUser(userData);
     setCurrentView('app');
+    
+    // Reset signup form
+    setSignupName('');
+    setSignupEmail('');
   };
 
   // Handle quadrant selection
