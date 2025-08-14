@@ -371,11 +371,11 @@ function App() {
       <section className="social-section">
         <div className="container">
           <div className="social-links">
-            <a href="https://instagram.com/pome" className="social-link" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.instagram.com/pome_app" className="social-link" target="_blank" rel="noopener noreferrer">
               <span>📸</span> Follow us on Instagram
             </a>
-            <a href="https://t.me/pome" className="social-link" target="_blank" rel="noopener noreferrer">
-              <span>💬</span> Join our Telegram
+            <a href="https://t.me/+q1qz-pSOEiNjZGFh" className="social-link" target="_blank" rel="noopener noreferrer">
+              <span>💬</span> Join our Telegram group to be part of the Pome app building community
             </a>
           </div>
         </div>
