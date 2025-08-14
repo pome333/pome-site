@@ -489,8 +489,8 @@ function App() {
   const renderEmotionsSection = () => (
     <div className="emotions-section">
       <div className="section-header">
-        <h2>Track Your Emotions</h2>
-        <p>Take a moment to reflect on how you're feeling right now. Your emotional awareness is the first step toward building resilience.</p>
+        <h2>Track Emotions</h2>
+        <p>Pause your busy life for a moment. Take a deep breath and ask yourself what emotion you're feeling right now. Choose your emotion from the four quadrants below and let the questions guide you deeper into reflection. Do this exercise multiple times a day because we feel different emotions throughout a day. Remember: your emotional awareness is the first step toward building lasting resilience.</p>
       </div>
 
       {/* Quadrant Selection */}
