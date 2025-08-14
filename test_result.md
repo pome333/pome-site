@@ -196,11 +196,11 @@ frontend:
 
   - task: "Activities management with 35 activities across 5 categories"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/frontend/src/App.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "needs_testing"
         agent: "main"
@@ -211,6 +211,9 @@ frontend:
       - working: "NA"
         agent: "main"
         comment: "RECENT UPDATES: Now 40 activities instead of 35, new Activities section text about energy being like a beautiful vase that needs to be filled and cherished. Needs retesting to verify expanded activity list and new content."
+      - working: true
+        agent: "testing"
+        comment: "✅ UPDATED FEATURES VERIFIED: Activities list successfully expanded to 40 activities (was 35). New activities section text verified: 'Think of your energy like a beautiful vase: it needs to be filled, cared for, and cherished. Each week, choose a handful of activities that pour life back into you. Not the tasks on your to-do list, but the moments that make you smile, breathe deeper, and feel alive.' All 40 activities display correctly across 5 categories with proper color coding. Add/remove functionality working perfectly. New activities include: Massage, Good sleep, Spa, Practice breathing exercises."
 
   - task: "Navigation between Emotions, Activities, and Analytics sections"
     implemented: true
