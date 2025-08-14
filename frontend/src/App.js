@@ -734,7 +734,8 @@ function App() {
               </div>
               <div className="summary-card">
                 <h3>{analytics.recentEmotions}</h3>
-                <p>This Week</p>
+                <p>Emotions This Week</p>
+                <small>Last 7 days</small>
               </div>
             </div>
 
