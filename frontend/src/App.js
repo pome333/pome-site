@@ -61,8 +61,9 @@ const EMOTION_DATA = {
   }
 };
 
-// Activities data - 35 activities with energy categories
+// Activities data - Updated focused list for emotional wellness
 const ACTIVITIES = [
+  // Physical Energy
   { id: 1, name: "Gym workout", categories: ["physical"] },
   { id: 2, name: "Yoga", categories: ["physical"] },
   { id: 3, name: "Beach walk", categories: ["physical", "natural"] },
@@ -71,9 +72,10 @@ const ACTIVITIES = [
   { id: 6, name: "Hiking", categories: ["physical", "natural"] },
   { id: 7, name: "Running", categories: ["physical"] },
   { id: 8, name: "Cycling", categories: ["physical"] },
-  { id: 9, name: "Practice breathing exercises", categories: ["physical"] },
-  { id: 10, name: "Stretching", categories: ["physical"] },
+  { id: 9, name: "Stretching", categories: ["physical"] },
+  { id: 10, name: "Long walks", categories: ["physical"] },
   
+  // Emotional Energy
   { id: 11, name: "Write in journal", categories: ["emotional"] },
   { id: 12, name: "Organize/declutter space", categories: ["emotional"] },
   { id: 13, name: "Gratitude journaling", categories: ["emotional"] },
@@ -81,27 +83,37 @@ const ACTIVITIES = [
   { id: 15, name: "Art/creative activities", categories: ["emotional"] },
   { id: 16, name: "Reading", categories: ["emotional"] },
   { id: 17, name: "Cooking", categories: ["emotional"] },
-  { id: 18, name: "Self-care routine", categories: ["emotional"] },
-  { id: 19, name: "Mindfulness/meditation", categories: ["emotional"] },
-  { id: 20, name: "Watch a movie", categories: ["emotional"] },
+  { id: 18, name: "Watch a movie", categories: ["emotional"] },
+  { id: 19, name: "Therapy", categories: ["emotional"] },
+  { id: 20, name: "Seeing new places", categories: ["emotional"] },
   
+  // Social Energy
   { id: 21, name: "Call a friend", categories: ["social"] },
   { id: 22, name: "Play with children", categories: ["social"] },
   { id: 23, name: "Meet friends", categories: ["social"] },
   { id: 24, name: "Family dinner", categories: ["social"] },
-  { id: 25, name: "Community activities", categories: ["social"] },
-  { id: 26, name: "Team sports", categories: ["social", "physical"] },
-  { id: 27, name: "Volunteer work", categories: ["social"] },
+  { id: 25, name: "Team sports", categories: ["social", "physical"] },
+  { id: 26, name: "A date", categories: ["social"] },
+  { id: 27, name: "Volunteering", categories: ["social"] },
+  { id: 28, name: "Time with a significant other", categories: ["social"] },
   
-  { id: 28, name: "Gardening", categories: ["natural"] },
-  { id: 29, name: "Sunrise/sunset viewing", categories: ["natural"] },
-  { id: 30, name: "Nature photography", categories: ["natural"] },
+  // Natural Energy
+  { id: 29, name: "Gardening", categories: ["natural"] },
+  { id: 30, name: "Sunrise/sunset watching", categories: ["natural"] },
   { id: 31, name: "Outdoor picnic", categories: ["natural"] },
+  { id: 32, name: "Time outside", categories: ["natural"] },
   
-  { id: 32, name: "Prayer/meditation", categories: ["spiritual"] },
-  { id: 33, name: "Religious service", categories: ["spiritual"] },
-  { id: 34, name: "Spiritual reading", categories: ["spiritual"] },
-  { id: 35, name: "Mindful reflection", categories: ["spiritual"] }
+  // Spiritual Energy
+  { id: 33, name: "Prayer/meditation", categories: ["spiritual"] },
+  { id: 34, name: "Religious service", categories: ["spiritual"] },
+  { id: 35, name: "Spiritual reading", categories: ["spiritual"] },
+  { id: 36, name: "Working on a mission", categories: ["spiritual"] },
+  
+  // Additional Wellness Activities
+  { id: 37, name: "Massage", categories: ["physical"] },
+  { id: 38, name: "Good sleep", categories: ["physical"] },
+  { id: 39, name: "Spa", categories: ["physical"] },
+  { id: 40, name: "Practice breathing exercises", categories: ["physical"] }
 ];
 
 // Context options
