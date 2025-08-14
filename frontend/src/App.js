@@ -284,7 +284,7 @@ function App() {
         <div className="hero-content">
           <h1 className="hero-title">Build Your Emotional Intelligence</h1>
           <p className="hero-subtitle">
-            Track your emotions, discover patterns, and cultivate activities that help you feel more resourceful and resilient.
+            Empower yourself with tools to track emotional states, identify triggers, and discover activities that shift you into a more resourceful, resilient mindset. This is your journey, one loving check-in at a time.
           </p>
           <button 
             className="cta-button"
