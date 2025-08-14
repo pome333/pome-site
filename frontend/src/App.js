@@ -779,6 +779,53 @@ function App() {
                 </div>
               </div>
             )}
+
+            {/* Past Emotions History */}
+            {analytics.totalEmotions > 0 && (
+              <div className="emotions-history">
+                <h3>Your Emotion Journey</h3>
+                <div className="emotions-list">
+                  {analytics.allEmotionsList.slice(0, 10).map((entry, index) => (
+                    <div key={index} className="emotion-history-item">
+                      <div className="emotion-info">
+                        <strong>{entry.emotion}</strong>
+                        <span className="quadrant-label">
+                          {EMOTION_DATA[entry.quadrant]?.name}
+                        </span>
+                      </div>
+                      <div className="emotion-context">
+                        {entry.context.location && <span className="context-tag">📍 {entry.context.location}</span>}
+                        {entry.context.social_setting && <span className="context-tag">👥 {entry.context.social_setting}</span>}
+                        {entry.context.current_activity && <span className="context-tag">🏃 {entry.context.current_activity}</span>}
+                      </div>
+                      <div className="emotion-timestamp">{entry.timestamp}</div>
+                    </div>
+                  ))}
+                  {analytics.allEmotionsList.length > 10 && (
+                    <p className="show-more-hint">Showing 10 most recent emotions of {analytics.totalEmotions} total</p>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Past Activities History */}
+            {analytics.totalActivities > 0 && (
+              <div className="activities-history">
+                <h3>Your Activity Plan</h3>
+                <div className="activities-list">
+                  {analytics.allActivitiesList.map((activity, index) => (
+                    <div key={index} className="activity-history-item">
+                      <span className="activity-name">{activity.name}</span>
+                      <div className="activity-categories">
+                        {activity.categories.map(cat => (
+                          <span key={cat} className={`category-tag ${cat}`}>{cat}</span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>
