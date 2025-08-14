@@ -54,11 +54,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .logo h1 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Quicksand', sans-serif;
   font-size: 2rem;
-  color: var(--accent-color);
+  color: #D47A93;
   text-align: center;
   margin: 0;
+  font-weight: 600;
 }
 
 /* Hero Section */
