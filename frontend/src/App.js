@@ -616,7 +616,8 @@ function App() {
     <div className="activities-section">
       <div className="section-header">
         <h2>Resourceful Activities</h2>
-        <p>Choose activities that help you feel more resourceful and resilient. Focus on variety across different energy sources.</p>
+        <p>Think of your energy like a beautiful vase: it needs to be filled, cared for, and cherished. Each week, choose a handful of activities that pour life back into you. Not the tasks on your to-do list, but the moments that make you smile, breathe deeper, and feel alive.</p>
+        <p>Life is busy, but you deserve space for what makes you happy. Explore different kinds of energy (physical, emotional, natural, social, and spiritual) and experiment with new ways to fill your vase. Over time, you'll discover your own personal recipe for feeling vibrant and resilient.</p>
       </div>
 
       {/* Selected Activities */}
