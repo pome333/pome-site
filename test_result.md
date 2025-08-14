@@ -223,11 +223,11 @@ frontend:
 
   - task: "Analytics dashboard with emotion patterns and activity statistics"
     implemented: true
-    working: true
+    working: "NA"
     file: "/app/frontend/src/App.js"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "needs_testing"
         agent: "main"
@@ -235,6 +235,9 @@ frontend:
       - working: true
         agent: "testing"
         comment: "✅ COMPREHENSIVE TESTING COMPLETED: Analytics dashboard working perfectly. Shows empty state when no data available. With data, displays 3 summary cards: Emotions Logged, Activities in Plan, This Week. Recent Emotion Patterns section shows quadrant breakdown with percentages. Your Activity Focus section shows category distribution. Analytics update in real-time as data is added. Calculations are accurate. Tested with multiple data scenarios successfully."
+      - working: "NA"
+        agent: "main"
+        comment: "RECENT UPDATES: 'This Week' now shows 'Emotions This Week' with 'Last 7 days' explanation, new 'Your Emotion Journey' section showing past logged emotions with context and timestamps, new 'Your Activity Plan' section showing selected activities. Needs retesting to verify new analytics sections and improved data display."
 
   - task: "Local storage data persistence"
     implemented: true
