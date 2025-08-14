@@ -36,11 +36,12 @@ body {
   padding: 0 1rem;
 }
 
-/* Typography */
+/* Typography - Updated for Quicksand headlines */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Playfair Display', serif;
-  color: var(--accent-color);
+  font-family: 'Quicksand', sans-serif;
+  color: #D47A93;
   margin-bottom: 1rem;
+  font-weight: 600;
 }
 
 /* LANDING PAGE STYLES */
