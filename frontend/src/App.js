@@ -213,7 +213,8 @@ function App() {
     setSelectedEmotion('');
     setEmotionContext({ location: '', social_setting: '', current_activity: '' });
 
-    alert('Emotion logged successfully! 🎉');
+    // Show success message with emotion details
+    alert(`✨ Emotion logged successfully!\n\nYou felt: ${selectedEmotion}\nFrom: ${EMOTION_DATA[selectedQuadrant].name}\n\nThank you for taking time to check in with yourself. Your emotional awareness is growing! 🌱`);
   };
 
   // Handle add activity to plan
