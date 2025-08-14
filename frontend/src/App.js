@@ -261,12 +261,28 @@ function App() {
       return acc;
     }, {});
 
+    // Get all emotions for detailed view
+    const allEmotionsList = emotions.map(e => ({
+      emotion: e.emotion,
+      quadrant: e.quadrant,
+      context: e.context,
+      timestamp: new Date(e.timestamp).toLocaleDateString('en-US', { 
+        weekday: 'short', 
+        month: 'short', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      })
+    })).reverse(); // Most recent first
+
     return {
       totalEmotions,
       totalActivities,
       recentEmotions: recentEmotions.length,
       quadrantCounts,
-      hasData: totalEmotions > 0 || totalActivities > 0
+      hasData: totalEmotions > 0 || totalActivities > 0,
+      allEmotionsList,
+      allActivitiesList: selectedActivities
     };
   };
 
