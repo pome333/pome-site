@@ -320,9 +320,9 @@ function App() {
       <section className="testimonial-section">
         <div className="container">
           <div className="testimonial">
-            <p>"Pome has revolutionized how I understand my emotions. The activity recommendations are spot-on!"</p>
+            <p>"Pome has helped me see the patterns in my emotions: what I feel, when I feel it, and why. I love keeping track of the little things that bring me energy and light. It's more than just tracking, it's feeling like I truly own my life again."</p>
             <div className="testimonial-author">
-              <strong>— Veranika, Early User</strong>
+              <strong>— Early Tester</strong>
             </div>
           </div>
         </div>
