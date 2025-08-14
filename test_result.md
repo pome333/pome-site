@@ -190,11 +190,11 @@ frontend:
 
   - task: "Activities management with 35 activities across 5 categories"
     implemented: true
-    working: true
+    working: "NA"
     file: "/app/frontend/src/App.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: false
+    needs_retesting: true
     status_history:
       - working: "needs_testing"
         agent: "main"
@@ -202,6 +202,9 @@ frontend:
       - working: true
         agent: "testing"
         comment: "✅ COMPREHENSIVE TESTING COMPLETED: Activities management working perfectly. All 35 activities display correctly across 5 categories (Physical, Emotional, Social, Natural, Spiritual). Energy legend shows all categories with proper color coding. 'Add to My Plan' functionality works - activities save to localStorage as 'pome_selected_activities'. Selected activities section appears when activities are added. Remove functionality works properly. Activity status updates correctly (Added to Plan ✓). Tested adding/removing multiple activities successfully."
+      - working: "NA"
+        agent: "main"
+        comment: "RECENT UPDATES: Now 40 activities instead of 35, new Activities section text about energy being like a beautiful vase that needs to be filled and cherished. Needs retesting to verify expanded activity list and new content."
 
   - task: "Navigation between Emotions, Activities, and Analytics sections"
     implemented: true
