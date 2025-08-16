@@ -508,10 +508,10 @@ body, p, span, div, button, input, textarea, a {
 }
 
 .quadrant-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Quicksand', sans-serif;
   font-size: 1.3rem;
   font-weight: 600;
-  color: var(--accent-color);
+  color: #912f32;
   margin-bottom: 1rem;
 }
 
