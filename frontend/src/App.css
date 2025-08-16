@@ -432,12 +432,12 @@ body, p, span, div, button, input, textarea, a {
 }
 
 .nav-button:hover {
-  color: #912f32;
+  color: #dc4663;
 }
 
 .nav-button.active {
-  color: #912f32;
-  border-bottom-color: #912f32;
+  color: #dc4663;
+  border-bottom-color: #dc4663;
 }
 
 /* Main Content */
