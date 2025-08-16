@@ -39,7 +39,7 @@ body {
 /* Typography - Quicksand for headlines, Nunito for body */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Quicksand', sans-serif;
-  color: #912f32;
+  color: #dc4663;
   margin-bottom: 1rem;
   font-weight: 600;
 }
