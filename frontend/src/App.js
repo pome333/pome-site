@@ -150,15 +150,31 @@ function App() {
   useEffect(() => {
     const savedUser = localStorage.getItem('pome_user');
     if (savedUser) {
-      const userData = JSON.parse(savedUser);
-      setUser(userData);
-      setCurrentView('app');
-      
-      // Load selected activities
-      const savedActivities = localStorage.getItem('pome_selected_activities');
-      if (savedActivities) {
-        setSelectedActivities(JSON.parse(savedActivities));
+      try {
+        const userData = JSON.parse(savedUser);
+        // Only auto-login if we have valid user data
+        if (userData && userData.id && userData.name) {
+          setUser(userData);
+          setCurrentView('app');
+          
+          // Load selected activities
+          const savedActivities = localStorage.getItem('pome_selected_activities');
+          if (savedActivities) {
+            setSelectedActivities(JSON.parse(savedActivities));
+          }
+        } else {
+          // Clear invalid user data
+          localStorage.removeItem('pome_user');
+          setCurrentView('landing');
+        }
+      } catch (error) {
+        // Clear corrupted user data
+        localStorage.removeItem('pome_user');
+        setCurrentView('landing');
       }
+    } else {
+      // No user data, show landing page
+      setCurrentView('landing');
     }
   }, []);
 
