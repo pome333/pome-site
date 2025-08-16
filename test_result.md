@@ -226,6 +226,12 @@ frontend:
       - working: true
         agent: "testing"
         comment: "✅ UPDATED FEATURES VERIFIED: Activities list successfully expanded to 40 activities (was 35). New activities section text verified: 'Think of your energy like a beautiful vase: it needs to be filled, cared for, and cherished. Each week, choose a handful of activities that pour life back into you. Not the tasks on your to-do list, but the moments that make you smile, breathe deeper, and feel alive.' All 40 activities display correctly across 5 categories with proper color coding. Add/remove functionality working perfectly. New activities include: Massage, Good sleep, Spa, Practice breathing exercises."
+      - working: "NA"
+        agent: "main"
+        comment: "COLOR SCHEME & FONT UPDATES: Updated activities section with #912f32 color for all headings and activity titles. 'Resourceful Activities' header and individual activity card titles now use #912f32 color and Quicksand font. Needs testing to verify color consistency in activities section."
+      - working: true
+        agent: "testing"
+        comment: "✅ COLOR SCHEME & FONT TESTING COMPLETED: Activities section color and font updates verified successfully. 'Resourceful Activities' header displays correctly in #912f32 color with Quicksand font. All 40 activity card titles use #912f32 color and Quicksand font consistently. Activity categories and energy legend maintain proper color coding. Add/remove functionality works perfectly with new design. Selected activities section properly styled. Complete activities management functionality verified with new color scheme."
 
   - task: "Navigation between Emotions, Activities, and Analytics sections"
     implemented: true
