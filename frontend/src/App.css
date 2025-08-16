@@ -36,12 +36,17 @@ body {
   padding: 0 1rem;
 }
 
-/* Typography - Updated for Quicksand headlines */
+/* Typography - Quicksand for headlines, Nunito for body */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Quicksand', sans-serif;
-  color: #D47A93;
+  color: #912f32;
   margin-bottom: 1rem;
   font-weight: 600;
+}
+
+/* Body text uses Nunito */
+body, p, span, div, button, input, textarea, a {
+  font-family: 'Nunito', sans-serif;
 }
 
 /* LANDING PAGE STYLES */
