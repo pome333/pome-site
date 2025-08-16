@@ -3,10 +3,10 @@
 
 /* CSS Variables - Updated with new primary color */
 :root {
-  --primary-gradient: linear-gradient(135deg, #912f32 0%, #D4A574 100%);
-  --primary-color: #912f32;
+  --primary-gradient: linear-gradient(135deg, #dc4663 0%, #D4A574 100%);
+  --primary-color: #dc4663;
   --secondary-color: #D4A574;
-  --accent-color: #912f32;
+  --accent-color: #dc4663;
   --background-white: #FFFFFF;
   --text-dark: #2D3748;
   --text-light: #4A5568;
