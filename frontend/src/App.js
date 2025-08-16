@@ -476,7 +476,7 @@ function App() {
       {/* Header */}
       <header className="app-header">
         <div className="logo">
-          <h1>Pome</h1>
+          <h1>pome</h1>
         </div>
         <div className="user-info">
           <span>Hello, {user.name}!</span>
