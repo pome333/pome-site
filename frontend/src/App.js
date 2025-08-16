@@ -525,7 +525,7 @@ function App() {
       {/* Quadrant Selection */}
       {!selectedQuadrant && (
         <div className="quadrant-container">
-          <h3>Choose Your Current Energy Level</h3>
+          <h3>Choose the Emotion You're Feeling Right Now</h3>
           <div className="quadrant-grid">
             {Object.keys(EMOTION_DATA).map(quadrant => (
               <button
