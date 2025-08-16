@@ -428,16 +428,16 @@ body, p, span, div, button, input, textarea, a {
   transition: all 0.3s ease;
   color: var(--text-light);
   border-bottom: 3px solid transparent;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .nav-button:hover {
-  color: var(--primary-color);
+  color: #912f32;
 }
 
 .nav-button.active {
-  color: var(--primary-color);
-  border-bottom-color: var(--primary-color);
+  color: #912f32;
+  border-bottom-color: #912f32;
 }
 
 /* Main Content */
