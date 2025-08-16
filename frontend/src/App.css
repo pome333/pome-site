@@ -1048,8 +1048,9 @@ body, p, span, div, button, input, textarea, a {
 }
 
 .emotion-info strong {
-  color: var(--primary-color);
+  color: #912f32;
   font-size: 1.1rem;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .quadrant-label {
