@@ -929,8 +929,9 @@ body, p, span, div, button, input, textarea, a {
 
 .summary-card h3 {
   font-size: 2.5rem;
-  color: var(--primary-color);
+  color: #912f32;
   margin-bottom: 0.5rem;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .summary-card p {
