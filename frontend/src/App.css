@@ -695,8 +695,9 @@ body, p, span, div, button, input, textarea, a {
 
 .activity-name {
   font-weight: 600;
-  color: var(--text-dark);
+  color: #912f32;
   flex: 1;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .activity-categories {
