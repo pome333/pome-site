@@ -816,20 +816,26 @@ function App() {
           </div>
         ) : (
           <div className="analytics-content">
-            {/* Summary Cards */}
+            {/* Summary Cards - Updated with smaller size and new metrics */}
             <div className="analytics-summary">
-              <div className="summary-card">
+              <div className="summary-card compact">
                 <h3>{analytics.totalEmotions}</h3>
-                <p>Emotions Logged</p>
+                <p>Total Emotions</p>
               </div>
-              <div className="summary-card">
-                <h3>{analytics.totalActivities}</h3>
-                <p>Activities in Plan</p>
+              <div className="summary-card compact">
+                <h3>{analytics.thisWeekEmotions}</h3>
+                <p>This Week</p>
+                <small>{analytics.weekRange}</small>
               </div>
-              <div className="summary-card">
-                <h3>{analytics.recentEmotions}</h3>
-                <p>Emotions This Week</p>
-                <small>Last 7 days</small>
+              <div className="summary-card compact">
+                <h3>{analytics.currentWeekActivities}</h3>
+                <p>Activities Planned</p>
+                <small>This Week</small>
+              </div>
+              <div className="summary-card compact">
+                <h3>{analytics.dayStreak}</h3>
+                <p>Day Streak</p>
+                <small>Consecutive days</small>
               </div>
             </div>
 
