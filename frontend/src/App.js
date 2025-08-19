@@ -143,8 +143,10 @@ function App() {
     current_activity: ''
   });
 
-  // Activities state
-  const [selectedActivities, setSelectedActivities] = useState([]);
+  // Activities state - Updated to support weekly planning
+  const [currentWeekActivities, setCurrentWeekActivities] = useState([]);
+  const [nextWeekActivities, setNextWeekActivities] = useState([]);
+  const [selectedWeekView, setSelectedWeekView] = useState('current'); // 'current' or 'next'
 
   // Load user data from localStorage on app start
   useEffect(() => {
