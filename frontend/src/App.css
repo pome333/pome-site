@@ -1119,6 +1119,14 @@ body, p, span, div, button, input, textarea, a {
   font-weight: 400;
 }
 
+.week-range {
+  text-align: center;
+  color: var(--text-light);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .hero-title {
