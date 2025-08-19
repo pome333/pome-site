@@ -269,22 +269,83 @@ function App() {
     alert('Activity removed from your plan');
   };
 
-  // Get analytics data
+  // Helper function to get start and end of calendar week
+  const getCalendarWeek = (date = new Date()) => {
+    const currentDate = new Date(date);
+    const startOfWeek = new Date(currentDate);
+    
+    // Get Monday as start of week
+    const dayOfWeek = currentDate.getDay();
+    const diff = dayOfWeek === 0 ? -6 : 1 - dayOfWeek; // Sunday = 0, so we want Monday
+    startOfWeek.setDate(currentDate.getDate() + diff);
+    startOfWeek.setHours(0, 0, 0, 0);
+    
+    const endOfWeek = new Date(startOfWeek);
+    endOfWeek.setDate(startOfWeek.getDate() + 6);
+    endOfWeek.setHours(23, 59, 59, 999);
+    
+    return { startOfWeek, endOfWeek };
+  };
+
+  // Helper function to calculate day streak
+  const calculateDayStreak = (emotions) => {
+    if (emotions.length === 0) return 0;
+
+    // Group emotions by date
+    const emotionsByDate = emotions.reduce((acc, emotion) => {
+      const date = new Date(emotion.timestamp).toDateString();
+      if (!acc[date]) {
+        acc[date] = [];
+      }
+      acc[date].push(emotion);
+      return acc;
+    }, {});
+
+    // Get unique dates and sort them
+    const uniqueDates = Object.keys(emotionsByDate).sort((a, b) => new Date(b) - new Date(a));
+    
+    if (uniqueDates.length === 0) return 0;
+
+    // Calculate consecutive days from today backwards
+    let streak = 0;
+    const today = new Date().toDateString();
+    
+    for (let i = 0; i < uniqueDates.length; i++) {
+      const currentDate = new Date(uniqueDates[i]);
+      const expectedDate = new Date();
+      expectedDate.setDate(expectedDate.getDate() - i);
+      
+      if (currentDate.toDateString() === expectedDate.toDateString()) {
+        streak++;
+      } else {
+        break;
+      }
+    }
+    
+    return streak;
+  };
+
+  // Get analytics data with calendar week and day streak
   const getAnalyticsData = () => {
     const emotions = JSON.parse(localStorage.getItem('pome_emotions') || '[]');
+    const currentWeekActivities = JSON.parse(localStorage.getItem('pome_current_week_activities') || '[]');
+    const nextWeekActivities = JSON.parse(localStorage.getItem('pome_next_week_activities') || '[]');
     
     // Basic analytics
     const totalEmotions = emotions.length;
-    const totalActivities = selectedActivities.length;
     
-    // Emotion patterns (last 7 days)
-    const lastWeek = new Date();
-    lastWeek.setDate(lastWeek.getDate() - 7);
-    
-    const recentEmotions = emotions.filter(e => new Date(e.timestamp) >= lastWeek);
-    
-    // Group by quadrant
-    const quadrantCounts = recentEmotions.reduce((acc, emotion) => {
+    // Calendar week emotions (this week)
+    const { startOfWeek, endOfWeek } = getCalendarWeek();
+    const thisWeekEmotions = emotions.filter(e => {
+      const emotionDate = new Date(e.timestamp);
+      return emotionDate >= startOfWeek && emotionDate <= endOfWeek;
+    });
+
+    // Day streak calculation
+    const dayStreak = calculateDayStreak(emotions);
+
+    // Group by quadrant for this week
+    const quadrantCounts = thisWeekEmotions.reduce((acc, emotion) => {
       acc[emotion.quadrant] = (acc[emotion.quadrant] || 0) + 1;
       return acc;
     }, {});
@@ -303,14 +364,19 @@ function App() {
       })
     })).reverse(); // Most recent first
 
+    // Format week range
+    const weekRange = `${startOfWeek.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${endOfWeek.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+
     return {
       totalEmotions,
-      totalActivities,
-      recentEmotions: recentEmotions.length,
+      thisWeekEmotions: thisWeekEmotions.length,
+      currentWeekActivities: currentWeekActivities.length,
+      dayStreak,
       quadrantCounts,
-      hasData: totalEmotions > 0 || totalActivities > 0,
+      hasData: totalEmotions > 0 || currentWeekActivities.length > 0,
       allEmotionsList,
-      allActivitiesList: selectedActivities
+      allActivitiesList: [...currentWeekActivities, ...nextWeekActivities],
+      weekRange
     };
   };
 
