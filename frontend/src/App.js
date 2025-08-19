@@ -907,13 +907,13 @@ function App() {
               </div>
             )}
 
-            {/* Activity Categories */}
-            {analytics.totalActivities > 0 && (
+            {/* Activity Categories - Updated for weekly planning */}
+            {analytics.currentWeekActivities > 0 && (
               <div className="activity-breakdown">
                 <h3>Your Activity Focus</h3>
                 <div className="category-stats">
                   {['physical', 'emotional', 'social', 'natural', 'spiritual'].map(category => {
-                    const count = selectedActivities.filter(activity => 
+                    const count = [...currentWeekActivities, ...nextWeekActivities].filter(activity => 
                       activity.categories.includes(category)
                     ).length;
                     
