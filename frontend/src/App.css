@@ -657,10 +657,51 @@ body, p, span, div, button, input, textarea, a {
   box-shadow: 0 6px 25px rgba(238, 51, 100, 0.35);
 }
 
-/* ACTIVITIES SECTION */
-.activities-section {
-  max-width: 1200px;
-  margin: 0 auto;
+/* Week Selection Tabs */
+.week-selection {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.week-tab {
+  background: white;
+  border: 2px solid var(--border-light);
+  border-radius: 15px;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  color: var(--text-dark);
+  min-width: 150px;
+}
+
+.week-tab:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(220, 70, 99, 0.15);
+}
+
+.week-tab.active {
+  border-color: var(--primary-color);
+  background: linear-gradient(135deg, rgba(220, 70, 99, 0.05) 0%, rgba(212, 165, 116, 0.05) 100%);
+  color: var(--primary-color);
+}
+
+.week-tab small {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-top: 0.3rem;
+  font-weight: 400;
+}
+
+.week-tab.active small {
+  color: var(--primary-color);
 }
 
 /* Selected Activities */
