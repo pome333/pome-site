@@ -909,8 +909,8 @@ body, p, span, div, button, input, textarea, a {
 
 .analytics-summary {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
 }
 
 .summary-card {
@@ -922,17 +922,26 @@ body, p, span, div, button, input, textarea, a {
   transition: all 0.3s ease;
 }
 
+.summary-card.compact {
+  padding: 1.2rem;
+  min-width: 140px;
+}
+
 .summary-card:hover {
   border-color: var(--primary-color);
   transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(238, 51, 100, 0.15);
+  box-shadow: 0 10px 25px rgba(220, 70, 99, 0.15);
 }
 
 .summary-card h3 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #dc4663;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
   font-family: 'Quicksand', sans-serif;
+}
+
+.summary-card.compact h3 {
+  font-size: 1.8rem;
 }
 
 .summary-card p {
@@ -940,7 +949,8 @@ body, p, span, div, button, input, textarea, a {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  margin-bottom: 0.2rem;
 }
 
 /* Emotion Patterns */
