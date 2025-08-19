@@ -704,6 +704,12 @@ body, p, span, div, button, input, textarea, a {
   color: var(--primary-color);
 }
 
+/* ACTIVITIES SECTION */
+.activities-section {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 /* Selected Activities */
 .selected-activities {
   margin-bottom: 3rem;
