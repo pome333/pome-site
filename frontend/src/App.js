@@ -739,76 +739,106 @@ function App() {
     </div>
   );
 
-  // Render activities section
-  const renderActivitiesSection = () => (
-    <div className="activities-section">
-      <div className="section-header">
-        <h2>Resourceful Activities</h2>
-        <p>Think of your energy like a beautiful vase: it needs to be filled, cared for, and cherished. Each week, choose a handful of activities that pour life back into you. Not the tasks on your to-do list, but the moments that make you smile, breathe deeper, and feel alive.</p>
-        <p>Life is busy, but you deserve space for what makes you happy. Explore different kinds of energy (physical, emotional, natural, social, and spiritual) and experiment with new ways to fill your vase. Over time, you'll discover your own personal recipe for feeling vibrant and resilient.</p>
-      </div>
+  // Render activities section with weekly planning
+  const renderActivitiesSection = () => {
+    const currentActivities = selectedWeekView === 'current' ? currentWeekActivities : nextWeekActivities;
+    const { startOfWeek: currentWeekStart, endOfWeek: currentWeekEnd } = getCalendarWeek();
+    const nextWeekStart = new Date(currentWeekStart);
+    nextWeekStart.setDate(nextWeekStart.getDate() + 7);
+    const nextWeekEnd = new Date(currentWeekEnd);
+    nextWeekEnd.setDate(nextWeekEnd.getDate() + 7);
+    
+    const currentWeekRange = `${currentWeekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${currentWeekEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+    const nextWeekRange = `${nextWeekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${nextWeekEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
 
-      {/* Selected Activities */}
-      {selectedActivities.length > 0 && (
-        <div className="selected-activities">
-          <h3>Your Weekly Resourceful Activities ({selectedActivities.length})</h3>
-          <div className="selected-activities-list">
-            {selectedActivities.map(activity => (
-              <div key={activity.id} className="selected-activity-item">
-                <span className="activity-name">{activity.name}</span>
+    return (
+      <div className="activities-section">
+        <div className="section-header">
+          <h2>Resourceful Activities</h2>
+          <p>Think of your energy like a beautiful vase: it needs to be filled, cared for, and cherished. Each week, choose a handful of activities that pour life back into you. Not the tasks on your to-do list, but the moments that make you smile, breathe deeper, and feel alive.</p>
+          <p>Life is busy, but you deserve space for what makes you happy. Explore different kinds of energy (physical, emotional, natural, social, and spiritual) and experiment with new ways to fill your vase. Over time, you'll discover your own personal recipe for feeling vibrant and resilient.</p>
+        </div>
+
+        {/* Week Selection Tabs */}
+        <div className="week-selection">
+          <button 
+            className={selectedWeekView === 'current' ? 'week-tab active' : 'week-tab'}
+            onClick={() => setSelectedWeekView('current')}
+          >
+            This Week
+            <small>{currentWeekRange}</small>
+          </button>
+          <button 
+            className={selectedWeekView === 'next' ? 'week-tab active' : 'week-tab'}
+            onClick={() => setSelectedWeekView('next')}
+          >
+            Next Week
+            <small>{nextWeekRange}</small>
+          </button>
+        </div>
+
+        {/* Selected Activities for Current Week View */}
+        {currentActivities.length > 0 && (
+          <div className="selected-activities">
+            <h3>Your Activities for {selectedWeekView === 'current' ? 'This Week' : 'Next Week'} ({currentActivities.length})</h3>
+            <div className="selected-activities-list">
+              {currentActivities.map(activity => (
+                <div key={activity.id} className="selected-activity-item">
+                  <span className="activity-name">{activity.name}</span>
+                  <div className="activity-categories">
+                    {activity.categories.map(cat => (
+                      <span key={cat} className={`category-tag ${cat}`}>{cat}</span>
+                    ))}
+                  </div>
+                  <button 
+                    className="remove-button"
+                    onClick={() => handleRemoveActivity(activity.id)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Energy Categories Legend */}
+        <div className="energy-legend">
+          <div className="legend-item physical">Physical</div>
+          <div className="legend-item emotional">Emotional</div>
+          <div className="legend-item social">Social</div>
+          <div className="legend-item natural">Natural</div>
+          <div className="legend-item spiritual">Spiritual</div>
+        </div>
+
+        {/* Activities Grid */}
+        <div className="activities-grid">
+          {ACTIVITIES.map(activity => {
+            const isSelected = currentActivities.find(a => a.id === activity.id);
+            
+            return (
+              <div key={activity.id} className="activity-card">
+                <h4>{activity.name}</h4>
                 <div className="activity-categories">
-                  {activity.categories.map(cat => (
-                    <span key={cat} className={`category-tag ${cat}`}>{cat}</span>
+                  {activity.categories.map(category => (
+                    <span key={category} className={`category-tag ${category}`}>
+                      {category}
+                    </span>
                   ))}
                 </div>
                 <button 
-                  className="remove-button"
-                  onClick={() => handleRemoveActivity(activity.id)}
+                  className={isSelected ? 'add-activity-button added' : 'add-activity-button'}
+                  onClick={() => isSelected ? handleRemoveActivity(activity.id) : handleAddActivity(activity)}
                 >
-                  Remove
+                  {isSelected ? 'Added ✓' : `Add to ${selectedWeekView === 'current' ? 'This Week' : 'Next Week'}`}
                 </button>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
-      )}
-
-      {/* Energy Categories Legend */}
-      <div className="energy-legend">
-        <div className="legend-item physical">Physical</div>
-        <div className="legend-item emotional">Emotional</div>
-        <div className="legend-item social">Social</div>
-        <div className="legend-item natural">Natural</div>
-        <div className="legend-item spiritual">Spiritual</div>
       </div>
-
-      {/* Activities Grid */}
-      <div className="activities-grid">
-        {ACTIVITIES.map(activity => {
-          const isSelected = selectedActivities.find(a => a.id === activity.id);
-          
-          return (
-            <div key={activity.id} className="activity-card">
-              <h4>{activity.name}</h4>
-              <div className="activity-categories">
-                {activity.categories.map(category => (
-                  <span key={category} className={`category-tag ${category}`}>
-                    {category}
-                  </span>
-                ))}
-              </div>
-              <button 
-                className={isSelected ? 'add-activity-button added' : 'add-activity-button'}
-                onClick={() => isSelected ? handleRemoveActivity(activity.id) : handleAddActivity(activity)}
-              >
-                {isSelected ? 'Added to Plan ✓' : 'Add to My Plan'}
-              </button>
-            </div>
-          );
-        })}
-      </div>
-    </div>
-  );
+    );
+  };
 
   // Render analytics section
   const renderAnalyticsSection = () => {
