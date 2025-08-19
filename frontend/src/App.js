@@ -839,14 +839,15 @@ function App() {
               </div>
             </div>
 
-            {/* Emotion Patterns */}
-            {analytics.recentEmotions > 0 && (
+            {/* Emotion Patterns - Updated to use calendar week */}
+            {analytics.thisWeekEmotions > 0 && (
               <div className="emotion-patterns">
-                <h3>Recent Emotion Patterns</h3>
+                <h3>This Week's Emotion Patterns</h3>
+                <p className="week-range">Week of {analytics.weekRange}</p>
                 <div className="quadrant-breakdown">
                   {Object.keys(EMOTION_DATA).map(quadrant => {
                     const count = analytics.quadrantCounts[quadrant] || 0;
-                    const percentage = analytics.recentEmotions > 0 ? Math.round((count / analytics.recentEmotions) * 100) : 0;
+                    const percentage = analytics.thisWeekEmotions > 0 ? Math.round((count / analytics.thisWeekEmotions) * 100) : 0;
                     
                     return count > 0 ? (
                       <div key={quadrant} className="quadrant-stat">
