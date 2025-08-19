@@ -311,6 +311,21 @@ frontend:
         agent: "testing"
         comment: "✅ COMPREHENSIVE TESTING COMPLETED: Local storage data persistence working perfectly. Three localStorage keys used: 'pome_user' (user data), 'pome_emotions' (emotion entries with context), 'pome_selected_activities' (selected activities). Data persists across page refreshes. User automatically logged in on return visits. All emotion and activity data maintained correctly. Tested multiple refresh cycles and data integrity maintained. No data loss observed."
 
+  - task: "Weekly planning features with calendar week calculations"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "needs_testing"
+        agent: "main"
+        comment: "NEW FEATURE: Weekly planning functionality added with separate 'This Week' and 'Next Week' activity planning, calendar week calculations, day streak tracking, and updated analytics with 4 compact scorecards."
+      - working: true
+        agent: "testing"
+        comment: "✅ COMPREHENSIVE WEEKLY PLANNING TESTING COMPLETED: All new weekly planning features working perfectly. Analytics section now has 4 compact scorecards: 'Total Emotions', 'This Week' (with calendar week range Aug 18-24), 'Activities Planned' (this week count), and 'Day Streak' (consecutive days). Activities section has week selection tabs for 'This Week' and 'Next Week' with accurate date ranges. Separate localStorage keys working: 'pome_current_week_activities' and 'pome_next_week_activities'. Data persistence verified when switching between weeks. Button text changes correctly based on selected week. Calendar week calculations accurate (Monday-Sunday). Day streak calculation working for consecutive days of emotion logging. 'This Week's Emotion Patterns' section shows calendar week data. Mobile and tablet responsive design working. Complete user journey tested: signup → emotion logging → weekly activity planning → analytics verification. All weekly planning features ready for production."
+
 metadata:
   created_by: "main_agent"
   version: "1.0"
