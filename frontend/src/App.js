@@ -179,17 +179,6 @@ function App() {
         if (userData && userData.id && userData.name) {
           setUser(userData);
           setCurrentView('app');
-          
-          // Load weekly activities
-          const savedCurrentWeekActivities = localStorage.getItem('pome_current_week_activities');
-          if (savedCurrentWeekActivities) {
-            setCurrentWeekActivities(JSON.parse(savedCurrentWeekActivities));
-          }
-          
-          const savedNextWeekActivities = localStorage.getItem('pome_next_week_activities');
-          if (savedNextWeekActivities) {
-            setNextWeekActivities(JSON.parse(savedNextWeekActivities));
-          }
         } else {
           // Clear invalid user data
           localStorage.removeItem('pome_user');
