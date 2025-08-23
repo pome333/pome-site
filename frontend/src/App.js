@@ -888,9 +888,29 @@ function App() {
     );
   };
 
-  // Render analytics section
+  // Render analytics section with weekly navigation
   const renderAnalyticsSection = () => {
     const analytics = getAnalyticsData();
+    const [analyticsWeekView, setAnalyticsWeekView] = useState('current');
+    
+    // Get all weeks since user started logging emotions
+    const getAllWeeksSinceStart = () => {
+      const emotions = JSON.parse(localStorage.getItem('pome_emotions') || '[]');
+      if (emotions.length === 0) return [];
+      
+      const weeks = new Set();
+      emotions.forEach(emotion => {
+        const emotionDate = new Date(emotion.timestamp);
+        const { startOfWeek } = getCalendarWeek(emotionDate);
+        const weekKey = startOfWeek.toISOString().split('T')[0];
+        weeks.add(weekKey);
+      });
+      
+      return Array.from(weeks).sort((a, b) => new Date(b) - new Date(a));
+    };
+    
+    const allWeeks = getAllWeeksSinceStart();
+    const selectedWeekData = getWeekData(analyticsWeekView);
 
     return (
       <div className="analytics-section">
@@ -911,21 +931,17 @@ function App() {
           </div>
         ) : (
           <div className="analytics-content">
-            {/* Summary Cards - Updated with smaller size and new metrics */}
+            {/* Updated Summary Cards - Removed Total Emotions */}
             <div className="analytics-summary">
               <div className="summary-card compact">
-                <h3>{analytics.totalEmotions}</h3>
-                <p>Total Emotions</p>
-              </div>
-              <div className="summary-card compact">
                 <h3>{analytics.thisWeekEmotions}</h3>
-                <p>This Week</p>
+                <p>Emotions Logged</p>
                 <small>{analytics.weekRange}</small>
               </div>
               <div className="summary-card compact">
                 <h3>{analytics.currentWeekActivities}</h3>
                 <p>Activities Planned</p>
-                <small>This Week</small>
+                <small>{analytics.weekRange}</small>
               </div>
               <div className="summary-card compact">
                 <h3>{analytics.dayStreak}</h3>
@@ -934,20 +950,66 @@ function App() {
               </div>
             </div>
 
-            {/* Emotion Patterns - Updated to use calendar week */}
-            {analytics.thisWeekEmotions > 0 && (
-              <div className="emotion-patterns">
-                <h3>This Week's Emotion Patterns</h3>
-                <p className="week-range">Week of {analytics.weekRange}</p>
-                <div className="quadrant-breakdown">
-                  {Object.keys(EMOTION_DATA).map(quadrant => {
-                    const count = analytics.quadrantCounts[quadrant] || 0;
-                    const percentage = analytics.thisWeekEmotions > 0 ? Math.round((count / analytics.thisWeekEmotions) * 100) : 0;
+            {/* Weekly Navigation for Analytics */}
+            {allWeeks.length > 0 && (
+              <div className="analytics-week-navigation">
+                <h3>Select Week to View</h3>
+                <div className="week-selector">
+                  {allWeeks.map((weekKey, index) => {
+                    const weekStart = new Date(weekKey);
+                    const weekEnd = new Date(weekStart);
+                    weekEnd.setDate(weekStart.getDate() + 6);
+                    const weekRange = `${weekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${weekEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+                    const isSelected = analyticsWeekView === weekKey || (analyticsWeekView === 'current' && index === 0);
                     
-                    return count > 0 ? (
-                      <div key={quadrant} className="quadrant-stat">
-                        <div className="quadrant-name">{EMOTION_DATA[quadrant].name}</div>
-                        <div className="quadrant-count">{count} times ({percentage}%)</div>
+                    return (
+                      <button
+                        key={weekKey}
+                        className={`week-selector-btn ${isSelected ? 'active' : ''}`}
+                        onClick={() => setAnalyticsWeekView(weekKey)}
+                      >
+                        {weekRange}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Your Emotion Journey - Updated with weekly view */}
+            {selectedWeekData.emotions.length > 0 && (
+              <div className="emotion-journey">
+                <h3>Your Emotion Journey</h3>
+                <p className="week-range">Week of {selectedWeekData.weekRange}</p>
+                
+                <div className="journey-emotions">
+                  {Object.keys(EMOTION_DATA).map(quadrant => {
+                    const quadrantEmotions = selectedWeekData.emotions.filter(e => e.quadrant === quadrant);
+                    
+                    return quadrantEmotions.length > 0 ? (
+                      <div key={quadrant} className="journey-quadrant">
+                        <h4>{EMOTION_DATA[quadrant].name}</h4>
+                        <div className="quadrant-emotions-list">
+                          {quadrantEmotions.reduce((acc, emotion) => {
+                            const existing = acc.find(e => e.emotion === emotion.emotion);
+                            if (existing) {
+                              existing.count++;
+                            } else {
+                              acc.push({
+                                emotion: emotion.emotion,
+                                count: 1,
+                                timestamp: emotion.timestamp
+                              });
+                            }
+                            return acc;
+                          }, []).map((emotionData, index) => (
+                            <div key={index} className="emotion-journey-item">
+                              <span className="emotion-name">{emotionData.emotion}</span>
+                              <span className="emotion-count">{emotionData.count} times</span>
+                              <span className="emotion-time">{emotionData.timestamp}</span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     ) : null;
                   })}
@@ -955,70 +1017,37 @@ function App() {
               </div>
             )}
 
-            {/* Activity Categories - Updated for weekly planning */}
-            {analytics.currentWeekActivities > 0 && (
-              <div className="activity-breakdown">
+            {/* Your Activity Focus - Updated with graph */}
+            {selectedWeekData.activities.length > 0 && (
+              <div className="activity-focus-chart">
                 <h3>Your Activity Focus</h3>
-                <div className="category-stats">
+                <p className="week-range">Week of {selectedWeekData.weekRange}</p>
+                
+                <div className="activity-chart">
                   {['physical', 'emotional', 'social', 'natural', 'spiritual'].map(category => {
-                    const count = [...currentWeekActivities, ...nextWeekActivities].filter(activity => 
+                    const count = selectedWeekData.activities.filter(activity => 
                       activity.categories.includes(category)
                     ).length;
                     
-                    return count > 0 ? (
-                      <div key={category} className="category-stat">
-                        <span className={`category-tag ${category}`}>{category}</span>
-                        <span className="category-count">{count} activities</span>
+                    const maxCount = Math.max(...['physical', 'emotional', 'social', 'natural', 'spiritual'].map(cat => 
+                      selectedWeekData.activities.filter(a => a.categories.includes(cat)).length
+                    ), 1);
+                    
+                    const percentage = (count / maxCount) * 100;
+                    
+                    return (
+                      <div key={category} className="chart-bar-container">
+                        <div className="chart-category">{category}</div>
+                        <div className="chart-bar-wrapper">
+                          <div 
+                            className={`chart-bar ${category}`}
+                            style={{ width: `${percentage}%` }}
+                          ></div>
+                          <span className="chart-count">{count}</span>
+                        </div>
                       </div>
-                    ) : null;
+                    );
                   })}
-                </div>
-              </div>
-            )}
-
-            {/* Past Emotions History */}
-            {analytics.totalEmotions > 0 && (
-              <div className="emotions-history">
-                <h3>Your Emotion Journey</h3>
-                <div className="emotions-list">
-                  {analytics.allEmotionsList.slice(0, 10).map((entry, index) => (
-                    <div key={index} className="emotion-history-item">
-                      <div className="emotion-info">
-                        <strong>{entry.emotion}</strong>
-                        <span className="quadrant-label">
-                          {EMOTION_DATA[entry.quadrant]?.name}
-                        </span>
-                      </div>
-                      <div className="emotion-context">
-                        {entry.context.location && <span className="context-tag">📍 {entry.context.location}</span>}
-                        {entry.context.social_setting && <span className="context-tag">👥 {entry.context.social_setting}</span>}
-                        {entry.context.current_activity && <span className="context-tag">🏃 {entry.context.current_activity}</span>}
-                      </div>
-                      <div className="emotion-timestamp">{entry.timestamp}</div>
-                    </div>
-                  ))}
-                  {analytics.allEmotionsList.length > 10 && (
-                    <p className="show-more-hint">Showing 10 most recent emotions of {analytics.totalEmotions} total</p>
-                  )}
-                </div>
-              </div>
-            )}
-
-            {/* Past Activities History */}
-            {analytics.totalActivities > 0 && (
-              <div className="activities-history">
-                <h3>Your Activity Plan</h3>
-                <div className="activities-list">
-                  {analytics.allActivitiesList.map((activity, index) => (
-                    <div key={index} className="activity-history-item">
-                      <span className="activity-name">{activity.name}</span>
-                      <div className="activity-categories">
-                        {activity.categories.map(cat => (
-                          <span key={cat} className={`category-tag ${cat}`}>{cat}</span>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
                 </div>
               </div>
             )}
