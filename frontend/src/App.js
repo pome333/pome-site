@@ -398,11 +398,9 @@ function App() {
     };
   };
 
-  // Get week data for analytics with weekly navigation
+  // Get week data for analytics with weekly navigation - Updated to support all week activities
   const getWeekData = (weekView) => {
     const emotions = JSON.parse(localStorage.getItem('pome_emotions') || '[]');
-    const currentWeekActivities = JSON.parse(localStorage.getItem('pome_current_week_activities') || '[]');
-    const nextWeekActivities = JSON.parse(localStorage.getItem('pome_next_week_activities') || '[]');
     
     let weekStart, weekEnd, weekRange;
     
@@ -436,28 +434,16 @@ function App() {
       })
     }));
     
-    // Determine activities for the selected week
-    let weekActivities = [];
-    const currentWeekData = getCalendarWeek();
-    const nextWeekStart = new Date(currentWeekData.startOfWeek);
-    nextWeekStart.setDate(nextWeekStart.getDate() + 7);
-    
-    if (weekView === 'current' || (weekStart.toDateString() === currentWeekData.startOfWeek.toDateString())) {
-      // Current week - show current week activities
-      weekActivities = [...currentWeekActivities];
-    } else if (weekStart.toDateString() === nextWeekStart.toDateString()) {
-      // Next week - show next week activities
-      weekActivities = [...nextWeekActivities];
-    } else {
-      // Historical week - no stored activities, show empty array but still show the chart
-      weekActivities = [];
-    }
+    // Get activities for the selected week - support all weeks
+    const weekKey = weekStart.toISOString().split('T')[0];
+    const weekActivitiesKey = `pome_week_activities_${weekKey}`;
+    const weekActivities = JSON.parse(localStorage.getItem(weekActivitiesKey) || '[]');
     
     return {
       emotions: weekEmotions,
       activities: weekActivities,
       weekRange,
-      isHistoricalWeek: weekView !== 'current' && weekStart.toDateString() !== currentWeekData.startOfWeek.toDateString() && weekStart.toDateString() !== nextWeekStart.toDateString()
+      weekKey
     };
   };
 
