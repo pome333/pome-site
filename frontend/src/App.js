@@ -1067,17 +1067,12 @@ function App() {
               </div>
             )}
 
-            {/* Your Activity Focus - Always show, with different content for historical weeks */}
+            {/* Your Activity Focus - Available for all weeks */}
             <div className="activity-focus-chart">
               <h3>Your Activity Focus</h3>
               <p className="week-range">Week of {selectedWeekData.weekRange}</p>
               
-              {selectedWeekData.isHistoricalWeek ? (
-                <div className="historical-week-message">
-                  <p>Activity planning data is only available for current and next week.</p>
-                  <p>Historical weeks show your emotional journey but not planned activities.</p>
-                </div>
-              ) : selectedWeekData.activities.length > 0 ? (
+              {selectedWeekData.activities.length > 0 ? (
                 <div className="activity-chart">
                   {['physical', 'emotional', 'social', 'natural', 'spiritual'].map(category => {
                     const count = selectedWeekData.activities.filter(activity => 
@@ -1106,8 +1101,8 @@ function App() {
                 </div>
               ) : (
                 <div className="no-activities-message">
-                  <p>No activities planned for this week yet.</p>
-                  <p>Visit the Activities section to start planning your week!</p>
+                  <p>No activities planned for this week.</p>
+                  <p>Visit the Activities section to plan activities for any week!</p>
                 </div>
               )}
             </div>
