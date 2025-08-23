@@ -1117,6 +1117,13 @@ body, p, span, div, button, input, textarea, a {
   color: white;
 }
 
+.week-selector-btn small {
+  display: block;
+  font-size: 0.7rem;
+  margin-top: 0.2rem;
+  opacity: 0.8;
+}
+
 /* Your Emotion Journey - Updated structure */
 .emotion-journey {
   background: white;
