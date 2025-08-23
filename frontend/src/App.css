@@ -657,12 +657,24 @@ body, p, span, div, button, input, textarea, a {
   box-shadow: 0 6px 25px rgba(238, 51, 100, 0.35);
 }
 
-/* Week Selection Tabs */
-.week-selection {
+/* Week Selection Tabs and Activities Week Navigation */
+.week-selection, .activities-week-navigation {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   gap: 1rem;
   margin-bottom: 2rem;
+}
+
+.activities-week-navigation h3 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.week-selection {
+  justify-content: center;
+  flex-direction: row;
 }
 
 .week-tab {
