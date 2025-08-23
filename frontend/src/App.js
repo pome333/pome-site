@@ -143,11 +143,31 @@ function App() {
     current_activity: ''
   });
 
-  // Activities state - Updated to support weekly planning
-  const [currentWeekActivities, setCurrentWeekActivities] = useState([]);
-  const [nextWeekActivities, setNextWeekActivities] = useState([]);
-  const [selectedWeekView, setSelectedWeekView] = useState('current'); // 'current' or 'next'
+  // Activities state - Updated to support all weeks
+  const [selectedWeekView, setSelectedWeekView] = useState('current'); // For activities section
   const [analyticsWeekView, setAnalyticsWeekView] = useState('current'); // For analytics section
+
+  // Get all weeks since user started (for activities section)
+  const getAllWeeksForActivities = () => {
+    const { startOfWeek: currentWeekStart } = getCalendarWeek();
+    const allWeeks = getAllWeeksSinceStart();
+    
+    // Add current week if not in list
+    const currentWeekKey = currentWeekStart.toISOString().split('T')[0];
+    if (!allWeeks.includes(currentWeekKey)) {
+      allWeeks.push(currentWeekKey);
+    }
+    
+    // Add next week
+    const nextWeekStart = new Date(currentWeekStart);
+    nextWeekStart.setDate(currentWeekStart.getDate() + 7);
+    const nextWeekKey = nextWeekStart.toISOString().split('T')[0];
+    if (!allWeeks.includes(nextWeekKey)) {
+      allWeeks.push(nextWeekKey);
+    }
+    
+    return allWeeks.sort((a, b) => new Date(a) - new Date(b));
+  };
 
   // Load user data from localStorage on app start
   useEffect(() => {
