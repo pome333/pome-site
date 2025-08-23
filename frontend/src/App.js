@@ -143,8 +143,9 @@ function App() {
     current_activity: ''
   });
 
-  // Activities state - Updated to support all weeks
+  // Activities state - Updated to support all weeks with proper re-rendering
   const [selectedWeekView, setSelectedWeekView] = useState('current'); // For activities section
+  const [currentWeekActivities, setCurrentWeekActivities] = useState([]); // Track current week's activities for re-rendering
   const [analyticsWeekView, setAnalyticsWeekView] = useState('current'); // For analytics section
 
   // Get all weeks since user started (for activities section)
