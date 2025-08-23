@@ -436,13 +436,28 @@ function App() {
       })
     }));
     
-    // For current week, use current activities, otherwise use empty array for historical weeks
-    const weekActivities = weekView === 'current' ? [...currentWeekActivities, ...nextWeekActivities] : [];
+    // Determine activities for the selected week
+    let weekActivities = [];
+    const currentWeekData = getCalendarWeek();
+    const nextWeekStart = new Date(currentWeekData.startOfWeek);
+    nextWeekStart.setDate(nextWeekStart.getDate() + 7);
+    
+    if (weekView === 'current' || (weekStart.toDateString() === currentWeekData.startOfWeek.toDateString())) {
+      // Current week - show current week activities
+      weekActivities = [...currentWeekActivities];
+    } else if (weekStart.toDateString() === nextWeekStart.toDateString()) {
+      // Next week - show next week activities
+      weekActivities = [...nextWeekActivities];
+    } else {
+      // Historical week - no stored activities, show empty array but still show the chart
+      weekActivities = [];
+    }
     
     return {
       emotions: weekEmotions,
       activities: weekActivities,
-      weekRange
+      weekRange,
+      isHistoricalWeek: weekView !== 'current' && weekStart.toDateString() !== currentWeekData.startOfWeek.toDateString() && weekStart.toDateString() !== nextWeekStart.toDateString()
     };
   };
 
