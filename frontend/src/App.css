@@ -1073,12 +1073,193 @@ body, p, span, div, button, input, textarea, a {
   color: var(--text-dark);
 }
 
-/* Emotion and Activity History */
-.emotions-history, .activities-history {
+/* Analytics Week Navigation */
+.analytics-week-navigation {
   background: white;
   border: 2px solid var(--border-light);
   border-radius: 15px;
   padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.analytics-week-navigation h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.week-selector {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.week-selector-btn {
+  background: white;
+  border: 2px solid var(--border-light);
+  border-radius: 10px;
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.week-selector-btn:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.week-selector-btn.active {
+  border-color: var(--primary-color);
+  background: var(--primary-gradient);
+  color: white;
+}
+
+/* Your Emotion Journey */
+.emotion-journey {
+  background: white;
+  border: 2px solid var(--border-light);
+  border-radius: 15px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.emotion-journey h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.journey-emotions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.journey-quadrant {
+  background: linear-gradient(135deg, rgba(220, 70, 99, 0.05) 0%, rgba(212, 165, 116, 0.05) 100%);
+  border-radius: 10px;
+  padding: 1.5rem;
+  border: 1px solid rgba(220, 70, 99, 0.1);
+}
+
+.journey-quadrant h4 {
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  font-size: 1.1rem;
+}
+
+.quadrant-emotions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.emotion-journey-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+}
+
+.emotion-name {
+  font-weight: 600;
+  color: var(--primary-color);
+  font-family: 'Quicksand', sans-serif;
+}
+
+.emotion-count {
+  font-weight: 500;
+  color: var(--text-dark);
+}
+
+.emotion-time {
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+/* Activity Focus Chart */
+.activity-focus-chart {
+  background: white;
+  border: 2px solid var(--border-light);
+  border-radius: 15px;
+  padding: 2rem;
+}
+
+.activity-focus-chart h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.activity-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.chart-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.chart-category {
+  font-weight: 600;
+  text-transform: capitalize;
+  min-width: 80px;
+  color: var(--text-dark);
+  font-family: 'Quicksand', sans-serif;
+}
+
+.chart-bar-wrapper {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  background: #f7fafc;
+  border-radius: 10px;
+  height: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.chart-bar {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.6s ease;
+  min-width: 2px;
+}
+
+.chart-bar.physical {
+  background: linear-gradient(135deg, #fed7e2, #97266d);
+}
+
+.chart-bar.emotional {
+  background: linear-gradient(135deg, #c6f6d5, #276749);
+}
+
+.chart-bar.social {
+  background: linear-gradient(135deg, #bee3f8, #2c5282);
+}
+
+.chart-bar.natural {
+  background: linear-gradient(135deg, #d9f7be, #389e0d);
+}
+
+.chart-bar.spiritual {
+  background: linear-gradient(135deg, #e9d8fd, #553c9a);
+}
+
+.chart-count {
+  position: absolute;
+  right: 10px;
+  font-weight: 600;
+  color: var(--text-dark);
+  z-index: 1;
 }
 
 .emotions-history h3, .activities-history h3 {
