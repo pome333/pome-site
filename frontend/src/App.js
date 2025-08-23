@@ -262,38 +262,58 @@ function App() {
     alert(`✨ Emotion logged successfully!\n\nYou felt: ${selectedEmotion}\nFrom: ${EMOTION_DATA[selectedQuadrant].name}\n\nThank you for taking time to check in with yourself. Your emotional awareness is growing! 🌱`);
   };
 
-  // Handle add activity to current or next week
-  const handleAddActivity = (activity) => {
-    const currentList = selectedWeekView === 'current' ? currentWeekActivities : nextWeekActivities;
-    const setCurrentList = selectedWeekView === 'current' ? setCurrentWeekActivities : setNextWeekActivities;
-    const storageKey = selectedWeekView === 'current' ? 'pome_current_week_activities' : 'pome_next_week_activities';
-    
-    if (currentList.find(a => a.id === activity.id)) return;
-
-    const newActivities = [...currentList, activity];
-    setCurrentList(newActivities);
-    
-    // Save to localStorage
-    localStorage.setItem(storageKey, JSON.stringify(newActivities));
-    
-    const weekText = selectedWeekView === 'current' ? 'this week' : 'next week';
-    alert(`${activity.name} added to your plan for ${weekText}! 🎉`);
+  // Get activities for a specific week
+  const getWeekActivities = (weekKey) => {
+    const storageKey = `pome_week_activities_${weekKey}`;
+    return JSON.parse(localStorage.getItem(storageKey) || '[]');
   };
 
-  // Handle remove activity from current or next week
+  // Save activities for a specific week
+  const saveWeekActivities = (weekKey, activities) => {
+    const storageKey = `pome_week_activities_${weekKey}`;
+    localStorage.setItem(storageKey, JSON.stringify(activities));
+  };
+
+  // Handle add activity to selected week
+  const handleAddActivity = (activity) => {
+    const weekKey = getWeekKeyFromView(selectedWeekView);
+    const currentActivities = getWeekActivities(weekKey);
+    
+    if (currentActivities.find(a => a.id === activity.id)) return;
+
+    const newActivities = [...currentActivities, activity];
+    saveWeekActivities(weekKey, newActivities);
+    
+    const weekRange = getWeekRangeFromKey(weekKey);
+    alert(`${activity.name} added to your plan for ${weekRange}! 🎉`);
+  };
+
+  // Handle remove activity from selected week
   const handleRemoveActivity = (activityId) => {
-    const currentList = selectedWeekView === 'current' ? currentWeekActivities : nextWeekActivities;
-    const setCurrentList = selectedWeekView === 'current' ? setCurrentWeekActivities : setNextWeekActivities;
-    const storageKey = selectedWeekView === 'current' ? 'pome_current_week_activities' : 'pome_next_week_activities';
+    const weekKey = getWeekKeyFromView(selectedWeekView);
+    const currentActivities = getWeekActivities(weekKey);
     
-    const newActivities = currentList.filter(a => a.id !== activityId);
-    setCurrentList(newActivities);
+    const newActivities = currentActivities.filter(a => a.id !== activityId);
+    saveWeekActivities(weekKey, newActivities);
     
-    // Save to localStorage
-    localStorage.setItem(storageKey, JSON.stringify(newActivities));
-    
-    const weekText = selectedWeekView === 'current' ? 'this week' : 'next week';
-    alert(`Activity removed from your plan for ${weekText}`);
+    const weekRange = getWeekRangeFromKey(weekKey);
+    alert(`Activity removed from your plan for ${weekRange}`);
+  };
+
+  // Helper functions
+  const getWeekKeyFromView = (weekView) => {
+    if (weekView === 'current') {
+      const { startOfWeek } = getCalendarWeek();
+      return startOfWeek.toISOString().split('T')[0];
+    }
+    return weekView;
+  };
+
+  const getWeekRangeFromKey = (weekKey) => {
+    const weekStart = new Date(weekKey);
+    const weekEnd = new Date(weekStart);
+    weekEnd.setDate(weekStart.getDate() + 6);
+    return `${weekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${weekEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
   };
 
   // Helper function to get start and end of calendar week
