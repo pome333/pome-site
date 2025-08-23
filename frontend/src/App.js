@@ -375,8 +375,6 @@ function App() {
   // Get analytics data with calendar week and day streak
   const getAnalyticsData = () => {
     const emotions = JSON.parse(localStorage.getItem('pome_emotions') || '[]');
-    const currentWeekActivities = JSON.parse(localStorage.getItem('pome_current_week_activities') || '[]');
-    const nextWeekActivities = JSON.parse(localStorage.getItem('pome_next_week_activities') || '[]');
     
     // Basic analytics
     const totalEmotions = emotions.length;
@@ -388,28 +386,12 @@ function App() {
       return emotionDate >= startOfWeek && emotionDate <= endOfWeek;
     });
 
+    // Current week activities
+    const currentWeekKey = startOfWeek.toISOString().split('T')[0];
+    const currentWeekActivities = getWeekActivities(currentWeekKey);
+
     // Day streak calculation
     const dayStreak = calculateDayStreak(emotions);
-
-    // Group by quadrant for this week
-    const quadrantCounts = thisWeekEmotions.reduce((acc, emotion) => {
-      acc[emotion.quadrant] = (acc[emotion.quadrant] || 0) + 1;
-      return acc;
-    }, {});
-
-    // Get all emotions for detailed view
-    const allEmotionsList = emotions.map(e => ({
-      emotion: e.emotion,
-      quadrant: e.quadrant,
-      context: e.context,
-      timestamp: new Date(e.timestamp).toLocaleDateString('en-US', { 
-        weekday: 'short', 
-        month: 'short', 
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      })
-    })).reverse(); // Most recent first
 
     // Format week range
     const weekRange = `${startOfWeek.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${endOfWeek.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
@@ -419,10 +401,7 @@ function App() {
       thisWeekEmotions: thisWeekEmotions.length,
       currentWeekActivities: currentWeekActivities.length,
       dayStreak,
-      quadrantCounts,
       hasData: totalEmotions > 0 || currentWeekActivities.length > 0,
-      allEmotionsList,
-      allActivitiesList: [...currentWeekActivities, ...nextWeekActivities],
       weekRange
     };
   };
