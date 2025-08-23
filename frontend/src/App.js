@@ -797,17 +797,16 @@ function App() {
     </div>
   );
 
-  // Render activities section with weekly planning
+  // Render activities section with all weeks support
   const renderActivitiesSection = () => {
-    const currentActivities = selectedWeekView === 'current' ? currentWeekActivities : nextWeekActivities;
-    const { startOfWeek: currentWeekStart, endOfWeek: currentWeekEnd } = getCalendarWeek();
-    const nextWeekStart = new Date(currentWeekStart);
-    nextWeekStart.setDate(nextWeekStart.getDate() + 7);
-    const nextWeekEnd = new Date(currentWeekEnd);
-    nextWeekEnd.setDate(nextWeekEnd.getDate() + 7);
+    const allWeeks = getAllWeeksForActivities();
+    const weekKey = getWeekKeyFromView(selectedWeekView);
+    const currentActivities = getWeekActivities(weekKey);
+    const weekRange = getWeekRangeFromKey(weekKey);
     
-    const currentWeekRange = `${currentWeekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${currentWeekEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
-    const nextWeekRange = `${nextWeekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${nextWeekEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+    const { startOfWeek: currentWeekStart } = getCalendarWeek();
+    const nextWeekStart = new Date(currentWeekStart);
+    nextWeekStart.setDate(currentWeekStart.getDate() + 7);
 
     return (
       <div className="activities-section">
@@ -817,28 +816,44 @@ function App() {
           <p>Life is busy, but you deserve space for what makes you happy. Explore different kinds of energy (physical, emotional, natural, social, and spiritual) and experiment with new ways to fill your vase. Over time, you'll discover your own personal recipe for feeling vibrant and resilient.</p>
         </div>
 
-        {/* Week Selection Tabs */}
-        <div className="week-selection">
-          <button 
-            className={selectedWeekView === 'current' ? 'week-tab active' : 'week-tab'}
-            onClick={() => setSelectedWeekView('current')}
-          >
-            This Week
-            <small>{currentWeekRange}</small>
-          </button>
-          <button 
-            className={selectedWeekView === 'next' ? 'week-tab active' : 'week-tab'}
-            onClick={() => setSelectedWeekView('next')}
-          >
-            Next Week
-            <small>{nextWeekRange}</small>
-          </button>
+        {/* Week Selection for All Weeks */}
+        <div className="activities-week-navigation">
+          <h3>Select Week to Plan</h3>
+          <div className="week-selector">
+            {allWeeks.map((weekKey) => {
+              const weekStart = new Date(weekKey);
+              const weekEnd = new Date(weekStart);
+              weekEnd.setDate(weekStart.getDate() + 6);
+              const weekRange = `${weekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${weekEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+              
+              // Determine week type
+              let weekLabel = '';
+              if (weekStart.toDateString() === currentWeekStart.toDateString()) {
+                weekLabel = 'Current Week';
+              } else if (weekStart.toDateString() === nextWeekStart.toDateString()) {
+                weekLabel = 'Next Week';
+              }
+              
+              const isSelected = selectedWeekView === weekKey || (selectedWeekView === 'current' && weekStart.toDateString() === currentWeekStart.toDateString());
+              
+              return (
+                <button
+                  key={weekKey}
+                  className={`week-selector-btn ${isSelected ? 'active' : ''}`}
+                  onClick={() => setSelectedWeekView(weekKey)}
+                >
+                  {weekRange}
+                  {weekLabel && <small>{weekLabel}</small>}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Selected Activities for Current Week View */}
         {currentActivities.length > 0 && (
           <div className="selected-activities">
-            <h3>Your Activities for {selectedWeekView === 'current' ? 'This Week' : 'Next Week'} ({currentActivities.length})</h3>
+            <h3>Your Activities for {weekRange} ({currentActivities.length})</h3>
             <div className="selected-activities-list">
               {currentActivities.map(activity => (
                 <div key={activity.id} className="selected-activity-item">
@@ -888,7 +903,7 @@ function App() {
                   className={isSelected ? 'add-activity-button added' : 'add-activity-button'}
                   onClick={() => isSelected ? handleRemoveActivity(activity.id) : handleAddActivity(activity)}
                 >
-                  {isSelected ? 'Added ✓' : `Add to ${selectedWeekView === 'current' ? 'This Week' : 'Next Week'}`}
+                  {isSelected ? 'Added ✓' : `Add to Week`}
                 </button>
               </div>
             );
