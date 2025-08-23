@@ -397,6 +397,54 @@ function App() {
     };
   };
 
+  // Get week data for analytics with weekly navigation
+  const getWeekData = (weekView) => {
+    const emotions = JSON.parse(localStorage.getItem('pome_emotions') || '[]');
+    const currentWeekActivities = JSON.parse(localStorage.getItem('pome_current_week_activities') || '[]');
+    const nextWeekActivities = JSON.parse(localStorage.getItem('pome_next_week_activities') || '[]');
+    
+    let weekStart, weekEnd, weekRange;
+    
+    if (weekView === 'current') {
+      const { startOfWeek, endOfWeek } = getCalendarWeek();
+      weekStart = startOfWeek;
+      weekEnd = endOfWeek;
+      weekRange = `${startOfWeek.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${endOfWeek.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+    } else {
+      // Specific week selected
+      weekStart = new Date(weekView);
+      weekEnd = new Date(weekStart);
+      weekEnd.setDate(weekStart.getDate() + 6);
+      weekRange = `${weekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${weekEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+    }
+    
+    // Filter emotions for selected week
+    const weekEmotions = emotions.filter(e => {
+      const emotionDate = new Date(e.timestamp);
+      return emotionDate >= weekStart && emotionDate <= weekEnd;
+    }).map(e => ({
+      emotion: e.emotion,
+      quadrant: e.quadrant,
+      context: e.context,
+      timestamp: new Date(e.timestamp).toLocaleDateString('en-US', { 
+        weekday: 'short', 
+        month: 'short', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      })
+    }));
+    
+    // For current week, use current activities, otherwise use empty array for historical weeks
+    const weekActivities = weekView === 'current' ? [...currentWeekActivities, ...nextWeekActivities] : [];
+    
+    return {
+      emotions: weekEmotions,
+      activities: weekActivities,
+      weekRange
+    };
+  };
+
   // Render landing page
   const renderLandingPage = () => (
     <div className="landing-page">
