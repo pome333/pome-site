@@ -147,6 +147,7 @@ function App() {
   const [currentWeekActivities, setCurrentWeekActivities] = useState([]);
   const [nextWeekActivities, setNextWeekActivities] = useState([]);
   const [selectedWeekView, setSelectedWeekView] = useState('current'); // 'current' or 'next'
+  const [analyticsWeekView, setAnalyticsWeekView] = useState('current'); // For analytics section
 
   // Load user data from localStorage on app start
   useEffect(() => {
