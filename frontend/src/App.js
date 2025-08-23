@@ -292,6 +292,9 @@ function App() {
     const newActivities = [...currentActivities, activity];
     saveWeekActivities(weekKey, newActivities);
     
+    // Update state to trigger re-rendering
+    setCurrentWeekActivities(newActivities);
+    
     const weekRange = getWeekRangeFromKey(weekKey);
     alert(`${activity.name} added to your plan for ${weekRange}! 🎉`);
   };
@@ -303,6 +306,9 @@ function App() {
     
     const newActivities = currentActivities.filter(a => a.id !== activityId);
     saveWeekActivities(weekKey, newActivities);
+    
+    // Update state to trigger re-rendering
+    setCurrentWeekActivities(newActivities);
     
     const weekRange = getWeekRangeFromKey(weekKey);
     alert(`Activity removed from your plan for ${weekRange}`);
