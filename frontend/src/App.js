@@ -891,8 +891,6 @@ function App() {
 
   // Render analytics section with weekly navigation
   const renderAnalyticsSection = () => {
-    const [analyticsWeekView, setAnalyticsWeekView] = useState('current');
-    
     const analytics = getAnalyticsData();
     
     // Get all weeks since user started logging emotions
