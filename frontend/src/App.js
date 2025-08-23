@@ -1013,37 +1013,6 @@ function App() {
               </div>
             </div>
 
-            {/* Weekly Navigation for Analytics */}
-            {allWeeks.length > 0 && (
-              <div className="analytics-week-navigation">
-                <h3>Select Week to View</h3>
-                <div className="week-selector">
-                  {allWeeks.map((weekKey, index) => {
-                    const weekStart = new Date(weekKey);
-                    const weekEnd = new Date(weekStart);
-                    weekEnd.setDate(weekStart.getDate() + 6);
-                    const weekRange = `${weekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${weekEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
-                    
-                    // Check if this is the current week or selected week
-                    const { startOfWeek } = getCalendarWeek();
-                    const isCurrentWeek = weekStart.toDateString() === startOfWeek.toDateString();
-                    const isSelected = analyticsWeekView === weekKey || (analyticsWeekView === 'current' && isCurrentWeek);
-                    
-                    return (
-                      <button
-                        key={weekKey}
-                        className={`week-selector-btn ${isSelected ? 'active' : ''}`}
-                        onClick={() => setAnalyticsWeekView(weekKey)}
-                      >
-                        {weekRange}
-                        {isCurrentWeek && <small>Current Week</small>}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-
             {/* Your Emotion Journey - Updated with quadrant analytics and specific emotions */}
             {selectedWeekData.emotions.length > 0 && (
               <div className="emotion-journey">
