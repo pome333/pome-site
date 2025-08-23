@@ -992,7 +992,11 @@ function App() {
                     const weekEnd = new Date(weekStart);
                     weekEnd.setDate(weekStart.getDate() + 6);
                     const weekRange = `${weekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${weekEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
-                    const isSelected = analyticsWeekView === weekKey || (analyticsWeekView === 'current' && index === 0);
+                    
+                    // Check if this is the current week or selected week
+                    const { startOfWeek } = getCalendarWeek();
+                    const isCurrentWeek = weekStart.toDateString() === startOfWeek.toDateString();
+                    const isSelected = analyticsWeekView === weekKey || (analyticsWeekView === 'current' && isCurrentWeek);
                     
                     return (
                       <button
@@ -1001,6 +1005,7 @@ function App() {
                         onClick={() => setAnalyticsWeekView(weekKey)}
                       >
                         {weekRange}
+                        {isCurrentWeek && <small>Current Week</small>}
                       </button>
                     );
                   })}
