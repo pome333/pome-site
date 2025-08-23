@@ -924,7 +924,6 @@ function App() {
     // Sort chronologically - oldest first (past weeks before current week)
     return Array.from(weeks).sort((a, b) => new Date(a) - new Date(b));
   };
-    
     const allWeeks = getAllWeeksSinceStart();
     const selectedWeekData = getWeekData(analyticsWeekView);
 
