@@ -196,6 +196,13 @@ function App() {
     }
   }, []);
 
+  // Update current week activities when week selection changes
+  useEffect(() => {
+    const weekKey = getWeekKeyFromView(selectedWeekView);
+    const activities = getWeekActivities(weekKey);
+    setCurrentWeekActivities(activities);
+  }, [selectedWeekView]);
+
   // Handle user signup
   const handleSignup = (name, email) => {
     const userData = {
