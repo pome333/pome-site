@@ -1013,43 +1013,70 @@ function App() {
               </div>
             )}
 
-            {/* Your Emotion Journey - Updated with weekly view */}
+            {/* Your Emotion Journey - Updated with quadrant analytics and specific emotions */}
             {selectedWeekData.emotions.length > 0 && (
               <div className="emotion-journey">
                 <h3>Your Emotion Journey</h3>
                 <p className="week-range">Week of {selectedWeekData.weekRange}</p>
                 
-                <div className="journey-emotions">
-                  {Object.keys(EMOTION_DATA).map(quadrant => {
-                    const quadrantEmotions = selectedWeekData.emotions.filter(e => e.quadrant === quadrant);
-                    
-                    return quadrantEmotions.length > 0 ? (
-                      <div key={quadrant} className="journey-quadrant">
-                        <h4>{EMOTION_DATA[quadrant].name}</h4>
-                        <div className="quadrant-emotions-list">
-                          {quadrantEmotions.reduce((acc, emotion) => {
-                            const existing = acc.find(e => e.emotion === emotion.emotion);
-                            if (existing) {
-                              existing.count++;
-                            } else {
-                              acc.push({
-                                emotion: emotion.emotion,
-                                count: 1,
-                                timestamp: emotion.timestamp
-                              });
-                            }
-                            return acc;
-                          }, []).map((emotionData, index) => (
-                            <div key={index} className="emotion-journey-item">
-                              <span className="emotion-name">{emotionData.emotion}</span>
-                              <span className="emotion-count">{emotionData.count} times</span>
-                              <span className="emotion-time">{emotionData.timestamp}</span>
-                            </div>
-                          ))}
+                {/* Quadrant Analytics - WITH percentages */}
+                <div className="quadrant-analytics">
+                  <h4>Emotion Quadrants</h4>
+                  <div className="quadrant-breakdown">
+                    {Object.keys(EMOTION_DATA).map(quadrant => {
+                      const count = selectedWeekData.emotions.filter(e => e.quadrant === quadrant).length;
+                      const percentage = selectedWeekData.emotions.length > 0 ? Math.round((count / selectedWeekData.emotions.length) * 100) : 0;
+                      
+                      return count > 0 ? (
+                        <div key={quadrant} className="quadrant-stat">
+                          <div className="quadrant-name">{EMOTION_DATA[quadrant].name}</div>
+                          <div className="quadrant-count">{count} times ({percentage}%)</div>
                         </div>
-                      </div>
-                    ) : null;
-                  })}
+                      ) : null;
+                    })}
+                  </div>
+                </div>
+                
+                {/* Specific Emotions - WITHOUT percentages, WITH date and time */}
+                <div className="specific-emotions">
+                  <h4>Specific Emotions</h4>
+                  <div className="emotions-timeline">
+                    {selectedWeekData.emotions
+                      .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)) // Most recent first
+                      .reduce((acc, emotion) => {
+                        const existing = acc.find(e => e.emotion === emotion.emotion);
+                        if (existing) {
+                          existing.count++;
+                          existing.timestamps.push(emotion.timestamp);
+                        } else {
+                          acc.push({
+                            emotion: emotion.emotion,
+                            quadrant: emotion.quadrant,
+                            count: 1,
+                            timestamps: [emotion.timestamp]
+                          });
+                        }
+                        return acc;
+                      }, [])
+                      .map((emotionData, index) => (
+                        <div key={index} className="emotion-timeline-item">
+                          <div className="emotion-header">
+                            <span className="emotion-name">{emotionData.emotion}</span>
+                            <span className="emotion-count">{emotionData.count} times</span>
+                            <span className="quadrant-label">{EMOTION_DATA[emotionData.quadrant]?.name}</span>
+                          </div>
+                          <div className="emotion-timestamps">
+                            {emotionData.timestamps.slice(0, 5).map((timestamp, i) => (
+                              <span key={i} className="timestamp">{timestamp}</span>
+                            ))}
+                            {emotionData.timestamps.length > 5 && (
+                              <span className="more-timestamps">+{emotionData.timestamps.length - 5} more</span>
+                            )}
+                          </div>
+                        </div>
+                      ))
+                    }
+                  </div>
                 </div>
               </div>
             )}
