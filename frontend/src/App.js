@@ -815,7 +815,6 @@ function App() {
   const renderActivitiesSection = () => {
     const allWeeks = getAllWeeksForActivities();
     const weekKey = getWeekKeyFromView(selectedWeekView);
-    const currentActivities = getWeekActivities(weekKey);
     const weekRange = getWeekRangeFromKey(weekKey);
     
     const { startOfWeek: currentWeekStart } = getCalendarWeek();
@@ -864,12 +863,12 @@ function App() {
           </div>
         </div>
 
-        {/* Selected Activities for Current Week View */}
-        {currentActivities.length > 0 && (
+        {/* Selected Activities for Current Week View - Use state variable */}
+        {currentWeekActivities.length > 0 && (
           <div className="selected-activities">
-            <h3>Your Activities for {weekRange} ({currentActivities.length})</h3>
+            <h3>Your Activities for {weekRange} ({currentWeekActivities.length})</h3>
             <div className="selected-activities-list">
-              {currentActivities.map(activity => (
+              {currentWeekActivities.map(activity => (
                 <div key={activity.id} className="selected-activity-item">
                   <span className="activity-name">{activity.name}</span>
                   <div className="activity-categories">
@@ -898,10 +897,10 @@ function App() {
           <div className="legend-item spiritual">Spiritual</div>
         </div>
 
-        {/* Activities Grid */}
+        {/* Activities Grid - Use state variable for button states */}
         <div className="activities-grid">
           {ACTIVITIES.map(activity => {
-            const isSelected = currentActivities.find(a => a.id === activity.id);
+            const isSelected = currentWeekActivities.find(a => a.id === activity.id);
             
             return (
               <div key={activity.id} className="activity-card">
