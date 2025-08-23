@@ -963,17 +963,17 @@ function App() {
           </div>
         ) : (
           <div className="analytics-content">
-            {/* Updated Summary Cards - Removed Total Emotions */}
+            {/* Updated Summary Cards - Use selected week data */}
             <div className="analytics-summary">
               <div className="summary-card compact">
-                <h3>{analytics.thisWeekEmotions}</h3>
+                <h3>{selectedWeekData.emotions.length}</h3>
                 <p>Emotions Logged</p>
-                <small>{analytics.weekRange}</small>
+                <small>{selectedWeekData.weekRange}</small>
               </div>
               <div className="summary-card compact">
-                <h3>{analytics.currentWeekActivities}</h3>
+                <h3>{selectedWeekData.activities.length}</h3>
                 <p>Activities Planned</p>
-                <small>{analytics.weekRange}</small>
+                <small>{selectedWeekData.weekRange}</small>
               </div>
               <div className="summary-card compact">
                 <h3>{analytics.dayStreak}</h3>
