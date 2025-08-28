@@ -646,7 +646,7 @@ function App() {
     <div className="main-app">
       {/* Header */}
       <header className="app-header">
-        <div className="logo">
+        <div className="logo" onClick={() => setCurrentView('landing')} style={{ cursor: 'pointer' }}>
           <h1>pome</h1>
         </div>
         <div className="user-info">
