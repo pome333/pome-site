@@ -870,29 +870,30 @@ body, p, span, div, button, input, textarea, a {
   margin-bottom: 0.5rem;
 }
 
+/* Activity Category Tags - Updated colors */
 .category-tag.physical {
-  background: #fed7e2;
-  color: #97266d;
+  background: #E57373;
+  color: white;
 }
 
 .category-tag.emotional {
-  background: #c6f6d5;
-  color: #276749;
+  background: #F4A261;
+  color: white;
 }
 
 .category-tag.social {
-  background: #bee3f8;
-  color: #2c5282;
+  background: #64B5F6;
+  color: white;
 }
 
 .category-tag.natural {
-  background: #d9f7be;
-  color: #389e0d;
+  background: #81C784;
+  color: white;
 }
 
 .category-tag.spiritual {
-  background: #e9d8fd;
-  color: #553c9a;
+  background: #9575CD;
+  color: white;
 }
 
 .add-activity-button {
