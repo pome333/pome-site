@@ -1309,23 +1309,23 @@ body, p, span, div, button, input, textarea, a {
 }
 
 .chart-bar.physical {
-  background: linear-gradient(135deg, #fed7e2, #97266d);
+  background: linear-gradient(135deg, #E57373, #D32F2F);
 }
 
 .chart-bar.emotional {
-  background: linear-gradient(135deg, #c6f6d5, #276749);
+  background: linear-gradient(135deg, #F4A261, #E65100);
 }
 
 .chart-bar.social {
-  background: linear-gradient(135deg, #bee3f8, #2c5282);
+  background: linear-gradient(135deg, #64B5F6, #1976D2);
 }
 
 .chart-bar.natural {
-  background: linear-gradient(135deg, #d9f7be, #389e0d);
+  background: linear-gradient(135deg, #81C784, #388E3C);
 }
 
 .chart-bar.spiritual {
-  background: linear-gradient(135deg, #e9d8fd, #553c9a);
+  background: linear-gradient(135deg, #9575CD, #512DA8);
 }
 
 .chart-count {
