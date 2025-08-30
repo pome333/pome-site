@@ -1085,8 +1085,8 @@ function App() {
                           <div className="emotion-header">
                             <span className="emotion-name">{emotionData.emotion}</span>
                             <span className="emotion-count">{emotionData.count} times</span>
-                            <span className="quadrant-label">{EMOTION_DATA[emotionData.quadrant]?.name}</span>
                           </div>
+                          <div className="quadrant-label">{EMOTION_DATA[emotionData.quadrant]?.name}</div>
                           <div className="emotion-timestamps">
                             {emotionData.timestamps.slice(0, 5).map((timestamp, i) => (
                               <span key={i} className="timestamp">{timestamp}</span>
