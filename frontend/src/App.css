@@ -1266,6 +1266,44 @@ body, p, span, div, button, input, textarea, a {
   padding: 0.2rem 0.6rem;
 }
 
+/* Mobile responsive improvements for emotion timeline */
+@media (max-width: 768px) {
+  .emotion-timeline-item {
+    padding: 0.8rem;
+  }
+  
+  .emotion-header {
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+  }
+  
+  .emotion-name {
+    font-size: 1rem;
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .emotion-count {
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+    white-space: nowrap;
+  }
+  
+  .quadrant-label {
+    font-size: 0.8rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .emotion-timestamps {
+    gap: 0.3rem;
+  }
+  
+  .timestamp {
+    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+  }
+}
+
 /* Activity Focus Chart */
 .activity-focus-chart {
   background: white;
