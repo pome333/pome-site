@@ -1219,7 +1219,7 @@ body, p, span, div, button, input, textarea, a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.5rem;
 }
 
 .emotion-name {
@@ -1227,17 +1227,21 @@ body, p, span, div, button, input, textarea, a {
   color: var(--primary-color);
   font-family: 'Quicksand', sans-serif;
   font-size: 1.1rem;
+  flex: 1;
 }
 
 .emotion-count {
   font-weight: 500;
   color: var(--text-dark);
+  margin-left: 1rem;
 }
 
 .quadrant-label {
   font-size: 0.85rem;
   color: var(--text-light);
   font-style: italic;
+  margin-bottom: 0.8rem;
+  display: block;
 }
 
 .emotion-timestamps {
