@@ -1130,7 +1130,8 @@ function App() {
                   if (newMomentText.trim()) {
                     handleSavePomeMoment(newMomentText.trim());
                     setNewMomentText('');
-                    // Refresh the data
+                    // Refresh the gratitude text from localStorage
+                    const weekKey = getWeekKeyFromView(journalingWeekView);
                     const data = getWeekJournalingData(weekKey);
                     setGratitudeText(data.gratitude);
                   }
