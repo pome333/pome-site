@@ -149,6 +149,11 @@ function App() {
   const [analyticsWeekView, setAnalyticsWeekView] = useState('current'); // For analytics section
   const [journalingWeekView, setJournalingWeekView] = useState('current'); // For journaling section
 
+  // Journaling state
+  const [gratitudeText, setGratitudeText] = useState('');
+  const [newMomentText, setNewMomentText] = useState('');
+  const [editingMoment, setEditingMoment] = useState(null);
+
   // Get all weeks since user started (for activities section)
   const getAllWeeksForActivities = () => {
     const { startOfWeek: currentWeekStart } = getCalendarWeek();
