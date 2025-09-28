@@ -1127,6 +1127,12 @@ body, p, span, div, button, input, textarea, a {
   }
 }
 
+/* ANALYTICS SECTION */
+.analytics-section {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
 .empty-state {
   text-align: center;
   padding: 4rem 2rem;
