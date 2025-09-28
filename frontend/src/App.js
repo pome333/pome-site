@@ -147,6 +147,7 @@ function App() {
   const [selectedWeekView, setSelectedWeekView] = useState('current'); // For activities section
   const [currentWeekActivities, setCurrentWeekActivities] = useState([]); // Track current week's activities for re-rendering
   const [analyticsWeekView, setAnalyticsWeekView] = useState('current'); // For analytics section
+  const [journalingWeekView, setJournalingWeekView] = useState('current'); // For journaling section
 
   // Get all weeks since user started (for activities section)
   const getAllWeeksForActivities = () => {
