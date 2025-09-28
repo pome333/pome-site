@@ -1213,6 +1213,7 @@ function App() {
                                   if (window.confirm('Are you sure you want to delete this PoMe moment?')) {
                                     handleEditPomeMoment(moment.id, null);
                                     setTimeout(() => {
+                                      const weekKey = getWeekKeyFromView(journalingWeekView);
                                       const data = getWeekJournalingData(weekKey);
                                       setGratitudeText(data.gratitude);
                                     }, 100);
