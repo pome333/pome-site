@@ -1038,17 +1038,7 @@ function App() {
     const journalingData = getWeekJournalingData(weekKey);
     const weekRange = getWeekRangeFromKey(weekKey);
     
-    const [gratitudeText, setGratitudeText] = useState(journalingData.gratitude);
-    const [newMomentText, setNewMomentText] = useState('');
-    const [editingMoment, setEditingMoment] = useState(null);
-    
     const { startOfWeek: currentWeekStart } = getCalendarWeek();
-    
-    // Update local state when week changes
-    React.useEffect(() => {
-      const data = getWeekJournalingData(weekKey);
-      setGratitudeText(data.gratitude);
-    }, [weekKey]);
 
     return (
       <div className="journaling-section">
