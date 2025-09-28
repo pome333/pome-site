@@ -1018,8 +1018,224 @@ function App() {
     return Array.from(weeks).sort((a, b) => new Date(a) - new Date(b));
   };
 
-  // Render analytics section with weekly navigation
-  const renderAnalyticsSection = () => {
+  // Render journaling section
+  const renderJournalingSection = () => {
+    const allWeeks = getAllWeeksSinceStart();
+    const weekKey = getWeekKeyFromView(journalingWeekView);
+    const journalingData = getWeekJournalingData(weekKey);
+    const weekRange = getWeekRangeFromKey(weekKey);
+    
+    const [gratitudeText, setGratitudeText] = useState(journalingData.gratitude);
+    const [newMomentText, setNewMomentText] = useState('');
+    const [editingMoment, setEditingMoment] = useState(null);
+    
+    const { startOfWeek: currentWeekStart } = getCalendarWeek();
+    
+    // Update local state when week changes
+    React.useEffect(() => {
+      const data = getWeekJournalingData(weekKey);
+      setGratitudeText(data.gratitude);
+    }, [weekKey]);
+
+    return (
+      <div className="journaling-section">
+        <div className="section-header">
+          <h2>Your Journal</h2>
+          <p>Capture gratitude and precious moments to nurture your emotional well-being.</p>
+        </div>
+
+        {/* Weekly Navigation for Journaling */}
+        {allWeeks.length > 0 && (
+          <div className="journaling-week-navigation">
+            <h3>Select Week to View</h3>
+            <div className="week-selector">
+              {allWeeks.map((weekKey) => {
+                const weekStart = new Date(weekKey);
+                const weekEnd = new Date(weekStart);
+                weekEnd.setDate(weekStart.getDate() + 6);
+                const weekRange = `${weekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${weekEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+                
+                const isCurrentWeek = weekStart.toDateString() === currentWeekStart.toDateString();
+                const isSelected = journalingWeekView === weekKey || (journalingWeekView === 'current' && isCurrentWeek);
+                
+                return (
+                  <button
+                    key={weekKey}
+                    className={`week-selector-btn ${isSelected ? 'active' : ''}`}
+                    onClick={() => setJournalingWeekView(weekKey)}
+                  >
+                    {weekRange}
+                    {isCurrentWeek && <small>Current Week</small>}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        <div className="journaling-content">
+          {/* Gratitude Journaling Section */}
+          <div className="gratitude-section">
+            <h3>Gratitude Journaling</h3>
+            <p className="section-description">
+              Write down five things or people you're grateful for. This simple habit lifts your spirit, 
+              strengthens resilience, and shifts your focus from what's missing to what truly matters. 
+              Practice gratitude journaling daily, or at least once a week, to feel its lasting benefits.
+            </p>
+            <div className="gratitude-input-container">
+              <textarea
+                className="gratitude-input"
+                placeholder="What are you grateful for this week? List five things or people..."
+                value={gratitudeText}
+                onChange={(e) => setGratitudeText(e.target.value)}
+                rows={6}
+              />
+              <button 
+                className="save-gratitude-button"
+                onClick={() => handleSaveGratitude(gratitudeText)}
+              >
+                Save Gratitude Entry
+              </button>
+            </div>
+          </div>
+
+          {/* PoMe Moments Section */}
+          <div className="pome-moments-section">
+            <h3>PoMe Moments</h3>
+            <p className="section-description">
+              Life is made of little moments that make your heart race, your eyes sparkle, or your smile 
+              last a little longer. Here, you can capture those happy thrills—big or small—so they never 
+              slip away. Maybe it was a breathtaking sunset, or laughing until your belly ached with your 
+              girlfriends. Write your PoMe moments down, revisit them when you need a lift, and let them 
+              remind you of the joy that's always within reach. Over time, you'll notice more and more of 
+              what makes you happy. Add those little PoMe moments to your own life recipe, and watch your 
+              days fill with joy.
+            </p>
+            
+            {/* Add New PoMe Moment */}
+            <div className="new-moment-container">
+              <textarea
+                className="moment-input"
+                placeholder="Describe a happy moment from this week..."
+                value={newMomentText}
+                onChange={(e) => setNewMomentText(e.target.value)}
+                rows={3}
+              />
+              <button 
+                className="save-moment-button"
+                onClick={() => {
+                  if (newMomentText.trim()) {
+                    handleSavePomeMoment(newMomentText.trim());
+                    setNewMomentText('');
+                    // Refresh the data
+                    const data = getWeekJournalingData(weekKey);
+                    setGratitudeText(data.gratitude);
+                  }
+                }}
+                disabled={!newMomentText.trim()}
+              >
+                Save PoMe Moment
+              </button>
+            </div>
+
+            {/* Display Existing PoMe Moments */}
+            {journalingData.pome_moments.length > 0 && (
+              <div className="moments-list">
+                <h4>Your PoMe Moments for {weekRange}</h4>
+                {journalingData.pome_moments
+                  .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+                  .map((moment) => (
+                    <div key={moment.id} className="moment-card">
+                      {editingMoment === moment.id ? (
+                        <div className="edit-moment-container">
+                          <textarea
+                            className="edit-moment-input"
+                            value={moment.text}
+                            onChange={(e) => {
+                              const updatedMoments = journalingData.pome_moments.map(m =>
+                                m.id === moment.id ? { ...m, text: e.target.value } : m
+                              );
+                              // Update local state temporarily for editing
+                            }}
+                            rows={2}
+                          />
+                          <div className="edit-buttons">
+                            <button 
+                              className="save-edit-button"
+                              onClick={() => {
+                                const textarea = document.querySelector('.edit-moment-input');
+                                handleEditPomeMoment(moment.id, textarea.value);
+                                setEditingMoment(null);
+                                setTimeout(() => {
+                                  const data = getWeekJournalingData(weekKey);
+                                  setGratitudeText(data.gratitude);
+                                }, 100);
+                              }}
+                            >
+                              Save
+                            </button>
+                            <button 
+                              className="cancel-edit-button"
+                              onClick={() => setEditingMoment(null)}
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        </div>
+                      ) : (
+                        <>
+                          <p className="moment-text">{moment.text}</p>
+                          <div className="moment-meta">
+                            <span className="moment-date">
+                              {new Date(moment.timestamp).toLocaleDateString('en-US', {
+                                weekday: 'short',
+                                month: 'short', 
+                                day: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit'
+                              })}
+                            </span>
+                            <div className="moment-actions">
+                              <button 
+                                className="edit-moment-button"
+                                onClick={() => setEditingMoment(moment.id)}
+                              >
+                                Edit
+                              </button>
+                              <button 
+                                className="delete-moment-button"
+                                onClick={() => {
+                                  if (window.confirm('Are you sure you want to delete this PoMe moment?')) {
+                                    handleEditPomeMoment(moment.id, null);
+                                    setTimeout(() => {
+                                      const data = getWeekJournalingData(weekKey);
+                                      setGratitudeText(data.gratitude);
+                                    }, 100);
+                                  }
+                                }}
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  ))
+                }
+              </div>
+            )}
+
+            {journalingData.pome_moments.length === 0 && (
+              <div className="empty-moments">
+                <p>No PoMe moments captured yet for this week. Start by adding your first happy moment!</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  };
     const analytics = getAnalyticsData();
     
   // Get all weeks since user started logging emotions (chronological order - oldest to newest)
