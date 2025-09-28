@@ -1171,6 +1171,7 @@ function App() {
                                 handleEditPomeMoment(moment.id, textarea.value);
                                 setEditingMoment(null);
                                 setTimeout(() => {
+                                  const weekKey = getWeekKeyFromView(journalingWeekView);
                                   const data = getWeekJournalingData(weekKey);
                                   setGratitudeText(data.gratitude);
                                 }, 100);
