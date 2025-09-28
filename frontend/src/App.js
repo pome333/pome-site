@@ -755,6 +755,7 @@ function App() {
       <main className="app-main">
         {currentSection === 'emotions' && renderEmotionsSection()}
         {currentSection === 'activities' && renderActivitiesSection()}
+        {currentSection === 'journaling' && renderJournalingSection()}
         {currentSection === 'analytics' && renderAnalyticsSection()}
       </main>
     </div>
