@@ -930,10 +930,201 @@ body, p, span, div, button, input, textarea, a {
   box-shadow: none;
 }
 
-/* ANALYTICS SECTION */
-.analytics-section {
-  max-width: 1000px;
+/* JOURNALING SECTION */
+.journaling-section {
+  max-width: 1200px;
   margin: 0 auto;
+}
+
+.journaling-week-navigation {
+  background: white;
+  border: 2px solid var(--border-light);
+  border-radius: 15px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.journaling-week-navigation h3 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+}
+
+.journaling-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Gratitude Journaling */
+.gratitude-section, .pome-moments-section {
+  background: white;
+  border: 2px solid var(--border-light);
+  border-radius: 15px;
+  padding: 2rem;
+}
+
+.gratitude-section h3, .pome-moments-section h3 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.section-description {
+  color: var(--text-light);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.gratitude-input-container, .new-moment-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.gratitude-input, .moment-input, .edit-moment-input {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid var(--border-light);
+  border-radius: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  resize: vertical;
+  min-height: 120px;
+}
+
+.gratitude-input:focus, .moment-input:focus, .edit-moment-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.save-gratitude-button, .save-moment-button {
+  background: var(--primary-gradient);
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-start;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.save-gratitude-button:hover, .save-moment-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(220, 70, 99, 0.3);
+}
+
+.save-moment-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* PoMe Moments */
+.moments-list {
+  margin-top: 2rem;
+}
+
+.moments-list h4 {
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+}
+
+.moment-card {
+  background: linear-gradient(135deg, rgba(220, 70, 99, 0.05) 0%, rgba(212, 165, 116, 0.05) 100%);
+  border: 1px solid rgba(220, 70, 99, 0.1);
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.moment-text {
+  color: var(--text-dark);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.moment-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.moment-date {
+  color: var(--text-light);
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.moment-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.edit-moment-button, .delete-moment-button, .save-edit-button, .cancel-edit-button {
+  background: transparent;
+  border: 1px solid var(--border-light);
+  padding: 0.4rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Nunito', sans-serif;
+}
+
+.edit-moment-button:hover, .save-edit-button:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.delete-moment-button:hover, .cancel-edit-button:hover {
+  border-color: #f56565;
+  color: #f56565;
+}
+
+.edit-moment-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.edit-buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-self: flex-start;
+}
+
+.empty-moments {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .journaling-section {
+    padding: 1rem;
+  }
+  
+  .gratitude-section, .pome-moments-section {
+    padding: 1.5rem;
+  }
+  
+  .moment-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .moment-actions {
+    align-self: flex-end;
+  }
 }
 
 .empty-state {
