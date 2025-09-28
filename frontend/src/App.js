@@ -1237,6 +1237,9 @@ function App() {
       </div>
     );
   };
+
+  // Render analytics section
+  const renderAnalyticsSection = () => {
     const analytics = getAnalyticsData();
     const allWeeks = getAllWeeksSinceStart();
     const selectedWeekData = getWeekData(analyticsWeekView);
