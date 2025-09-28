@@ -670,6 +670,12 @@ function App() {
           Activities
         </button>
         <button 
+          className={currentSection === 'journaling' ? 'nav-button active' : 'nav-button'}
+          onClick={() => setCurrentSection('journaling')}
+        >
+          Journaling
+        </button>
+        <button 
           className={currentSection === 'analytics' ? 'nav-button active' : 'nav-button'}
           onClick={() => setCurrentSection('analytics')}
         >
