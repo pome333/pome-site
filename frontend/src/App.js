@@ -1238,23 +1238,6 @@ function App() {
     );
   };
     const analytics = getAnalyticsData();
-    
-  // Get all weeks since user started logging emotions (chronological order - oldest to newest)
-  const getAllWeeksSinceStart = () => {
-    const emotions = JSON.parse(localStorage.getItem('pome_emotions') || '[]');
-    if (emotions.length === 0) return [];
-    
-    const weeks = new Set();
-    emotions.forEach(emotion => {
-      const emotionDate = new Date(emotion.timestamp);
-      const { startOfWeek } = getCalendarWeek(emotionDate);
-      const weekKey = startOfWeek.toISOString().split('T')[0];
-      weeks.add(weekKey);
-    });
-    
-    // Sort chronologically - oldest first (past weeks before current week)
-    return Array.from(weeks).sort((a, b) => new Date(a) - new Date(b));
-  };
     const allWeeks = getAllWeeksSinceStart();
     const selectedWeekData = getWeekData(analyticsWeekView);
 
