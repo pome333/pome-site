@@ -209,6 +209,13 @@ function App() {
     setCurrentWeekActivities(activities);
   }, [selectedWeekView]);
 
+  // Update gratitude text when journaling week view changes
+  useEffect(() => {
+    const weekKey = getWeekKeyFromView(journalingWeekView);
+    const journalingData = getWeekJournalingData(weekKey);
+    setGratitudeText(journalingData.gratitude);
+  }, [journalingWeekView]);
+
   // Handle user signup
   const handleSignup = (name, email) => {
     const userData = {
