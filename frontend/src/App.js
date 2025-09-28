@@ -315,6 +315,22 @@ function App() {
     alert(`Activity removed from your plan for ${weekRange}`);
   };
 
+  // Helper functions
+  const getWeekKeyFromView = (weekView) => {
+    if (weekView === 'current') {
+      const { startOfWeek } = getCalendarWeek();
+      return startOfWeek.toISOString().split('T')[0];
+    }
+    return weekView;
+  };
+
+  const getWeekRangeFromKey = (weekKey) => {
+    const weekStart = new Date(weekKey);
+    const weekEnd = new Date(weekStart);
+    weekEnd.setDate(weekStart.getDate() + 6);
+    return `${weekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${weekEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+  };
+
   // Get journaling data for a specific week
   const getWeekJournalingData = (weekKey) => {
     const storageKey = `pome_week_journaling_${weekKey}`;
