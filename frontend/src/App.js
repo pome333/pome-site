@@ -315,20 +315,72 @@ function App() {
     alert(`Activity removed from your plan for ${weekRange}`);
   };
 
-  // Helper functions
-  const getWeekKeyFromView = (weekView) => {
-    if (weekView === 'current') {
-      const { startOfWeek } = getCalendarWeek();
-      return startOfWeek.toISOString().split('T')[0];
-    }
-    return weekView;
+  // Get journaling data for a specific week
+  const getWeekJournalingData = (weekKey) => {
+    const storageKey = `pome_week_journaling_${weekKey}`;
+    return JSON.parse(localStorage.getItem(storageKey) || '{"gratitude": "", "pome_moments": []}');
   };
 
-  const getWeekRangeFromKey = (weekKey) => {
-    const weekStart = new Date(weekKey);
-    const weekEnd = new Date(weekStart);
-    weekEnd.setDate(weekStart.getDate() + 6);
-    return `${weekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${weekEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+  // Save journaling data for a specific week
+  const saveWeekJournalingData = (weekKey, data) => {
+    const storageKey = `pome_week_journaling_${weekKey}`;
+    localStorage.setItem(storageKey, JSON.stringify(data));
+  };
+
+  // Handle save gratitude entry
+  const handleSaveGratitude = (gratitudeText) => {
+    const weekKey = getWeekKeyFromView(journalingWeekView);
+    const currentData = getWeekJournalingData(weekKey);
+    const updatedData = { ...currentData, gratitude: gratitudeText };
+    saveWeekJournalingData(weekKey, updatedData);
+    
+    const weekRange = getWeekRangeFromKey(weekKey);
+    alert(`Gratitude entry saved for ${weekRange}! 🙏`);
+  };
+
+  // Handle save PoMe moment
+  const handleSavePomeMoment = (momentText) => {
+    const weekKey = getWeekKeyFromView(journalingWeekView);
+    const currentData = getWeekJournalingData(weekKey);
+    const newMoment = {
+      id: Date.now().toString(),
+      text: momentText,
+      timestamp: new Date().toISOString()
+    };
+    const updatedData = { 
+      ...currentData, 
+      pome_moments: [...currentData.pome_moments, newMoment] 
+    };
+    saveWeekJournalingData(weekKey, updatedData);
+    
+    const weekRange = getWeekRangeFromKey(weekKey);
+    alert(`PoMe moment saved for ${weekRange}! ✨`);
+  };
+
+  // Handle edit/delete PoMe moment
+  const handleEditPomeMoment = (momentId, newText = null) => {
+    const weekKey = getWeekKeyFromView(journalingWeekView);
+    const currentData = getWeekJournalingData(weekKey);
+    
+    if (newText === null) {
+      // Delete moment
+      const updatedData = {
+        ...currentData,
+        pome_moments: currentData.pome_moments.filter(m => m.id !== momentId)
+      };
+      saveWeekJournalingData(weekKey, updatedData);
+      alert('PoMe moment deleted! 🗑️');
+    } else {
+      // Edit moment
+      const updatedData = {
+        ...currentData,
+        pome_moments: currentData.pome_moments.map(m => 
+          m.id === momentId ? { ...m, text: newText } : m
+        )
+      };
+      saveWeekJournalingData(weekKey, updatedData);
+      alert('PoMe moment updated! ✨');
+    }
   };
 
   // Helper function to get start and end of calendar week
