@@ -1017,11 +1017,60 @@ body, p, span, div, button, input, textarea, a {
   box-shadow: 0 5px 15px rgba(220, 70, 99, 0.3);
 }
 
-.save-moment-button:disabled {
+.save-moment-button:disabled, .save-gratitude-button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
+}
+
+/* Existing Gratitude Entry Display */
+.existing-gratitude {
+  background: linear-gradient(135deg, rgba(220, 70, 99, 0.05) 0%, rgba(212, 165, 116, 0.05) 100%);
+  border: 1px solid rgba(220, 70, 99, 0.1);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+.gratitude-display {
+  color: var(--text-dark);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  white-space: pre-wrap;
+}
+
+.gratitude-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.edit-gratitude-button, .delete-gratitude-button, .cancel-gratitude-button {
+  background: transparent;
+  border: 1px solid var(--border-light);
+  padding: 0.4rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Nunito', sans-serif;
+}
+
+.edit-gratitude-button:hover, .cancel-gratitude-button:hover {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.delete-gratitude-button:hover {
+  border-color: #f56565;
+  color: #f56565;
+}
+
+.gratitude-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 }
 
 /* PoMe Moments */
