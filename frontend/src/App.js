@@ -1123,21 +1123,68 @@ function App() {
               strengthens resilience, and shifts your focus from what's missing to what truly matters. 
               Practice gratitude journaling daily, or at least once a week, to feel its lasting benefits.
             </p>
-            <div className="gratitude-input-container">
-              <textarea
-                className="gratitude-input"
-                placeholder="What are you grateful for this week? List five things or people..."
-                value={gratitudeText}
-                onChange={(e) => setGratitudeText(e.target.value)}
-                rows={6}
-              />
-              <button 
-                className="save-gratitude-button"
-                onClick={() => handleSaveGratitude(gratitudeText)}
-              >
-                Save Gratitude Entry
-              </button>
-            </div>
+            
+            {/* Show existing gratitude entry if not editing */}
+            {gratitudeText && !editingGratitude && (
+              <div className="existing-gratitude">
+                <div className="gratitude-content">
+                  <p className="gratitude-display">{gratitudeText}</p>
+                </div>
+                <div className="gratitude-actions">
+                  <button 
+                    className="edit-gratitude-button"
+                    onClick={() => setEditingGratitude(true)}
+                  >
+                    Edit
+                  </button>
+                  <button 
+                    className="delete-gratitude-button"
+                    onClick={() => {
+                      if (window.confirm('Are you sure you want to delete this gratitude entry?')) {
+                        handleDeleteGratitude();
+                      }
+                    }}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {/* Show input when editing or no existing entry */}
+            {(!gratitudeText || editingGratitude) && (
+              <div className="gratitude-input-container">
+                <textarea
+                  className="gratitude-input"
+                  placeholder="What are you grateful for this week? List five things or people..."
+                  value={gratitudeText}
+                  onChange={(e) => setGratitudeText(e.target.value)}
+                  rows={6}
+                />
+                <div className="gratitude-buttons">
+                  <button 
+                    className="save-gratitude-button"
+                    onClick={() => handleSaveGratitude(gratitudeText)}
+                    disabled={!gratitudeText.trim()}
+                  >
+                    Save Gratitude Entry
+                  </button>
+                  {editingGratitude && (
+                    <button 
+                      className="cancel-gratitude-button"
+                      onClick={() => {
+                        const weekKey = getWeekKeyFromView(journalingWeekView);
+                        const journalingData = getWeekJournalingData(weekKey);
+                        setGratitudeText(journalingData.gratitude);
+                        setEditingGratitude(false);
+                      }}
+                    >
+                      Cancel
+                    </button>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* PoMe Moments Section */}
