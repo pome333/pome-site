@@ -63,6 +63,9 @@ const EMOTION_DATA = {
 
 // Activities data - Updated focused list for emotional wellness
 const ACTIVITIES = [
+  // Gratitude Journaling Activity (auto-added when user creates gratitude entry)
+  { id: 0, name: "Gratitude Journaling", categories: ["emotional"] },
+  
   // Physical Energy
   { id: 1, name: "Gym workout", categories: ["physical"] },
   { id: 2, name: "Yoga", categories: ["physical"] },
