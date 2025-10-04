@@ -366,8 +366,42 @@ function App() {
     const updatedData = { ...currentData, gratitude: gratitudeText };
     saveWeekJournalingData(weekKey, updatedData);
     
+    // Also add "Gratitude Journaling" activity to the same week
+    const gratitudeActivity = ACTIVITIES.find(a => a.name === "Gratitude Journaling");
+    if (gratitudeActivity && gratitudeText.trim()) {
+      const weekActivities = getWeekActivities(weekKey);
+      const hasGratitudeActivity = weekActivities.find(a => a.id === gratitudeActivity.id);
+      
+      if (!hasGratitudeActivity) {
+        const updatedActivities = [...weekActivities, gratitudeActivity];
+        saveWeekActivities(weekKey, updatedActivities);
+      }
+    }
+    
+    setEditingGratitude(false);
     const weekRange = getWeekRangeFromKey(weekKey);
     alert(`Gratitude entry saved for ${weekRange}! 🙏`);
+  };
+
+  // Handle delete gratitude entry
+  const handleDeleteGratitude = () => {
+    const weekKey = getWeekKeyFromView(journalingWeekView);
+    const currentData = getWeekJournalingData(weekKey);
+    const updatedData = { ...currentData, gratitude: '' };
+    saveWeekJournalingData(weekKey, updatedData);
+    
+    // Also remove "Gratitude Journaling" activity from the same week
+    const gratitudeActivity = ACTIVITIES.find(a => a.name === "Gratitude Journaling");
+    if (gratitudeActivity) {
+      const weekActivities = getWeekActivities(weekKey);
+      const updatedActivities = weekActivities.filter(a => a.id !== gratitudeActivity.id);
+      saveWeekActivities(weekKey, updatedActivities);
+    }
+    
+    setGratitudeText('');
+    setEditingGratitude(false);
+    const weekRange = getWeekRangeFromKey(weekKey);
+    alert(`Gratitude entry deleted for ${weekRange}`);
   };
 
   // Handle save PoMe moment
