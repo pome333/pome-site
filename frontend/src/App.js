@@ -1468,6 +1468,147 @@ function App() {
                     }
                   </div>
                 </div>
+
+                {/* Where Analytics - Location context with quadrants */}
+                {selectedWeekData.emotions.filter(e => e.context && e.context.location).length > 0 && (
+                  <div className="context-analytics">
+                    <h4>Where You Felt Emotions</h4>
+                    <div className="context-timeline">
+                      {selectedWeekData.emotions
+                        .filter(e => e.context && e.context.location)
+                        .reduce((acc, emotion) => {
+                          const key = `${emotion.context.location}-${emotion.quadrant}`;
+                          const existing = acc.find(e => e.key === key);
+                          if (existing) {
+                            existing.count++;
+                            existing.timestamps.push(emotion.timestamp);
+                          } else {
+                            acc.push({
+                              key,
+                              context: emotion.context.location,
+                              quadrant: emotion.quadrant,
+                              count: 1,
+                              timestamps: [emotion.timestamp]
+                            });
+                          }
+                          return acc;
+                        }, [])
+                        .sort((a, b) => b.count - a.count)
+                        .map((contextData, index) => (
+                          <div key={index} className="emotion-timeline-item">
+                            <div className="emotion-header">
+                              <span className="emotion-name">{contextData.context}</span>
+                              <span className="emotion-count">{contextData.count} times</span>
+                            </div>
+                            <div className="quadrant-label">{EMOTION_DATA[contextData.quadrant]?.name}</div>
+                            <div className="emotion-timestamps">
+                              {contextData.timestamps.slice(0, 5).map((timestamp, i) => (
+                                <span key={i} className="timestamp">{timestamp}</span>
+                              ))}
+                              {contextData.timestamps.length > 5 && (
+                                <span className="more-timestamps">+{contextData.timestamps.length - 5} more</span>
+                              )}
+                            </div>
+                          </div>
+                        ))
+                      }
+                    </div>
+                  </div>
+                )}
+
+                {/* Who Analytics - Social context with quadrants */}
+                {selectedWeekData.emotions.filter(e => e.context && e.context.social_setting).length > 0 && (
+                  <div className="context-analytics">
+                    <h4>Who You Were With</h4>
+                    <div className="context-timeline">
+                      {selectedWeekData.emotions
+                        .filter(e => e.context && e.context.social_setting)
+                        .reduce((acc, emotion) => {
+                          const key = `${emotion.context.social_setting}-${emotion.quadrant}`;
+                          const existing = acc.find(e => e.key === key);
+                          if (existing) {
+                            existing.count++;
+                            existing.timestamps.push(emotion.timestamp);
+                          } else {
+                            acc.push({
+                              key,
+                              context: emotion.context.social_setting,
+                              quadrant: emotion.quadrant,
+                              count: 1,
+                              timestamps: [emotion.timestamp]
+                            });
+                          }
+                          return acc;
+                        }, [])
+                        .sort((a, b) => b.count - a.count)
+                        .map((contextData, index) => (
+                          <div key={index} className="emotion-timeline-item">
+                            <div className="emotion-header">
+                              <span className="emotion-name">{contextData.context}</span>
+                              <span className="emotion-count">{contextData.count} times</span>
+                            </div>
+                            <div className="quadrant-label">{EMOTION_DATA[contextData.quadrant]?.name}</div>
+                            <div className="emotion-timestamps">
+                              {contextData.timestamps.slice(0, 5).map((timestamp, i) => (
+                                <span key={i} className="timestamp">{timestamp}</span>
+                              ))}
+                              {contextData.timestamps.length > 5 && (
+                                <span className="more-timestamps">+{contextData.timestamps.length - 5} more</span>
+                              )}
+                            </div>
+                          </div>
+                        ))
+                      }
+                    </div>
+                  </div>
+                )}
+
+                {/* What Analytics - Activity context with quadrants */}
+                {selectedWeekData.emotions.filter(e => e.context && e.context.current_activity).length > 0 && (
+                  <div className="context-analytics">
+                    <h4>What You Were Doing</h4>
+                    <div className="context-timeline">
+                      {selectedWeekData.emotions
+                        .filter(e => e.context && e.context.current_activity)
+                        .reduce((acc, emotion) => {
+                          const key = `${emotion.context.current_activity}-${emotion.quadrant}`;
+                          const existing = acc.find(e => e.key === key);
+                          if (existing) {
+                            existing.count++;
+                            existing.timestamps.push(emotion.timestamp);
+                          } else {
+                            acc.push({
+                              key,
+                              context: emotion.context.current_activity,
+                              quadrant: emotion.quadrant,
+                              count: 1,
+                              timestamps: [emotion.timestamp]
+                            });
+                          }
+                          return acc;
+                        }, [])
+                        .sort((a, b) => b.count - a.count)
+                        .map((contextData, index) => (
+                          <div key={index} className="emotion-timeline-item">
+                            <div className="emotion-header">
+                              <span className="emotion-name">{contextData.context}</span>
+                              <span className="emotion-count">{contextData.count} times</span>
+                            </div>
+                            <div className="quadrant-label">{EMOTION_DATA[contextData.quadrant]?.name}</div>
+                            <div className="emotion-timestamps">
+                              {contextData.timestamps.slice(0, 5).map((timestamp, i) => (
+                                <span key={i} className="timestamp">{timestamp}</span>
+                              ))}
+                              {contextData.timestamps.length > 5 && (
+                                <span className="more-timestamps">+{contextData.timestamps.length - 5} more</span>
+                              )}
+                            </div>
+                          </div>
+                        ))
+                      }
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 
