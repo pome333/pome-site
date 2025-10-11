@@ -454,11 +454,15 @@ body, p, span, div, button, input, textarea, a {
 
 /* Navigation */
 .app-nav {
-  background: var(--background-white);
+  background: white;
   padding: 0 2rem;
   display: flex;
   gap: 0;
   border-bottom: 1px solid var(--border-light);
+  position: sticky;
+  top: 72px;
+  z-index: 98;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .nav-button {
