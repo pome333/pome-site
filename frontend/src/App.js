@@ -775,7 +775,7 @@ function App() {
               onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSfimMroes1U1ho1k3nNmVuJHPxDXp_CcYWl4GTgyFkmqxHotQ/viewform', '_blank')}
               title="Leave Feedback"
             >
-              💬 Feedback
+              LEAVE FEEDBACK
             </button>
             <div className="user-info">
               <span>Hello, {user.name}!</span>
