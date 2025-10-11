@@ -765,11 +765,22 @@ function App() {
     <div className="main-app">
       {/* Header */}
       <header className="app-header">
-        <div className="logo" onClick={() => setCurrentView('landing')} style={{ cursor: 'pointer' }}>
-          <h1>pome</h1>
-        </div>
-        <div className="user-info">
-          <span>Hello, {user.name}!</span>
+        <div className="header-content">
+          <div className="logo" onClick={() => setCurrentView('landing')} style={{ cursor: 'pointer' }}>
+            <h1>pome</h1>
+          </div>
+          <div className="header-actions">
+            <button 
+              className="feedback-button"
+              onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSfimMroes1U1ho1k3nNmVuJHPxDXp_CcYWl4GTgyFkmqxHotQ/viewform', '_blank')}
+              title="Leave Feedback"
+            >
+              💬 Feedback
+            </button>
+            <div className="user-info">
+              <span>Hello, {user.name}!</span>
+            </div>
+          </div>
         </div>
       </header>
 
