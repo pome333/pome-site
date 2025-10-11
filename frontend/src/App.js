@@ -641,7 +641,7 @@ function App() {
           <div className="testimonial">
             <p>"Pome has helped me see the patterns in my emotions: what I feel, when I feel it, and why. I love keeping track of the little things that bring me energy and light. It's more than just tracking, it's feeling like I truly own my life again."</p>
             <div className="testimonial-author">
-              <strong>— Early Tester</strong>
+              <strong>— Veranika</strong>
             </div>
           </div>
         </div>
