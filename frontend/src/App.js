@@ -651,7 +651,7 @@ function App() {
       <section className="cta-section">
         <div className="container">
           <h2>Ready to Start Your Journey?</h2>
-          <p>Join thousands of women building their emotional intelligence with Pome.</p>
+          <p>Join women who are growing their emotional intelligence, creating more balance, clarity, and confidence in everyday life with Pome.</p>
           <button 
             className="cta-button"
             onClick={() => setCurrentView('signup')}
