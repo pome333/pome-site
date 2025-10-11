@@ -391,12 +391,47 @@ body, p, span, div, button, input, textarea, a {
 
 /* App Header */
 .app-header {
-  background: var(--background-white);
+  background: white;
   padding: 1rem 2rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  border-bottom: 2px solid var(--border-light);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.header-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.feedback-button {
+  background: linear-gradient(135deg, rgba(220, 70, 99, 0.1) 0%, rgba(212, 165, 116, 0.1) 100%);
+  border: 1px solid rgba(220, 70, 99, 0.3);
+  color: var(--primary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Nunito', sans-serif;
+}
+
+.feedback-button:hover {
+  background: var(--primary-gradient);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 70, 99, 0.3);
 }
 
 .app-header .logo h1 {
@@ -405,8 +440,8 @@ body, p, span, div, button, input, textarea, a {
 }
 
 .user-info {
-  font-weight: 600;
   color: var(--text-dark);
+  font-weight: 500;
 }
 
 /* Navigation */
