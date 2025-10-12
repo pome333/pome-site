@@ -461,6 +461,10 @@ body, p, span, div, button, input, textarea, a {
 .user-info {
   color: var(--text-dark);
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem;
 }
 
 /* Navigation */
