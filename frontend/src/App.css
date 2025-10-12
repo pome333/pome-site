@@ -427,7 +427,7 @@ body, p, span, div, button, input, textarea, a {
   background: linear-gradient(135deg, #E91E63 0%, #FF9800 100%);
   border: none;
   color: white;
-  padding: 0.6rem 1.2rem;
+  padding: 0.7rem 1.3rem;
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 600;
@@ -437,6 +437,9 @@ body, p, span, div, button, input, textarea, a {
   font-family: 'Quicksand', sans-serif;
   text-transform: uppercase;
   box-shadow: 0 2px 8px rgba(233, 30, 99, 0.3);
+  display: flex;
+  align-items: center;
+  height: 36px;
 }
 
 .feedback-button:hover {
