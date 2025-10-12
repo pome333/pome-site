@@ -448,9 +448,14 @@ body, p, span, div, button, input, textarea, a {
   background: linear-gradient(135deg, #D81B60 0%, #F57C00 100%);
 }
 
-.app-header .logo h1 {
-  font-size: 1.8rem;
+.logo h1 {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 2rem;
+  color: #dc4663;
+  text-align: center;
   margin: 0;
+  font-weight: 600;
+  line-height: 1;
 }
 
 .user-info {
