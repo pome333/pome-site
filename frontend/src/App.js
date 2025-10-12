@@ -361,8 +361,8 @@ function App() {
     const updatedData = { ...currentData, gratitude: gratitudeText };
     saveWeekJournalingData(weekKey, updatedData);
     
-    // Also add "Gratitude Journaling" activity to the same week
-    const gratitudeActivity = ACTIVITIES.find(a => a.name === "Gratitude Journaling");
+    // Also add "Gratitude journaling" activity to the same week
+    const gratitudeActivity = ACTIVITIES.find(a => a.name === "Gratitude journaling");
     if (gratitudeActivity && gratitudeText.trim()) {
       const weekActivities = getWeekActivities(weekKey);
       const hasGratitudeActivity = weekActivities.find(a => a.id === gratitudeActivity.id);
@@ -385,8 +385,8 @@ function App() {
     const updatedData = { ...currentData, gratitude: '' };
     saveWeekJournalingData(weekKey, updatedData);
     
-    // Also remove "Gratitude Journaling" activity from the same week
-    const gratitudeActivity = ACTIVITIES.find(a => a.name === "Gratitude Journaling");
+    // Also remove "Gratitude journaling" activity from the same week
+    const gratitudeActivity = ACTIVITIES.find(a => a.name === "Gratitude journaling");
     if (gratitudeActivity) {
       const weekActivities = getWeekActivities(weekKey);
       const updatedActivities = weekActivities.filter(a => a.id !== gratitudeActivity.id);
