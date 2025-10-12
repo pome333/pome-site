@@ -407,6 +407,7 @@ body, p, span, div, button, input, textarea, a {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+  min-height: 60px;
 }
 
 .logo {
