@@ -392,7 +392,7 @@ body, p, span, div, button, input, textarea, a {
 /* App Header */
 .app-header {
   background: white;
-  padding: 1rem 2rem;
+  padding: 1.2rem 2rem;
   border-bottom: 2px solid var(--border-light);
   position: sticky;
   top: 0;
@@ -407,11 +407,23 @@ body, p, span, div, button, input, textarea, a {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
-  min-height: 60px;
+  height: 44px;
 }
 
 .logo {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.logo h1 {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 2rem;
+  color: #dc4663;
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.2;
   display: flex;
   align-items: center;
 }
@@ -420,14 +432,14 @@ body, p, span, div, button, input, textarea, a {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  margin-left: auto;
+  height: 100%;
 }
 
 .feedback-button {
   background: linear-gradient(135deg, #E91E63 0%, #FF9800 100%);
   border: none;
   color: white;
-  padding: 0.7rem 1.3rem;
+  padding: 0.75rem 1.3rem;
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 600;
@@ -439,23 +451,15 @@ body, p, span, div, button, input, textarea, a {
   box-shadow: 0 2px 8px rgba(233, 30, 99, 0.3);
   display: flex;
   align-items: center;
-  height: 36px;
+  justify-content: center;
+  height: 38px;
+  white-space: nowrap;
 }
 
 .feedback-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(233, 30, 99, 0.4);
   background: linear-gradient(135deg, #D81B60 0%, #F57C00 100%);
-}
-
-.logo h1 {
-  font-family: 'Quicksand', sans-serif;
-  font-size: 2rem;
-  color: #dc4663;
-  text-align: center;
-  margin: 0;
-  font-weight: 600;
-  line-height: 1;
 }
 
 .user-info {
@@ -465,6 +469,8 @@ body, p, span, div, button, input, textarea, a {
   align-items: center;
   font-family: 'Nunito', sans-serif;
   font-size: 0.95rem;
+  height: 100%;
+  line-height: 1.4;
 }
 
 /* Navigation */
