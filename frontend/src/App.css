@@ -419,7 +419,7 @@ body, p, span, div, button, input, textarea, a {
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.5rem;
   margin-left: auto;
 }
 
