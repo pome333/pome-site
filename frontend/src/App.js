@@ -517,7 +517,7 @@ function App() {
     });
 
     // Current week activities
-    const currentWeekKey = startOfWeek.toISOString().split('T')[0];
+    const currentWeekKey = getLocalDateKey(startOfWeek);
     const currentWeekActivities = getWeekActivities(currentWeekKey);
 
     // Day streak calculation
