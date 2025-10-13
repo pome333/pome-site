@@ -1061,9 +1061,14 @@ function App() {
   // Get all weeks since user started logging emotions (chronological order - oldest to newest)
   const getAllWeeksSinceStart = () => {
     const emotions = JSON.parse(localStorage.getItem('pome_emotions') || '[]');
-    if (emotions.length === 0) return [];
-    
     const weeks = new Set();
+    
+    // Always include current week
+    const { startOfWeek } = getCalendarWeek();
+    const currentWeekKey = startOfWeek.toISOString().split('T')[0];
+    weeks.add(currentWeekKey);
+    
+    // Add weeks from existing emotions
     emotions.forEach(emotion => {
       const emotionDate = new Date(emotion.timestamp);
       const { startOfWeek } = getCalendarWeek(emotionDate);
