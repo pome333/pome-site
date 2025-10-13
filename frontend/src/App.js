@@ -159,7 +159,7 @@ function App() {
     const allWeeks = getAllWeeksSinceStart();
     
     // Add current week if not in list
-    const currentWeekKey = currentWeekStart.toISOString().split('T')[0];
+    const currentWeekKey = getLocalDateKey(currentWeekStart);
     if (!allWeeks.includes(currentWeekKey)) {
       allWeeks.push(currentWeekKey);
     }
@@ -167,7 +167,7 @@ function App() {
     // Add next week
     const nextWeekStart = new Date(currentWeekStart);
     nextWeekStart.setDate(currentWeekStart.getDate() + 7);
-    const nextWeekKey = nextWeekStart.toISOString().split('T')[0];
+    const nextWeekKey = getLocalDateKey(nextWeekStart);
     if (!allWeeks.includes(nextWeekKey)) {
       allWeeks.push(nextWeekKey);
     }
