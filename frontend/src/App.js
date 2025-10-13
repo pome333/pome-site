@@ -330,7 +330,7 @@ function App() {
   const getWeekKeyFromView = (weekView) => {
     if (weekView === 'current') {
       const { startOfWeek } = getCalendarWeek();
-      return startOfWeek.toISOString().split('T')[0];
+      return getLocalDateKey(startOfWeek);
     }
     return weekView;
   };
