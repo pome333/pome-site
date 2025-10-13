@@ -446,17 +446,17 @@ function App() {
 
   // Helper function to get start and end of calendar week
   const getCalendarWeek = (date = new Date()) => {
+    // Work entirely in local time to avoid timezone conversion issues
     const currentDate = new Date(date);
-    const startOfWeek = new Date(currentDate);
     
-    // Get Monday as start of week
-    const dayOfWeek = currentDate.getDay();
-    const diff = dayOfWeek === 0 ? -6 : 1 - dayOfWeek; // Sunday = 0, so we want Monday
-    startOfWeek.setDate(currentDate.getDate() + diff);
+    // Get Sunday as start of week (standard US weeks)
+    const dayOfWeek = currentDate.getDay(); // 0 = Sunday, 1 = Monday, etc.
+    const startOfWeek = new Date(currentDate);
+    startOfWeek.setDate(currentDate.getDate() - dayOfWeek); // Go back to Sunday
     startOfWeek.setHours(0, 0, 0, 0);
     
     const endOfWeek = new Date(startOfWeek);
-    endOfWeek.setDate(startOfWeek.getDate() + 6);
+    endOfWeek.setDate(startOfWeek.getDate() + 6); // Saturday
     endOfWeek.setHours(23, 59, 59, 999);
     
     return { startOfWeek, endOfWeek };
