@@ -1058,6 +1058,14 @@ function App() {
     );
   };
 
+  // Helper to convert date to local date string (YYYY-MM-DD) without timezone conversion
+  const getLocalDateKey = (date) => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
   // Get all weeks since user started logging emotions (chronological order - oldest to newest)
   const getAllWeeksSinceStart = () => {
     const emotions = JSON.parse(localStorage.getItem('pome_emotions') || '[]');
@@ -1068,7 +1076,7 @@ function App() {
     console.log('🔍 getAllWeeksSinceStart - Today:', today.toString());
     
     const { startOfWeek: currentWeekStart, endOfWeek: currentWeekEnd } = getCalendarWeek(today);
-    const currentWeekKey = currentWeekStart.toISOString().split('T')[0];
+    const currentWeekKey = getLocalDateKey(currentWeekStart);
     
     console.log('🔍 Current week:', {
       key: currentWeekKey,
@@ -1085,7 +1093,7 @@ function App() {
     emotions.forEach(emotion => {
       const emotionDate = new Date(emotion.timestamp);
       const { startOfWeek } = getCalendarWeek(emotionDate);
-      const weekKey = startOfWeek.toISOString().split('T')[0];
+      const weekKey = getLocalDateKey(startOfWeek);
       console.log(`🔍 Emotion at ${emotion.timestamp} -> week key: ${weekKey}`);
       weeks.add(weekKey);
     });
