@@ -144,6 +144,7 @@ function App() {
   // Activities state - Updated to support all weeks with proper re-rendering
   const [selectedWeekView, setSelectedWeekView] = useState('current'); // For activities section
   const [currentWeekActivities, setCurrentWeekActivities] = useState([]); // Track current week's activities for re-rendering
+  const [activityTypeFilter, setActivityTypeFilter] = useState(null); // Filter by activity type (null = show all)
   const [analyticsWeekView, setAnalyticsWeekView] = useState('current'); // For analytics section
   const [journalingWeekView, setJournalingWeekView] = useState('current'); // For journaling section
 
