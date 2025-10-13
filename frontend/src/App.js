@@ -1063,9 +1063,10 @@ function App() {
     const emotions = JSON.parse(localStorage.getItem('pome_emotions') || '[]');
     const weeks = new Set();
     
-    // Always include current week
-    const { startOfWeek } = getCalendarWeek();
-    const currentWeekKey = startOfWeek.toISOString().split('T')[0];
+    // Always include current week based on today's actual date
+    const today = new Date();
+    const { startOfWeek: currentWeekStart } = getCalendarWeek(today);
+    const currentWeekKey = currentWeekStart.toISOString().split('T')[0];
     weeks.add(currentWeekKey);
     
     // Add weeks from existing emotions
