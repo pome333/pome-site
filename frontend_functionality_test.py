@@ -6,7 +6,6 @@ Tests the frontend application to ensure localStorage functionality works
 
 import requests
 import sys
-from bs4 import BeautifulSoup
 
 class PomeFrontendTester:
     def __init__(self, base_url="https://emotion-compass-2.preview.emergentagent.com"):
