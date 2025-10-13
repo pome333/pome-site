@@ -546,8 +546,9 @@ function App() {
       weekEnd = endOfWeek;
       weekRange = `${startOfWeek.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${endOfWeek.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
     } else {
-      // Specific week selected
-      weekStart = new Date(weekView);
+      // Specific week selected - parse as local date
+      const parts = weekView.split('-');
+      weekStart = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
       weekEnd = new Date(weekStart);
       weekEnd.setDate(weekStart.getDate() + 6);
       weekRange = `${weekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${weekEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
@@ -571,7 +572,7 @@ function App() {
     }));
     
     // Get activities for the selected week - support all weeks
-    const weekKey = weekStart.toISOString().split('T')[0];
+    const weekKey = getLocalDateKey(weekStart);
     const weekActivitiesKey = `pome_week_activities_${weekKey}`;
     const weekActivities = JSON.parse(localStorage.getItem(weekActivitiesKey) || '[]');
     
