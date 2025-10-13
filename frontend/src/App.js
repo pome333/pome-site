@@ -1029,39 +1029,39 @@ function App() {
         {/* Energy Categories Legend - Now Clickable for Filtering */}
         <div className="energy-legend">
           <div 
-            className={`legend-item physical ${activityTypeFilter === 'Physical' ? 'active' : ''}`}
-            onClick={() => setActivityTypeFilter(activityTypeFilter === 'Physical' ? null : 'Physical')}
+            className={`legend-item physical ${activityTypeFilter === 'physical' ? 'active' : ''}`}
+            onClick={() => setActivityTypeFilter(activityTypeFilter === 'physical' ? null : 'physical')}
             style={{ cursor: 'pointer' }}
           >
-            Physical {activityTypeFilter === 'Physical' && '✓'}
+            Physical {activityTypeFilter === 'physical' && '✓'}
           </div>
           <div 
-            className={`legend-item emotional ${activityTypeFilter === 'Emotional' ? 'active' : ''}`}
-            onClick={() => setActivityTypeFilter(activityTypeFilter === 'Emotional' ? null : 'Emotional')}
+            className={`legend-item emotional ${activityTypeFilter === 'emotional' ? 'active' : ''}`}
+            onClick={() => setActivityTypeFilter(activityTypeFilter === 'emotional' ? null : 'emotional')}
             style={{ cursor: 'pointer' }}
           >
-            Emotional {activityTypeFilter === 'Emotional' && '✓'}
+            Emotional {activityTypeFilter === 'emotional' && '✓'}
           </div>
           <div 
-            className={`legend-item social ${activityTypeFilter === 'Social' ? 'active' : ''}`}
-            onClick={() => setActivityTypeFilter(activityTypeFilter === 'Social' ? null : 'Social')}
+            className={`legend-item social ${activityTypeFilter === 'social' ? 'active' : ''}`}
+            onClick={() => setActivityTypeFilter(activityTypeFilter === 'social' ? null : 'social')}
             style={{ cursor: 'pointer' }}
           >
-            Social {activityTypeFilter === 'Social' && '✓'}
+            Social {activityTypeFilter === 'social' && '✓'}
           </div>
           <div 
-            className={`legend-item natural ${activityTypeFilter === 'Natural' ? 'active' : ''}`}
-            onClick={() => setActivityTypeFilter(activityTypeFilter === 'Natural' ? null : 'Natural')}
+            className={`legend-item natural ${activityTypeFilter === 'natural' ? 'active' : ''}`}
+            onClick={() => setActivityTypeFilter(activityTypeFilter === 'natural' ? null : 'natural')}
             style={{ cursor: 'pointer' }}
           >
-            Natural {activityTypeFilter === 'Natural' && '✓'}
+            Natural {activityTypeFilter === 'natural' && '✓'}
           </div>
           <div 
-            className={`legend-item spiritual ${activityTypeFilter === 'Spiritual' ? 'active' : ''}`}
-            onClick={() => setActivityTypeFilter(activityTypeFilter === 'Spiritual' ? null : 'Spiritual')}
+            className={`legend-item spiritual ${activityTypeFilter === 'spiritual' ? 'active' : ''}`}
+            onClick={() => setActivityTypeFilter(activityTypeFilter === 'spiritual' ? null : 'spiritual')}
             style={{ cursor: 'pointer' }}
           >
-            Spiritual {activityTypeFilter === 'Spiritual' && '✓'}
+            Spiritual {activityTypeFilter === 'spiritual' && '✓'}
           </div>
         </div>
 
