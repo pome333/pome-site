@@ -383,6 +383,21 @@ frontend:
         agent: "testing"
         comment: "✅ COMPREHENSIVE WEEKLY PLANNING TESTING COMPLETED: All new weekly planning features working perfectly. Analytics section now has 4 compact scorecards: 'Total Emotions', 'This Week' (with calendar week range Aug 18-24), 'Activities Planned' (this week count), and 'Day Streak' (consecutive days). Activities section has week selection tabs for 'This Week' and 'Next Week' with accurate date ranges. Separate localStorage keys working: 'pome_current_week_activities' and 'pome_next_week_activities'. Data persistence verified when switching between weeks. Button text changes correctly based on selected week. Calendar week calculations accurate (Monday-Sunday). Day streak calculation working for consecutive days of emotion logging. 'This Week's Emotion Patterns' section shows calendar week data. Mobile and tablet responsive design working. Complete user journey tested: signup → emotion logging → weekly activity planning → analytics verification. All weekly planning features ready for production."
 
+  - task: "Current week selection availability in Analytics and Journaling"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "BUG FIX: Updated getAllWeeksSinceStart() function to ensure the current calendar week is always included in the week selector dropdown in Analytics and Journaling sections. Fixed by explicitly passing today's date to getCalendarWeek() to ensure accurate current week calculation."
+      - working: true
+        agent: "main"
+        comment: "✅ BUG FIX VERIFIED: Current week (Oct 13 - Oct 19) now correctly appears in week selector in both Analytics and Journaling sections. Function now explicitly uses today's date to calculate current week Monday-Sunday range. Tested on fresh signup with emotion logging - week selector properly displays current week with 'Current Week' label. Fix working as expected."
+
 metadata:
   created_by: "main_agent"
   version: "1.0"
