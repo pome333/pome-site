@@ -1362,6 +1362,13 @@ function App() {
     const allWeeks = getAllWeeksSinceStart();
     const selectedWeekData = getWeekData(analyticsWeekView);
 
+    console.log('🔍 renderAnalyticsSection:', {
+      allWeeksCount: allWeeks.length,
+      allWeeks: allWeeks,
+      analyticsWeekView: analyticsWeekView,
+      selectedWeekData: selectedWeekData
+    });
+
     return (
       <div className="analytics-section">
         <div className="section-header">
