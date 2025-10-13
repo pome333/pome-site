@@ -336,7 +336,9 @@ function App() {
   };
 
   const getWeekRangeFromKey = (weekKey) => {
-    const weekStart = new Date(weekKey);
+    // Parse local date from YYYY-MM-DD format
+    const parts = weekKey.split('-');
+    const weekStart = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
     const weekEnd = new Date(weekStart);
     weekEnd.setDate(weekStart.getDate() + 6);
     return `${weekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${weekEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
