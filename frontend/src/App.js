@@ -1065,20 +1065,36 @@ function App() {
     
     // Always include current week based on today's actual date
     const today = new Date();
-    const { startOfWeek: currentWeekStart } = getCalendarWeek(today);
+    console.log('🔍 getAllWeeksSinceStart - Today:', today.toString());
+    
+    const { startOfWeek: currentWeekStart, endOfWeek: currentWeekEnd } = getCalendarWeek(today);
     const currentWeekKey = currentWeekStart.toISOString().split('T')[0];
+    
+    console.log('🔍 Current week:', {
+      key: currentWeekKey,
+      start: currentWeekStart.toString(),
+      end: currentWeekEnd.toString(),
+      startFormatted: currentWeekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+      endFormatted: currentWeekEnd.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+    });
+    
     weeks.add(currentWeekKey);
     
     // Add weeks from existing emotions
+    console.log(`🔍 Processing ${emotions.length} emotions`);
     emotions.forEach(emotion => {
       const emotionDate = new Date(emotion.timestamp);
       const { startOfWeek } = getCalendarWeek(emotionDate);
       const weekKey = startOfWeek.toISOString().split('T')[0];
+      console.log(`🔍 Emotion at ${emotion.timestamp} -> week key: ${weekKey}`);
       weeks.add(weekKey);
     });
     
     // Sort chronologically - oldest first (past weeks before current week)
-    return Array.from(weeks).sort((a, b) => new Date(a) - new Date(b));
+    const sortedWeeks = Array.from(weeks).sort((a, b) => new Date(a) - new Date(b));
+    console.log('🔍 All weeks (sorted):', sortedWeeks);
+    
+    return sortedWeeks;
   };
 
   // Render journaling section
