@@ -1026,39 +1026,76 @@ function App() {
           </div>
         )}
 
-        {/* Energy Categories Legend */}
+        {/* Energy Categories Legend - Now Clickable for Filtering */}
         <div className="energy-legend">
-          <div className="legend-item physical">Physical</div>
-          <div className="legend-item emotional">Emotional</div>
-          <div className="legend-item social">Social</div>
-          <div className="legend-item natural">Natural</div>
-          <div className="legend-item spiritual">Spiritual</div>
+          <div 
+            className={`legend-item physical ${activityTypeFilter === 'Physical' ? 'active' : ''}`}
+            onClick={() => setActivityTypeFilter(activityTypeFilter === 'Physical' ? null : 'Physical')}
+            style={{ cursor: 'pointer' }}
+          >
+            Physical {activityTypeFilter === 'Physical' && '✓'}
+          </div>
+          <div 
+            className={`legend-item emotional ${activityTypeFilter === 'Emotional' ? 'active' : ''}`}
+            onClick={() => setActivityTypeFilter(activityTypeFilter === 'Emotional' ? null : 'Emotional')}
+            style={{ cursor: 'pointer' }}
+          >
+            Emotional {activityTypeFilter === 'Emotional' && '✓'}
+          </div>
+          <div 
+            className={`legend-item social ${activityTypeFilter === 'Social' ? 'active' : ''}`}
+            onClick={() => setActivityTypeFilter(activityTypeFilter === 'Social' ? null : 'Social')}
+            style={{ cursor: 'pointer' }}
+          >
+            Social {activityTypeFilter === 'Social' && '✓'}
+          </div>
+          <div 
+            className={`legend-item natural ${activityTypeFilter === 'Natural' ? 'active' : ''}`}
+            onClick={() => setActivityTypeFilter(activityTypeFilter === 'Natural' ? null : 'Natural')}
+            style={{ cursor: 'pointer' }}
+          >
+            Natural {activityTypeFilter === 'Natural' && '✓'}
+          </div>
+          <div 
+            className={`legend-item spiritual ${activityTypeFilter === 'Spiritual' ? 'active' : ''}`}
+            onClick={() => setActivityTypeFilter(activityTypeFilter === 'Spiritual' ? null : 'Spiritual')}
+            style={{ cursor: 'pointer' }}
+          >
+            Spiritual {activityTypeFilter === 'Spiritual' && '✓'}
+          </div>
         </div>
 
-        {/* Activities Grid - Use state variable for button states */}
+        {/* Activities Grid - Use state variable for button states, filtered by type */}
         <div className="activities-grid">
-          {ACTIVITIES.map(activity => {
-            const isSelected = currentWeekActivities.find(a => a.id === activity.id);
-            
-            return (
-              <div key={activity.id} className="activity-card">
-                <h4>{activity.name}</h4>
-                <div className="activity-categories">
-                  {activity.categories.map(category => (
-                    <span key={category} className={`category-tag ${category}`}>
-                      {category}
-                    </span>
-                  ))}
+          {ACTIVITIES
+            .filter(activity => {
+              // If no filter selected, show all
+              if (!activityTypeFilter) return true;
+              // Otherwise, show only activities that include the selected type
+              return activity.categories.includes(activityTypeFilter);
+            })
+            .map(activity => {
+              const isSelected = currentWeekActivities.find(a => a.id === activity.id);
+              
+              return (
+                <div key={activity.id} className="activity-card">
+                  <h4>{activity.name}</h4>
+                  <div className="activity-categories">
+                    {activity.categories.map(category => (
+                      <span key={category} className={`category-tag ${category}`}>
+                        {category}
+                      </span>
+                    ))}
+                  </div>
+                  <button 
+                    className={isSelected ? 'add-activity-button added' : 'add-activity-button'}
+                    onClick={() => isSelected ? handleRemoveActivity(activity.id) : handleAddActivity(activity)}
+                  >
+                    {isSelected ? 'Added ✓' : `Add to Week`}
+                  </button>
                 </div>
-                <button 
-                  className={isSelected ? 'add-activity-button added' : 'add-activity-button'}
-                  onClick={() => isSelected ? handleRemoveActivity(activity.id) : handleAddActivity(activity)}
-                >
-                  {isSelected ? 'Added ✓' : `Add to Week`}
-                </button>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       </div>
     );
