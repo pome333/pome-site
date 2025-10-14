@@ -1239,7 +1239,10 @@ function App() {
                   className="gratitude-input"
                   placeholder="What are you grateful for this week? List five things or people..."
                   value={gratitudeText}
-                  onChange={(e) => setGratitudeText(e.target.value)}
+                  onChange={(e) => {
+                    console.log('Gratitude text changing to:', e.target.value);
+                    setGratitudeText(e.target.value);
+                  }}
                   rows={6}
                 />
                 <div className="gratitude-buttons">
