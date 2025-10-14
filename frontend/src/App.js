@@ -410,6 +410,7 @@ function App() {
     
     setGratitudeText('');
     setEditingGratitude(false);
+    setIsCreatingNewGratitude(true); // Back to creating mode
     const weekRange = getWeekRangeFromKey(weekKey);
     alert(`Gratitude entry deleted for ${weekRange}`);
   };
