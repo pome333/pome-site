@@ -1216,8 +1216,8 @@ function App() {
               Practice gratitude journaling daily, or at least once a week, to feel its lasting benefits.
             </p>
             
-            {/* Show existing gratitude entry if not editing */}
-            {gratitudeText && !editingGratitude && (
+            {/* Show existing gratitude entry if not editing and not creating new */}
+            {gratitudeText && !editingGratitude && !isCreatingNewGratitude && (
               <div className="existing-gratitude">
                 <div className="gratitude-content">
                   <p className="gratitude-display">{gratitudeText}</p>
@@ -1243,8 +1243,8 @@ function App() {
               </div>
             )}
 
-            {/* Show input when editing or no existing entry */}
-            {(!gratitudeText || editingGratitude) && (
+            {/* Show input when editing or creating new entry */}
+            {(isCreatingNewGratitude || editingGratitude) && (
               <div className="gratitude-input-container">
                 <textarea
                   className="gratitude-input"
