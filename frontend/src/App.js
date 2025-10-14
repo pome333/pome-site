@@ -153,6 +153,7 @@ function App() {
   const [newMomentText, setNewMomentText] = useState('');
   const [editingMoment, setEditingMoment] = useState(null);
   const [editingGratitude, setEditingGratitude] = useState(false);
+  const [isCreatingNewGratitude, setIsCreatingNewGratitude] = useState(false);
 
   // Get all weeks since user started (for activities section)
   const getAllWeeksForActivities = () => {
