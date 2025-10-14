@@ -211,8 +211,10 @@ function App() {
 
   // Update gratitude text when journaling week view changes
   useEffect(() => {
+    console.log('useEffect triggered for journalingWeekView:', journalingWeekView);
     const weekKey = getWeekKeyFromView(journalingWeekView);
     const journalingData = getWeekJournalingData(weekKey);
+    console.log('Loading gratitude data:', journalingData.gratitude);
     setGratitudeText(journalingData.gratitude);
   }, [journalingWeekView]);
 
