@@ -77,7 +77,7 @@ const ACTIVITIES = [
   { id: 11, name: "Stretching", categories: ["physical"] },
   { id: 12, name: "Swimming", categories: ["physical"] },
   { id: 13, name: "Team sports", categories: ["social", "physical"] },
-  { id: 14, name: "Yoga", categories: ["physical"] },
+  { id: 14, name: "Yoga", categories: ["physical", "spiritual"] },
   
   // Emotional Energy (alphabetical order)
   { id: 15, name: "Art/creative activities", categories: ["emotional"] },
