@@ -388,6 +388,7 @@ function App() {
     }
     
     setEditingGratitude(false);
+    setIsCreatingNewGratitude(false);
     const weekRange = getWeekRangeFromKey(weekKey);
     alert(`Gratitude entry saved for ${weekRange}! 🙏`);
   };
