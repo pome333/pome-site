@@ -84,7 +84,7 @@ const ACTIVITIES = [
   { id: 16, name: "Cooking", categories: ["emotional"] },
   { id: 17, name: "Gratitude journaling", categories: ["emotional"] },
   { id: 18, name: "Listen to music", categories: ["emotional"] },
-  { id: 19, name: "Organize/declutter space", categories: ["emotional"] },
+  { id: 19, name: "Organize or declutter space", categories: ["emotional"] },
   { id: 20, name: "Reading", categories: ["emotional"] },
   { id: 21, name: "Seeing new places", categories: ["emotional"] },
   { id: 22, name: "Therapy", categories: ["emotional"] },
@@ -95,7 +95,7 @@ const ACTIVITIES = [
   { id: 25, name: "Beach walk", categories: ["physical", "natural"] },
   { id: 26, name: "Gardening", categories: ["natural"] },
   { id: 27, name: "Outdoor picnic", categories: ["natural"] },
-  { id: 28, name: "Sunrise/sunset watching", categories: ["natural"] },
+  { id: 28, name: "Sunset or sunrise watching", categories: ["natural"] },
   { id: 29, name: "Time outside", categories: ["natural"] },
   
   // Social Energy (alphabetical order)
@@ -108,10 +108,11 @@ const ACTIVITIES = [
   { id: 36, name: "Volunteering", categories: ["social"] },
   
   // Spiritual Energy (alphabetical order)
-  { id: 37, name: "Prayer/meditation", categories: ["spiritual"] },
-  { id: 38, name: "Religious service", categories: ["spiritual"] },
-  { id: 39, name: "Spiritual reading", categories: ["spiritual"] },
-  { id: 40, name: "Working on a mission", categories: ["spiritual"] }
+  { id: 37, name: "Meditation", categories: ["spiritual"] },
+  { id: 38, name: "Prayer", categories: ["spiritual"] },
+  { id: 39, name: "Religious service", categories: ["spiritual"] },
+  { id: 40, name: "Spiritual reading", categories: ["spiritual"] },
+  { id: 41, name: "Working on a mission", categories: ["spiritual"] }
 ];
 
 // Context options
