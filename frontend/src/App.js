@@ -217,6 +217,14 @@ function App() {
     const journalingData = getWeekJournalingData(weekKey);
     console.log('Loading gratitude data:', journalingData.gratitude);
     setGratitudeText(journalingData.gratitude);
+    
+    // If there's no existing gratitude, user will be creating new one
+    if (!journalingData.gratitude) {
+      setIsCreatingNewGratitude(true);
+    } else {
+      setIsCreatingNewGratitude(false);
+    }
+    setEditingGratitude(false);
   }, [journalingWeekView]);
 
   // Handle user signup
