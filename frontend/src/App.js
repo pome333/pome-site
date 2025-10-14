@@ -1266,7 +1266,7 @@ function App() {
                   >
                     Save Gratitude Entry
                   </button>
-                  {editingGratitude && (
+                  {(editingGratitude || isCreatingNewGratitude) && (
                     <button 
                       className="cancel-gratitude-button"
                       onClick={() => {
@@ -1274,6 +1274,7 @@ function App() {
                         const journalingData = getWeekJournalingData(weekKey);
                         setGratitudeText(journalingData.gratitude);
                         setEditingGratitude(false);
+                        setIsCreatingNewGratitude(false);
                       }}
                     >
                       Cancel
