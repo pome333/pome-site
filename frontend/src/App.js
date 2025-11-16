@@ -118,7 +118,7 @@ const ACTIVITIES = [
 // Context options
 const CONTEXT_OPTIONS = {
   location: ["Home", "Work", "School", "Gym", "Outside", "Restaurant", "Traveling", "Shopping", "Transport"],
-  social_setting: ["By myself", "Family", "Friends", "Colleagues", "Strangers", "Partner", "Children"],
+  social_setting: ["By myself", "Family", "Friends", "Colleagues", "Strangers", "Partner", "Children", "Pets"],
   current_activity: ["Working", "Relaxing", "Exercising", "Socializing", "Learning", "Eating", "Commuting", "Shopping", "Entertainment"]
 };
 
