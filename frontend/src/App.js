@@ -469,7 +469,6 @@ function App() {
     saveWeekJournalingData(weekKey, updatedData);
     setPomeMomentsRefresh(prev => prev + 1); // Force re-render
     alert('PoMe moment deleted! 🗑️');
-    }
   };
 
   // Helper function to get start and end of calendar week
