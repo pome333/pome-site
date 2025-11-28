@@ -153,8 +153,10 @@ function App() {
   const [gratitudeText, setGratitudeText] = useState('');
   const [newMomentText, setNewMomentText] = useState('');
   const [editingMoment, setEditingMoment] = useState(null);
+  const [editingMomentText, setEditingMomentText] = useState('');
   const [editingGratitude, setEditingGratitude] = useState(false);
   const [isCreatingNewGratitude, setIsCreatingNewGratitude] = useState(false);
+  const [pomeMomentsRefresh, setPomeMomentsRefresh] = useState(0); // Force re-render after edit/delete
 
   // Get all weeks since user started (for activities section)
   const getAllWeeksForActivities = () => {
