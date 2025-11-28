@@ -438,28 +438,37 @@ function App() {
   };
 
   // Handle edit/delete PoMe moment
-  const handleEditPomeMoment = (momentId, newText = null) => {
+  const handleEditPomeMoment = (momentId, newText) => {
     const weekKey = getWeekKeyFromView(journalingWeekView);
     const currentData = getWeekJournalingData(weekKey);
     
-    if (newText === null) {
-      // Delete moment
-      const updatedData = {
-        ...currentData,
-        pome_moments: currentData.pome_moments.filter(m => m.id !== momentId)
-      };
-      saveWeekJournalingData(weekKey, updatedData);
-      alert('PoMe moment deleted! 🗑️');
-    } else {
-      // Edit moment
-      const updatedData = {
-        ...currentData,
-        pome_moments: currentData.pome_moments.map(m => 
-          m.id === momentId ? { ...m, text: newText } : m
-        )
-      };
-      saveWeekJournalingData(weekKey, updatedData);
-      alert('PoMe moment updated! ✨');
+    // Edit moment
+    const updatedData = {
+      ...currentData,
+      pome_moments: currentData.pome_moments.map(m => 
+        m.id === momentId ? { ...m, text: newText } : m
+      )
+    };
+    saveWeekJournalingData(weekKey, updatedData);
+    setEditingMoment(null);
+    setEditingMomentText('');
+    setPomeMomentsRefresh(prev => prev + 1); // Force re-render
+    alert('PoMe moment updated! ✨');
+  };
+
+  // Handle delete PoMe moment
+  const handleDeletePomeMoment = (momentId) => {
+    const weekKey = getWeekKeyFromView(journalingWeekView);
+    const currentData = getWeekJournalingData(weekKey);
+    
+    // Delete moment
+    const updatedData = {
+      ...currentData,
+      pome_moments: currentData.pome_moments.filter(m => m.id !== momentId)
+    };
+    saveWeekJournalingData(weekKey, updatedData);
+    setPomeMomentsRefresh(prev => prev + 1); // Force re-render
+    alert('PoMe moment deleted! 🗑️');
     }
   };
 
