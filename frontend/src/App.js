@@ -1349,34 +1349,24 @@ function App() {
                         <div className="edit-moment-container">
                           <textarea
                             className="edit-moment-input"
-                            value={moment.text}
-                            onChange={(e) => {
-                              const updatedMoments = journalingData.pome_moments.map(m =>
-                                m.id === moment.id ? { ...m, text: e.target.value } : m
-                              );
-                              // Update local state temporarily for editing
-                            }}
+                            value={editingMomentText}
+                            onChange={(e) => setEditingMomentText(e.target.value)}
                             rows={2}
                           />
                           <div className="edit-buttons">
                             <button 
                               className="save-edit-button"
-                              onClick={() => {
-                                const textarea = document.querySelector('.edit-moment-input');
-                                handleEditPomeMoment(moment.id, textarea.value);
-                                setEditingMoment(null);
-                                setTimeout(() => {
-                                  const weekKey = getWeekKeyFromView(journalingWeekView);
-                                  const data = getWeekJournalingData(weekKey);
-                                  setGratitudeText(data.gratitude);
-                                }, 100);
-                              }}
+                              onClick={() => handleEditPomeMoment(moment.id, editingMomentText)}
+                              disabled={!editingMomentText.trim()}
                             >
                               Save
                             </button>
                             <button 
                               className="cancel-edit-button"
-                              onClick={() => setEditingMoment(null)}
+                              onClick={() => {
+                                setEditingMoment(null);
+                                setEditingMomentText('');
+                              }}
                             >
                               Cancel
                             </button>
@@ -1398,7 +1388,10 @@ function App() {
                             <div className="moment-actions">
                               <button 
                                 className="edit-moment-button"
-                                onClick={() => setEditingMoment(moment.id)}
+                                onClick={() => {
+                                  setEditingMoment(moment.id);
+                                  setEditingMomentText(moment.text);
+                                }}
                               >
                                 Edit
                               </button>
@@ -1406,12 +1399,7 @@ function App() {
                                 className="delete-moment-button"
                                 onClick={() => {
                                   if (window.confirm('Are you sure you want to delete this PoMe moment?')) {
-                                    handleEditPomeMoment(moment.id, null);
-                                    setTimeout(() => {
-                                      const weekKey = getWeekKeyFromView(journalingWeekView);
-                                      const data = getWeekJournalingData(weekKey);
-                                      setGratitudeText(data.gratitude);
-                                    }, 100);
+                                    handleDeletePomeMoment(moment.id);
                                   }
                                 }}
                               >
