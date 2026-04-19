@@ -13,6 +13,10 @@ const Footer = () => {
           <Link to="/terms" className="footer-link" data-testid="footer-terms-link">
             Terms &amp; Conditions
           </Link>
+          <span className="footer-separator" aria-hidden="true">•</span>
+          <Link to="/care" className="footer-link" data-testid="footer-care-link">
+            Care
+          </Link>
         </div>
         <p className="footer-copy" data-testid="footer-copy">
           Pome is operated by DataArtistry, LLC, a Florida limited liability company.

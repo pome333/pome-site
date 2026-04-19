@@ -2102,7 +2102,7 @@ body, p, span, div, button, input, textarea, a {
   border-radius: 6px;
 }
 
-.legal-callout strong {
+.legal-callout > strong:first-child {
   display: block;
   color: var(--primary-color);
   margin-bottom: 0.4rem;
@@ -2122,6 +2122,17 @@ body, p, span, div, button, input, textarea, a {
   border-left-color: #ED8936;
   background: rgba(237, 137, 54, 0.08);
 }
+
+.care-closing {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--primary-color);
+  text-align: center;
+  padding: 1.5rem 0 0.5rem;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+}
+
 
 .legal-callout-warning strong {
   color: #C05621;

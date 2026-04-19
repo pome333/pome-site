@@ -8,6 +8,7 @@ The web app is now strictly a **marketing site**:
 - `/` — Landing page ("Build Your Emotional Intelligence") — hero, features, testimonial, feedback (Google Form), social links.
 - `/privacy` — Privacy Policy
 - `/terms` — Terms & Conditions
+- `/care` — Care / Contact page ("We're here for you.")
 - Catch-all routes redirect to `/`.
 
 **Removed from the site (previously existed, now deleted):**
