@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 
 const Landing = () => {
@@ -70,6 +71,13 @@ const Landing = () => {
             >
               LEAVE FEEDBACK
             </button>
+
+            <p className="contact-link-wrapper">
+              Need help or have a question?{' '}
+              <Link to="/care" className="contact-link" data-testid="landing-contact-link">
+                Contact us
+              </Link>
+            </p>
 
             {showFeedbackForm && (
               <div className="feedback-form-container" data-testid="feedback-form-container">

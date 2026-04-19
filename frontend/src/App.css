@@ -2133,6 +2133,24 @@ body, p, span, div, button, input, textarea, a {
   font-weight: 500;
 }
 
+.contact-link-wrapper {
+  margin-top: 1.25rem;
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+
+.contact-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.contact-link:hover {
+  border-bottom-color: var(--primary-color);
+}
+
 
 .legal-callout-warning strong {
   color: #C05621;
