@@ -32,7 +32,7 @@ const Privacy = () => {
               <li><a href="#p-how-we-use">How We Use Your Information</a></li>
               <li><a href="#p-sensitive">Sensitive &amp; Wellness Data</a></li>
               <li><a href="#p-sharing">Sharing of Information</a></li>
-              <li><a href="#p-analytics">Analytics &amp; Third-Party SDKs</a></li>
+              <li><a href="#p-analytics">Analytics, Tracking &amp; Third-Party Tools</a></li>
               <li><a href="#p-retention">Data Retention</a></li>
               <li><a href="#p-rights">Your Privacy Rights</a></li>
               <li><a href="#p-security">Data Security</a></li>
@@ -156,14 +156,22 @@ const Privacy = () => {
           </section>
 
           <section id="p-analytics" className="legal-section">
-            <h2>6. Analytics &amp; Third-Party SDKs</h2>
+            <h2>6. Analytics, Tracking &amp; Third-Party Tools</h2>
             <p>
-              Pome uses third-party analytics and crash-reporting tools (such as Firebase and Google Analytics) to understand how users interact with the app and to diagnose technical issues. These tools may collect device identifiers and usage data, but they do not receive your wellness content or journal entries.
+              Pome uses third-party analytics, behavior analysis, and crash-reporting tools to understand how users interact with the app and website, diagnose technical issues, and improve the overall experience. These tools may collect device identifiers and usage data. They do not receive your wellness content, mood entries, or journal entries.
             </p>
+            <p>The tools we currently use include:</p>
+            <ul>
+              <li><strong>Firebase Analytics &amp; Crashlytics</strong> &mdash; app usage events, session data, and crash reporting</li>
+              <li><strong>Google Analytics (GA4)</strong> &mdash; website traffic and usage patterns</li>
+              <li><strong>Google Tag Manager</strong> &mdash; manages when and how analytics tools load on our website. It does not collect personal data directly.</li>
+              <li><strong>Microsoft Clarity</strong> &mdash; session behavior and heatmaps on our website to help us improve usability. Does not collect wellness content.</li>
+              <li><strong>Email communications</strong> &mdash; If you opt in to email updates, your email address is shared with our email delivery provider solely for the purpose of sending those communications.</li>
+            </ul>
             <p>
-              We do not use third-party advertising SDKs or allow behavioral advertising within the app. Pome is ad-free.
+              Pome does not use advertising SDKs or allow behavioral advertising within the app. Pome is ad-free.
             </p>
-            <p>Push notifications are opt-in. You can manage or disable them at any time in your device settings.</p>
+            <p>Push notifications are opt-in and can be disabled at any time in your iOS device settings.</p>
           </section>
 
           <section id="p-retention" className="legal-section">
