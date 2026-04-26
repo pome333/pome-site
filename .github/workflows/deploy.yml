@@ -30,7 +30,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: frontend
-        run: yarn install --frozen-lockfile
+        run: yarn install --network-timeout 600000
 
       - name: Build
         working-directory: frontend
