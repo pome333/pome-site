@@ -58,7 +58,7 @@ const Landing = () => {
       {/* CTA Section */}
       <section className="cta-section">
         <div className="container">
-          <h2>Pome is now live on the App Store.</h2>
+          <h2>Pome is now live on the App Store</h2>
           <p>A quiet, beautiful space for women who feel deeply and want to understand themselves better.</p>
 
           <div className="app-store-cta">
@@ -159,30 +159,27 @@ const Landing = () => {
               Follow us on Instagram
             </a>
 
-            <div className="social-pill-group">
-              <a
-                href="https://t.me/+q1qz-pSOEiNjZGFh"
-                className="social-pill"
-                target="_blank"
-                rel="noopener noreferrer"
-                data-testid="social-telegram-link"
+            <a
+              href="https://t.me/+q1qz-pSOEiNjZGFh"
+              className="social-pill"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-testid="social-telegram-link"
+            >
+              <svg
+                className="social-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
               >
-                <svg
-                  className="social-icon"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M20.665 3.717L2.935 10.562c-1.197.476-1.19 1.143-.22 1.438l4.572 1.427 10.573-6.67c.499-.303.955-.14.58.192L9.228 15.306l-.319 4.753c.467 0 .673-.213.932-.466l2.238-2.176 4.654 3.44c.858.474 1.476.23 1.692-.795l3.064-14.434c.314-1.26-.48-1.83-1.824-1.91z"
-                    fill="currentColor"
-                  />
-                </svg>
-                Join our Telegram community
-              </a>
-              <p className="social-pill-subtitle">Be part of the Pome app building community</p>
-            </div>
+                <path
+                  d="M20.665 3.717L2.935 10.562c-1.197.476-1.19 1.143-.22 1.438l4.572 1.427 10.573-6.67c.499-.303.955-.14.58.192L9.228 15.306l-.319 4.753c.467 0 .673-.213.932-.466l2.238-2.176 4.654 3.44c.858.474 1.476.23 1.692-.795l3.064-14.434c.314-1.26-.48-1.83-1.824-1.91z"
+                  fill="currentColor"
+                />
+              </svg>
+              Join our Telegram community
+            </a>
           </div>
         </div>
       </section>
