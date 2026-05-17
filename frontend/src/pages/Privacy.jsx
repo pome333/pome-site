@@ -162,11 +162,10 @@ const Privacy = () => {
             </p>
             <p>The tools we currently use include:</p>
             <ul>
-              <li><strong>Firebase Analytics &amp; Crashlytics</strong> &mdash; app usage events, session data, and crash reporting</li>
-              <li><strong>Google Analytics (GA4)</strong> &mdash; website traffic and usage patterns</li>
-              <li><strong>Google Tag Manager</strong> &mdash; manages when and how analytics tools load on our website. It does not collect personal data directly.</li>
-              <li><strong>Microsoft Clarity</strong> &mdash; session behavior and heatmaps on our website to help us improve usability. Does not collect wellness content.</li>
-              <li><strong>Email communications</strong> &mdash; If you opt in to email updates, your email address is shared with our email delivery provider solely for the purpose of sending those communications.</li>
+              <li>Firebase Analytics &amp; Crashlytics &mdash; app usage events, session data, and crash reporting</li>
+              <li>Google Analytics (GA4) &mdash; website traffic and usage patterns</li>
+              <li>Google Tag Manager &mdash; manages when and how analytics tools load on our website. It does not collect personal data directly.</li>
+              <li>Email communications &mdash; If you opt in to email updates, your email address is shared with our email delivery provider solely for the purpose of sending those communications.</li>
             </ul>
             <p>
               Pome does not use advertising SDKs or allow behavioral advertising within the app. Pome is ad-free.
